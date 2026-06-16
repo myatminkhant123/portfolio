@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initPortfolio() {
 
     // ===== DASHBOARD SIDEBAR & ROUTING =====
     const sidebar = document.getElementById('sidebar');
@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reset scroll position to top
         window.scrollTo({ top: 0, behavior: 'instant' });
+        // Dispatch window resize event to force hidden canvases/containers to recalculate client dimensions
+        window.dispatchEvent(new Event('resize'));
     }
 
     // Handle clicks on sidebar links
@@ -122,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(updateCursor);
 
     // Hover elements interactions with cursor
-    document.querySelectorAll('a, button, .skill-tag, .filter-tab, .project-card, .cert-card').forEach(el => {
+    document.querySelectorAll('a, button, .skill-tag, .filter-tab, .project-card, .cert-card, .interactive-step, .interactive-edu-card').forEach(el => {
         el.addEventListener('mouseenter', () => {
             if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
             if (glow) glow.style.background = 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%)';
@@ -208,8 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const roles = [
         "Software Engineer",
         "Data Analyst",
-        "AI Engineer",
-        "Cloud Operation Generalist"
+        "Data Scientist",
+        "Cloud Engineer"
     ];
     let roleIdx = 0;
     let charIdx = 0;
@@ -278,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillsRadar = document.getElementById('skills-radar');
     if (skillsRadar) {
         const rCtx = skillsRadar.getContext('2d');
-        const labels = ['Programming', 'Web Dev', 'Data & AI', 'Cloud & Ops', 'Tools & Sys'];
+        const labels = ['Programming', 'Web Dev', 'Data Science', 'Cloud & Ops', 'Tools & Sys'];
         const values = [0.90, 0.85, 0.90, 0.80, 0.85]; // Skills percentages
         const pointsCount = labels.length;
         const radius = 120;
@@ -310,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function drawGrid() {
             // Concentric hexagons
-            rCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            rCtx.strokeStyle = document.body.classList.contains('light-theme') ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.05)';
             rCtx.lineWidth = 1;
             for (let j = 1; j <= 4; j++) {
                 const r = radius * (j / 4);
@@ -338,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function drawLabels() {
             rCtx.font = '500 11px Inter, sans-serif';
-            rCtx.fillStyle = '#9ca3af';
+            rCtx.fillStyle = document.body.classList.contains('light-theme') ? '#4b5563' : '#9ca3af';
             rCtx.textAlign = 'center';
             rCtx.textBaseline = 'middle';
 
@@ -414,93 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Project category filter bar has been removed as requested.
     // All projects are displayed by default.
 
-    // ===== FUTURISTIC CONTACT GEOGRAPHIC MAP CANVAS =====
-    const mapCanvas = document.getElementById('map-canvas');
-    if (mapCanvas) {
-        const mCtx = mapCanvas.getContext('2d');
-        let pulseRadius = 0;
-        let pulseGrow = true;
 
-        function resizeMap() {
-            mapCanvas.width = mapCanvas.parentElement.clientWidth;
-            mapCanvas.height = 250;
-        }
-        resizeMap();
-        window.addEventListener('resize', resizeMap);
-
-        // Alor Setar Coordinates relative to layout
-        const targetX = mapCanvas.width * 0.5;
-        const targetY = mapCanvas.height * 0.48;
-
-        function drawMapGrid() {
-            mCtx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
-            mCtx.lineWidth = 1;
-
-            // Grid lines
-            for (let i = 0; i < mapCanvas.width; i += 20) {
-                mCtx.beginPath();
-                mCtx.moveTo(i, 0);
-                mCtx.lineTo(i, mapCanvas.height);
-                mCtx.stroke();
-            }
-            for (let j = 0; j < mapCanvas.height; j += 20) {
-                mCtx.beginPath();
-                mCtx.moveTo(0, j);
-                mCtx.lineTo(mapCanvas.width, j);
-                mCtx.stroke();
-            }
-
-            // Concentric radar scan lines
-            mCtx.strokeStyle = 'rgba(6, 182, 212, 0.05)';
-            mCtx.beginPath();
-            mCtx.arc(targetX, targetY, 60, 0, Math.PI * 2);
-            mCtx.stroke();
-            mCtx.beginPath();
-            mCtx.arc(targetX, targetY, 120, 0, Math.PI * 2);
-            mCtx.stroke();
-        }
-
-        function drawRadarPulse() {
-            mCtx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
-            drawMapGrid();
-
-            // Pulsating Beacon
-            if (pulseGrow) {
-                pulseRadius += 0.35;
-                if (pulseRadius > 25) pulseGrow = false;
-            } else {
-                pulseRadius -= 0.35;
-                if (pulseRadius < 8) pulseGrow = true;
-            }
-
-            // Outer pulse ring
-            mCtx.beginPath();
-            mCtx.arc(targetX, targetY, pulseRadius, 0, Math.PI * 2);
-            mCtx.fillStyle = 'rgba(6, 182, 212, 0.12)';
-            mCtx.strokeStyle = 'rgba(6, 182, 212, 0.5)';
-            mCtx.lineWidth = 1;
-            mCtx.fill();
-            mCtx.stroke();
-
-            // Inner solid core
-            mCtx.beginPath();
-            mCtx.arc(targetX, targetY, 5, 0, Math.PI * 2);
-            mCtx.fillStyle = '#06b6d4';
-            mCtx.fill();
-
-            // Label Box
-            mCtx.font = '600 12px Space Grotesk, sans-serif';
-            mCtx.fillStyle = '#f3f4f6';
-            mCtx.textAlign = 'center';
-            mCtx.fillText('Albukhary International University', targetX, targetY + 35);
-            mCtx.font = '500 10px Inter, sans-serif';
-            mCtx.fillStyle = '#9ca3af';
-            mCtx.fillText('Alor Setar, Kedah, Malaysia (Active Location)', targetX, targetY + 49);
-
-            requestAnimationFrame(drawRadarPulse);
-        }
-        requestAnimationFrame(drawRadarPulse);
-    }
 
 
 
@@ -519,34 +435,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ===== TECH STACK MARQUEE & SYNCED BACKGROUND CANVASES =====
-    const marqueeContainer = document.getElementById('marquee-container');
-    const marqueeWrapper = document.getElementById('marquee-wrapper');
-    const marqueeTrack = document.getElementById('marquee-track');
-    const marqueeBgCanvas = document.getElementById('marquee-bg-canvas');
+    // ===== TECH STACK ORBIT ENGINE & BACKGROUND CANVASES =====
+    const orbitContainer = document.getElementById('orbit-container');
+    const orbitRing = document.getElementById('orbit-ring');
+    const orbitBgCanvas = document.getElementById('orbit-bg-canvas');
     const skillDescBox = document.getElementById('skill-desc-box');
     const skillDescText = document.getElementById('skill-desc-text');
     const infoIcon = skillDescBox ? skillDescBox.querySelector('.info-icon') : null;
 
-    if (marqueeTrack && marqueeBgCanvas && marqueeWrapper) {
-        const mBgCtx = marqueeBgCanvas.getContext('2d');
-        let isHoveringMarquee = false;
-        
-        // 1. Duplicate track items for seamless looping
-        const trackItems = Array.from(marqueeTrack.children);
-        // Duplicate twice to ensure full coverage on wide screens
-        for (let j = 0; j < 2; j++) {
-            trackItems.forEach(item => {
-                const clone = item.cloneNode(true);
-                marqueeTrack.appendChild(clone);
-            });
-        }
+    if (orbitContainer && orbitBgCanvas) {
+        const oBgCtx = orbitBgCanvas.getContext('2d');
+        const orbitItems = orbitContainer.querySelectorAll('.orbit-item');
+        let isHoveringOrbit = false;
+        let angleOffset = 0;
 
         // Tech descriptions mapping
         const techDetails = {
             vscode: "VS Code: Primary IDE. Custom styled with ESLint, Prettier, GitLens, and tailored python/debugging integrations.",
-            nlp: "Natural Language Processing: Sentiment analysis models, TF-IDF vectorizers, word tokenization, and LIME transparency integrations.",
-            python: "Python: Advanced machine learning (scikit-learn), real-time computer vision (OpenCV), face recognition, and Pandas data mining.",
+            nlp: "Natural Language Processing: Sentiment analysis models, TF-IDF vectorizers, word tokenization, and model transparency integrations.",
+            python: "Python: Data analysis, scripting and automation, database integration, web scraping, and data manipulation using Pandas.",
             java: "Java: Solid object-oriented software engineering principles, system design patterns, and enterprise backend architectures.",
             javascript: "JavaScript: Creating high-performance interactive client experiences and modular Node.js REST API systems.",
             html5: "HTML5: Structuring clean semantic layouts with a focus on SEO best practices and page speed optimization.",
@@ -556,7 +463,10 @@ document.addEventListener('DOMContentLoaded', () => {
             react: "React: Developing highly interactive stateful SPAs, customized React Hooks, and responsive web dashboards.",
             nodejs: "Node.js: Engineering scalable runtime servers with Express, JWT authentication, and structured MongoDB access pipelines.",
             docker: "Docker: Containerizing environments to guarantee 100% execution consistency from development to cloud hosting.",
-            azure: "Microsoft Azure: Virtual network routing, resource group structures, role-based access lists, and cloud VM provisioning."
+            azure: "Microsoft Azure: Virtual network routing, resource group structures, role-based access lists, and cloud VM provisioning.",
+            powerbi: "Power BI: Creating interactive executive business dashboards, advanced DAX queries, data transformations, and scheduled gateway refreshes.",
+            excel: "Microsoft Excel: Advanced spreadsheets, pivot tables, VLOOKUP/INDEX-MATCH, VBA macros, and financial data modeling.",
+            servicenow: "ServiceNow: Managing IT Service Management (ITSM) workflows, system incidents tracking, asset management, and ticketing pipelines."
         };
 
         // Brand colors mapping for dynamic hover styles
@@ -573,12 +483,14 @@ document.addEventListener('DOMContentLoaded', () => {
             react: "#61DAFB",
             nodejs: "#339933",
             docker: "#2496ED",
-            azure: "#0078D4"
+            azure: "#0078D4",
+            powerbi: "#F2C811",
+            excel: "#107C41",
+            servicenow: "#81B924"
         };
 
         // Hover functionality
-        const allItems = marqueeTrack.querySelectorAll('.marquee-item');
-        allItems.forEach(item => {
+        orbitItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
                 const tech = item.getAttribute('data-tech');
                 const text = techDetails[tech] || "Exploring premium software engineering capabilities.";
@@ -589,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         skillDescText.textContent = text;
                         skillDescText.style.opacity = '1';
-                        skillDescText.style.color = '#ffffff';
+                        skillDescText.style.color = 'var(--text-main)';
                     }, 150);
                 }
                 
@@ -602,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     infoIcon.style.color = color;
                     infoIcon.style.transform = 'scale(1.2) rotate(10deg)';
                 }
-                isHoveringMarquee = true;
+                isHoveringOrbit = true;
             });
 
             item.addEventListener('mouseleave', () => {
@@ -624,190 +536,119 @@ document.addEventListener('DOMContentLoaded', () => {
                     infoIcon.style.color = 'var(--cyan)';
                     infoIcon.style.transform = 'scale(1) rotate(0deg)';
                 }
-                isHoveringMarquee = false;
+                isHoveringOrbit = false;
             });
         });
 
-        // 2. Local background canvas dimensions
-        function resizeMarqueeCanvas() {
-            marqueeBgCanvas.width = marqueeContainer.clientWidth;
-            marqueeBgCanvas.height = marqueeContainer.clientHeight;
+        // Background canvas dimensions
+        function resizeOrbitCanvas() {
+            orbitBgCanvas.width = orbitContainer.clientWidth;
+            orbitBgCanvas.height = orbitContainer.clientHeight;
         }
-        resizeMarqueeCanvas();
-        window.addEventListener('resize', resizeMarqueeCanvas);
+        resizeOrbitCanvas();
+        window.addEventListener('resize', resizeOrbitCanvas);
 
-        // Particle configuration for marquee background
-        const marqueeParticles = [];
-        const maxMarqueeParticles = 30;
+        // Particle configuration for background
+        const orbitParticles = [];
+        const maxParticles = 25;
         
-        class MarqueeParticle {
+        class OrbitBgParticle {
             constructor() {
-                this.x = Math.random() * marqueeBgCanvas.width;
-                this.y = Math.random() * marqueeBgCanvas.height;
-                this.speedX = (Math.random() - 0.5) * 0.2;
-                this.speedY = (Math.random() - 0.5) * 0.2;
+                this.x = Math.random() * orbitBgCanvas.width;
+                this.y = Math.random() * orbitBgCanvas.height;
+                this.speedX = (Math.random() - 0.5) * 0.15;
+                this.speedY = (Math.random() - 0.5) * 0.15;
                 this.radius = Math.random() * 1.5 + 0.5;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.x < 0) this.x = marqueeBgCanvas.width;
-                if (this.x > marqueeBgCanvas.width) this.x = 0;
-                if (this.y < 0) this.y = marqueeBgCanvas.height;
-                if (this.y > marqueeBgCanvas.height) this.y = 0;
+                if (this.x < 0) this.x = orbitBgCanvas.width;
+                if (this.x > orbitBgCanvas.width) this.x = 0;
+                if (this.y < 0) this.y = orbitBgCanvas.height;
+                if (this.y > orbitBgCanvas.height) this.y = 0;
             }
         }
 
-        for (let i = 0; i < maxMarqueeParticles; i++) {
-            marqueeParticles.push(new MarqueeParticle());
+        for (let i = 0; i < maxParticles; i++) {
+            orbitParticles.push(new OrbitBgParticle());
         }
-
-        // Marquee Animation Control Variables
-        let scrollX = 0;
-        let speed = 0.8; 
-        let isDragging = false;
-        let startX = 0;
-        let scrollStartX = 0;
-        const parallaxFactor = 0.25; // How fast background moves relative to marquee
-
-        // Drag to scroll handlers
-        marqueeWrapper.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - marqueeWrapper.offsetLeft;
-            scrollStartX = scrollX;
-            marqueeWrapper.style.cursor = 'grabbing';
-        });
-
-        marqueeWrapper.addEventListener('mouseleave', () => {
-            isDragging = false;
-            marqueeWrapper.style.cursor = 'grab';
-        });
-
-        marqueeWrapper.addEventListener('mouseup', () => {
-            isDragging = false;
-            marqueeWrapper.style.cursor = 'grab';
-        });
-
-        marqueeWrapper.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - marqueeWrapper.offsetLeft;
-            const walk = (x - startX) * 1.5; // multiplier for drag sensitivity
-            scrollX = scrollStartX - walk;
-        });
-
-        // Touch event handlers for mobile
-        marqueeWrapper.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startX = e.touches[0].pageX - marqueeWrapper.offsetLeft;
-            scrollStartX = scrollX;
-        });
-
-        marqueeWrapper.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        marqueeWrapper.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            const x = e.touches[0].pageX - marqueeWrapper.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            scrollX = scrollStartX - walk;
-        });
 
         // Animation Loop
-        function animateMarquee() {
-            // Get single group width (total track width / 3, since we cloned twice)
-            const trackWidth = marqueeTrack.scrollWidth;
-            const singleGroupWidth = trackWidth / 3;
-
-            // Handle auto-scroll when not dragging and not hovering
-            if (!isDragging) {
-                if (isHoveringMarquee) {
-                    scrollX += speed * 0.15; // Slow down on hover
-                } else {
-                    scrollX += speed; // Standard auto-scroll speed
-                }
-            }
-
-            // Infinite loop wrapping logic
-            if (scrollX >= singleGroupWidth) {
-                scrollX -= singleGroupWidth;
-                if (isDragging) scrollStartX -= singleGroupWidth;
-            } else if (scrollX < 0) {
-                scrollX += singleGroupWidth;
-                if (isDragging) scrollStartX += singleGroupWidth;
-            }
-
-            // Apply translation to marquee track
-            marqueeTrack.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
-
-            // Draw Parallax Canvas Background
-            mBgCtx.clearRect(0, 0, marqueeBgCanvas.width, marqueeBgCanvas.height);
+        function animateOrbit() {
+            const centerX = orbitContainer.clientWidth / 2;
+            const centerY = orbitContainer.clientHeight / 2;
             
-            // 1. Draw translated grid lines
-            const gridSpacing = 40;
-            const bgOffsetX = -(scrollX * parallaxFactor) % gridSpacing;
-            
-            mBgCtx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
-            mBgCtx.lineWidth = 1;
+            // Adjust radii dynamically based on container size (safeguarded against 0 or negative values)
+            const rx = Math.max(80, Math.min(centerX - 85, 420));
+            const ry = Math.max(40, Math.min(centerY - 55, 150));
 
-            // Vertical grid lines shifting with marquee scroll
-            for (let x = bgOffsetX; x < marqueeBgCanvas.width; x += gridSpacing) {
-                mBgCtx.beginPath();
-                mBgCtx.moveTo(x, 0);
-                mBgCtx.lineTo(x, marqueeBgCanvas.height);
-                mBgCtx.stroke();
+            // Update orbit path line size
+            if (orbitRing) {
+                orbitRing.style.width = `${rx * 2}px`;
+                orbitRing.style.height = `${ry * 2}px`;
             }
 
-            // Horizontal grid lines
-            for (let y = 0; y < marqueeBgCanvas.height; y += gridSpacing) {
-                mBgCtx.beginPath();
-                mBgCtx.moveTo(0, y);
-                mBgCtx.lineTo(marqueeBgCanvas.width, y);
-                mBgCtx.stroke();
-            }
-
-            // 2. Draw translated particles
-            marqueeParticles.forEach(p => {
-                p.update();
+            // Update items positions
+            const N = orbitItems.length;
+            orbitItems.forEach((item, index) => {
+                // Symmetrically distribute items around the circle
+                const theta = (index / N) * Math.PI * 2 + angleOffset;
+                const x = rx * Math.cos(theta);
+                const y = ry * Math.sin(theta);
                 
-                // Translate the X position based on marquee scrolling
-                let drawX = (p.x - (scrollX * parallaxFactor)) % marqueeBgCanvas.width;
-                if (drawX < 0) drawX += marqueeBgCanvas.width;
-
-                mBgCtx.beginPath();
-                mBgCtx.arc(drawX, p.y, p.radius, 0, Math.PI * 2);
-                mBgCtx.fillStyle = 'rgba(6, 182, 212, 0.15)';
-                mBgCtx.fill();
+                // Depth effects (using sine of theta to simulate 3D projection)
+                const depth = Math.sin(theta); // Ranges from -1 (back) to 1 (front)
+                
+                const scale = 0.8 + 0.3 * ((depth + 1) / 2);
+                const zIndex = Math.round(10 + 10 * depth);
+                const opacity = 0.45 + 0.55 * ((depth + 1) / 2);
+                
+                item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
+                item.style.zIndex = zIndex;
+                item.style.opacity = opacity;
             });
 
-            // 3. Draw connections between shifted particles
-            for (let i = 0; i < marqueeParticles.length; i++) {
-                for (let j = i + 1; j < marqueeParticles.length; j++) {
-                    let drawXi = (marqueeParticles[i].x - (scrollX * parallaxFactor)) % marqueeBgCanvas.width;
-                    if (drawXi < 0) drawXi += marqueeBgCanvas.width;
-
-                    let drawXj = (marqueeParticles[j].x - (scrollX * parallaxFactor)) % marqueeBgCanvas.width;
-                    if (drawXj < 0) drawXj += marqueeBgCanvas.width;
-
-                    const dist = Math.hypot(drawXi - drawXj, marqueeParticles[i].y - marqueeParticles[j].y);
-                    if (dist < 100) {
-                        const alpha = (1 - dist / 100) * 0.06;
-                        mBgCtx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
-                        mBgCtx.lineWidth = 0.5;
-                        mBgCtx.beginPath();
-                        mBgCtx.moveTo(drawXi, marqueeParticles[i].y);
-                        mBgCtx.lineTo(drawXj, marqueeParticles[j].y);
-                        mBgCtx.stroke();
-                    }
-                }
+            // Increment angle offset (pause or slow down on hover)
+            if (isHoveringOrbit) {
+                angleOffset += 0.0003;
+            } else {
+                angleOffset += 0.0018;
             }
 
-            requestAnimationFrame(animateMarquee);
+            // Draw Background Particles & faint lines
+            oBgCtx.clearRect(0, 0, orbitBgCanvas.width, orbitBgCanvas.height);
+            
+            // Draw grid mapping lines on background
+            oBgCtx.strokeStyle = 'rgba(255, 255, 255, 0.006)';
+            oBgCtx.lineWidth = 1;
+            const gridSpacing = 40;
+            for (let x = 0; x < orbitBgCanvas.width; x += gridSpacing) {
+                oBgCtx.beginPath();
+                oBgCtx.moveTo(x, 0);
+                oBgCtx.lineTo(x, orbitBgCanvas.height);
+                oBgCtx.stroke();
+            }
+            for (let y = 0; y < orbitBgCanvas.height; y += gridSpacing) {
+                oBgCtx.beginPath();
+                oBgCtx.moveTo(0, y);
+                oBgCtx.lineTo(orbitBgCanvas.width, y);
+                oBgCtx.stroke();
+            }
+
+            // Draw drifting stars
+            orbitParticles.forEach(p => {
+                p.update();
+                oBgCtx.beginPath();
+                oBgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                oBgCtx.fillStyle = 'rgba(6, 182, 212, 0.12)';
+                oBgCtx.fill();
+            });
+
+            requestAnimationFrame(animateOrbit);
         }
-        
-        // Start marquee animation
-        requestAnimationFrame(animateMarquee);
+
+        requestAnimationFrame(animateOrbit);
     }
 
     // ===== STATIC GALLERY LIGHTBOX SYSTEM =====
@@ -852,5 +693,226 @@ document.addEventListener('DOMContentLoaded', () => {
     initLightbox();
     initStaticGallery();
 
+
+    // ===== INTERACTIVE RESUME MODAL =====
+    const resumeModal = document.getElementById('resumeModal');
+    const viewResumeBtn = document.getElementById('viewResumeBtn');
+    const heroResumeBtn = document.getElementById('heroResumeBtn');
+    const closeResumeBtn = document.getElementById('closeResumeBtn');
+
+    function openResumeModal(e) {
+        if (e) e.preventDefault();
+        if (resumeModal) {
+            resumeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeResumeModal() {
+        if (resumeModal) {
+            resumeModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (viewResumeBtn) {
+        viewResumeBtn.addEventListener('click', openResumeModal);
+    }
+    if (heroResumeBtn) {
+        heroResumeBtn.addEventListener('click', openResumeModal);
+    }
+    if (closeResumeBtn) {
+        closeResumeBtn.addEventListener('click', closeResumeModal);
+    }
+
+    if (resumeModal) {
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeResumeModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && resumeModal && resumeModal.classList.contains('active')) {
+            closeResumeModal();
+        }
+    });
+
+    // ===== INTERACTIVE AI ASSISTANT WIDGET LOGIC =====
+    const chatbotTrigger = document.getElementById('chatbotTrigger');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSendBtn = document.getElementById('chatbotSendBtn');
+    const suggestionChips = document.querySelectorAll('.suggestion-chip');
+
+    const botResponses = {
+        skills: "Myat specializes in **Software Engineering**, **Data Science & Analytics**, and **Cloud Infrastructure** workflows.\n\n" +
+                "🛠️ **Technical Stack:**\n" +
+                "• **Languages:** Python, Java, JavaScript, C++, SQL\n" +
+                "• **Web Frameworks:** React, Node.js, Express.js\n" +
+                "• **Cloud & Systems:** Microsoft Azure, Linux Systems, Docker, Git/GitHub, VS Code\n" +
+                "• **Data Tools:** Pandas, NumPy, Scikit-Learn, Power BI, Excel",
+        experience: "Myat has solid hands-on experience in enterprise IT operations and systems:\n\n" +
+                    "💼 **AIA Digital +** — *Cloud Operations Intern* (Apr 2026 - Present)\n" +
+                    "Assisting in Incident Management, Change Management (drafting monthly Linux patching changes), and performance monitoring using Dynatrace and ServiceNow.\n\n" +
+                    "💼 **Print With Sahel** — *Founder & Owner* (Apr 2024 - Feb 2026)\n" +
+                    "Managed operations systems, client support, and data analytics to optimize operations.",
+        status: "📍 **Availability Status:**\n" +
+                "• **Target Role:** Software Engineering, Data Analytics, or Cloud Operations (Junior / Entry-level / Industrial Training)\n" +
+                "• **Location:** Kuala Lumpur, Malaysia\n" +
+                "• **Relocation:** Fully open & flexible to regional/international relocation\n" +
+                "• **Availability Timeline:** Starting from **November 2026**",
+        contact: "You can reach Myat directly via these secure channels:\n\n" +
+                 "📧 **Email:** mmk111203@gmail.com\n" +
+                 "💼 **LinkedIn:** linkedin.com/in/myat-min-khant-810bb3275\n" +
+                 "📂 **GitHub:** github.com/myatminkhant123\n\n" +
+                 "Or scroll down to the contact form on this page to send a secure message!",
+        education: "Myat is a final-year **Bachelor of Computer Science (Honours)** student at **Albukhary International University** (Oct 2023 - Nov 2026).\n\n" +
+                   "• **CGPA Honor:** 3.53\n" +
+                   "• **Scholarship:** Albukhary Foundation Full Scholar\n" +
+                   "• **Certifications:** IBM Data Analyst Professional Certificate"
+    };
+
+    function toggleChatbot() {
+        if (chatbotWindow) {
+            chatbotWindow.classList.toggle('active');
+            if (chatbotWindow.classList.contains('active') && chatbotInput) {
+                chatbotInput.focus();
+            }
+        }
+    }
+
+    function addMessage(text, sender) {
+        if (!chatbotMessages) return;
+
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-message ${sender}`;
+        
+        let formattedText = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n/g, '<br>');
+        
+        msgDiv.innerHTML = formattedText;
+        chatbotMessages.appendChild(msgDiv);
+        
+        chatbotMessages.scrollTo({
+            top: chatbotMessages.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+
+    function getBotResponse(userMsg) {
+        const text = userMsg.toLowerCase().trim();
+        
+        if (text.includes('skill') || text.includes('tech') || text.includes('stack') || text.includes('python') || text.includes('code') || text.includes('program')) {
+            return botResponses.skills;
+        } else if (text.includes('exp') || text.includes('work') || text.includes('job') || text.includes('intern') || text.includes('aia') || text.includes('sahel')) {
+            return botResponses.experience;
+        } else if (text.includes('status') || text.includes('avail') || text.includes('relocat') || text.includes('timelin') || text.includes('where') || text.includes('locat')) {
+            return botResponses.status;
+        } else if (text.includes('contact') || text.includes('email') || text.includes('phone') || text.includes('linkedin') || text.includes('github') || text.includes('reach')) {
+            return botResponses.contact;
+        } else if (text.includes('study') || text.includes('edu') || text.includes('uni') || text.includes('degree') || text.includes('college') || text.includes('cert')) {
+            return botResponses.education;
+        } else if (text.includes('hello') || text.includes('hi') || text.includes('hey') || text.includes('greet')) {
+            return "Hello! I am Myat's virtual assistant. Try asking me about his **skills**, **experience**, **education**, **availability**, or **contact info**!";
+        } else {
+            return "I can answer questions regarding Myat's **skills**, **experience**, **education**, **availability**, or **contact info**. Feel free to try any of these keywords!";
+        }
+    }
+
+    function handleUserSend() {
+        if (!chatbotInput) return;
+        const text = chatbotInput.value.trim();
+        if (!text) return;
+
+        addMessage(text, 'user');
+        chatbotInput.value = '';
+
+        setTimeout(() => {
+            const reply = getBotResponse(text);
+            addMessage(reply, 'bot');
+        }, 600);
+    }
+
+    if (chatbotTrigger) {
+        chatbotTrigger.addEventListener('click', toggleChatbot);
+    }
+    if (chatbotCloseBtn) {
+        chatbotCloseBtn.addEventListener('click', toggleChatbot);
+    }
+
+    if (chatbotSendBtn) {
+        chatbotSendBtn.addEventListener('click', handleUserSend);
+    }
+
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleUserSend();
+            }
+        });
+    }
+
+    suggestionChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const questionKey = chip.getAttribute('data-question');
+            const questionText = chip.textContent;
+            
+            addMessage(questionText, 'user');
+            
+            setTimeout(() => {
+                const reply = botResponses[questionKey] || "I don't have information on that yet.";
+                addMessage(reply, 'bot');
+            }, 500);
+        });
+    });
+
+    // ===== DARK/LIGHT THEME SWITCHER =====
+    const themeToggleSidebar = document.getElementById('themeToggleSidebar');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+
+    function toggleTheme() {
+        const isLightTheme = document.body.classList.toggle('light-theme');
+        localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+        updateThemeIcons(isLightTheme);
+    }
+
+    function updateThemeIcons(isLight) {
+        const toggleButtons = [themeToggleSidebar, themeToggleMobile];
+        toggleButtons.forEach(btn => {
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    if (isLight) {
+                        icon.className = 'fa-solid fa-sun';
+                        btn.style.color = '#eab308';
+                    } else {
+                        icon.className = 'fa-solid fa-moon';
+                        btn.style.color = '';
+                    }
+                }
+            }
+        });
+    }
+
+    if (themeToggleSidebar) themeToggleSidebar.addEventListener('click', toggleTheme);
+    if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        updateThemeIcons(true);
+    }
+
     console.log('Premium Futuristic Portfolio Loaded successfully! 🛸');
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+    initPortfolio();
+}

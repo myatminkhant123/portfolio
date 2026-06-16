@@ -10,7 +10,33 @@
     <!-- FontAwesome for futuristic icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.8">
+    
+    <!-- JSON-LD Structured Schema Metadata (SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Myat Min Khant",
+      "jobTitle": [
+        "Software Engineer",
+        "Data Analyst",
+        "Cloud Operations Intern"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Albukhary International University",
+        "sameAs": "https://aiu.edu.my"
+      },
+      "url": "https://github.com/myatminkhant123",
+      "sameAs": [
+        "https://www.linkedin.com/in/myat-min-khant-810bb3275/",
+        "https://github.com/myatminkhant123"
+      ],
+      "email": "mmk111203@gmail.com",
+      "description": "Final year Computer Science Honours student specializing in Software Engineering, Data Science, and Cloud Operations. Albukhary Foundation Scholar."
+    }
+    </script>
 </head>
 
 <body>
@@ -29,8 +55,9 @@
 
     <!-- Sidebar Navigation -->
     <aside id="sidebar">
-        <div class="sidebar-brand">
+        <div class="sidebar-brand" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <div class="sidebar-logo">MMK</div>
+            <button id="themeToggleSidebar" class="theme-toggle-btn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
         </div>
         <ul class="sidebar-menu">
             <li><a href="#home" class="sidebar-link active" data-section="home"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
@@ -45,12 +72,14 @@
         </div>
     </aside>
 
-    <!-- Mobile Header -->
     <header id="mobile-header">
         <div class="mobile-logo">MMK</div>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-            <span class="hamburger"></span>
-        </button>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button id="themeToggleMobile" class="theme-toggle-btn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
     </header>
 
     <main class="main-content">
@@ -70,7 +99,7 @@
                         <span class="role-switcher" id="role-text">Software Engineer</span>
                     </div>
                     <p class="hero-desc">
-                        Results-driven Computer Science student at <strong style="color: var(--cyan);">Albukhary International University</strong> with a strong foundation in Data Science, cloud operations, software development, and data analytics. Experienced in developing tech solutions and managing IT operations.
+                        Results-driven Computer Science student and <strong style="color: var(--cyan);">Albukhary Foundation Full Scholarship Awardee</strong> at <strong style="color: var(--cyan);">Albukhary International University</strong> with a strong foundation in Data Science, cloud operations, software development, and data analytics. Experienced in developing tech solutions and managing IT operations.
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
@@ -81,15 +110,15 @@
                     <!-- Live Statistics Grid -->
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-num" data-target="9">0</span>
+                            <span class="stat-num" data-target="5">0</span>
                             <span class="stat-lbl">Projects</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num" data-target="20">0</span>
+                            <span class="stat-num" data-target="6">0</span>
                             <span class="stat-lbl">Certifications</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num" data-target="3">0</span>
+                            <span class="stat-num" data-target="4">0</span>
                             <span class="stat-lbl">Years Learning</span>
                         </div>
                         <div class="stat-item">
@@ -104,7 +133,7 @@
                         <div class="profile-ring"></div>
                         <div class="profile-ring-outer"></div>
                         <div class="profile-glow"></div>
-                        <img src="CVphoto.jpg" alt="Myat Min Khant Profile" class="profile-image">
+                        <img src="CVphoto.webp" alt="Myat Min Khant Profile" class="profile-image">
                         
                         <!-- Floating Technology Icons -->
                         <div class="floating-tech-icon icon-1" title="Python"><i class="fa-brands fa-python" style="color: #3776AB;"></i></div>
@@ -124,20 +153,12 @@
                         I am a final-year Computer Science student with a deep passion for solving real-world challenges through code, data, and intelligent algorithms. My education at Albukhary International University has grounded me in core computer science disciplines while instilling a commitment to social impact and continuous self-improvement.
                     </p>
                     <p>
-                        I specialize in translating raw data into actionable business intelligence and designing robust full-stack web applications. I bridge the gap between engineering, analytics, and operational systems, enabling me to build scalable systems with integrated AI capabilities.
+                        I specialize in translating raw data into actionable business intelligence and designing robust full-stack web applications. I bridge the gap between engineering, analytics, and operational systems, enabling me to build scalable and reliable systems.
                     </p>
                     <div class="story-passions">
                         <div class="passion-tag">
                             <span class="passion-icon">💻</span>
-                            <span class="passion-name">Software Eng.</span>
-                        </div>
-                        <div class="passion-tag">
-                            <span class="passion-icon">🤖</span>
-                            <span class="passion-name">Artificial Intelligence</span>
-                        </div>
-                        <div class="passion-tag">
-                            <span class="passion-icon">🧠</span>
-                            <span class="passion-name">Machine Learning</span>
+                            <span class="passion-name">Software Engineering</span>
                         </div>
                         <div class="passion-tag">
                             <span class="passion-icon">📊</span>
@@ -156,33 +177,33 @@
                 
                 <div class="journey-visualization reveal" style="transition-delay: 0.2s;">
                     <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text-main);">Academic & Tech Journey</h3>
+                    <div class="journey-step">
+                        <div class="journey-marker">🎓</div>
+                        <div class="journey-info">
+                            <span class="journey-date">Oct 2022 - Sep 2023</span>
+                            <h4 class="journey-title">Foundation in Computing</h4>
+                            <p class="journey-desc">Completed pre-university computing studies at Albukhary International University, establishing core programming, mathematics, and logic concepts.</p>
+                        </div>
+                    </div>
                     
                     <div class="journey-step">
                         <div class="journey-marker">🎓</div>
                         <div class="journey-info">
-                            <span class="journey-date">2023 - Present</span>
+                            <span class="journey-date">Oct 2023 - Present</span>
                             <h4 class="journey-title">Bachelor of Computer Science</h4>
-                            <p class="journey-desc">Honours student at Albukhary International University. Maintaining a strong academic record with data science focus.</p>
+                            <p class="journey-desc">Honours student and Albukhary Foundation Full Scholarship recipient at Albukhary International University. Maintaining a strong academic record with data science focus.</p>
                         </div>
                     </div>
                     
                     <div class="journey-step">
                         <div class="journey-marker">💼</div>
                         <div class="journey-info">
-                            <span class="journey-date">Nov 2023 - Feb 2024</span>
+                            <span class="journey-date">Apr 2026 - Present</span>
                             <h4 class="journey-title">Cloud Operations Internship</h4>
                             <p class="journey-desc">Gained valuable corporate IT experience handling systems patching, monitoring, SLAs, and enterprise service delivery.</p>
                         </div>
                     </div>
-                    
-                    <div class="journey-step">
-                        <div class="journey-marker">🏆</div>
-                        <div class="journey-info">
-                            <span class="journey-date">2024 - 2026</span>
-                            <h4 class="journey-title">Professional Certifications & Projects</h4>
-                            <p class="journey-desc">Earned 20+ technical certs (IBM Data Analyst, Microsoft Cloud Support, Azure) and launched 5+ major applications.</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -209,15 +230,18 @@
                             <div class="edu-meta">
                                 <span class="edu-meta-item"><i class="fa-solid fa-calendar-days"></i> Oct 2023 – Nov 2026</span>
                                 <span class="edu-meta-item"><i class="fa-solid fa-award"></i> Grade: <strong class="edu-grade">3.53</strong></span>
+                                <span class="edu-meta-item" style="color: #f59e0b;"><i class="fa-solid fa-medal"></i> Albukhary Foundation Full Scholar</span>
                             </div>
                             <div class="edu-details">
-                                <p>Specializing in <strong>Data Science</strong> workflows. Formulating machine learning models, relational databases, and dynamic visualization platforms.</p>
+                                <p>Specializing in <strong>Data Science</strong> workflows. Formulating data analytics pipelines, relational databases, and dynamic visualization platforms.</p>
                             </div>
-                            <div class="edu-skills-tags">
+
+
+                            <div class="edu-skills-tags" style="margin-top: 1.5rem;">
                                 <span class="edu-skills-tag">Python (Programming Language)</span>
                                 <span class="edu-skills-tag">Java</span>
                                 <span class="edu-skills-tag">Data Mining</span>
-                                <span class="edu-skills-tag">Machine Learning</span>
+                                <span class="edu-skills-tag">Data Engineering</span>
                                 <span class="edu-skills-tag">Cloud Infrastructure</span>
                                 <span class="edu-skills-tag">+15 skills</span>
                             </div>
@@ -236,12 +260,14 @@
                             <div class="edu-meta">
                                 <span class="edu-meta-item"><i class="fa-solid fa-calendar-days"></i> Oct 2022 – Sep 2023</span>
                                 <span class="edu-meta-item"><i class="fa-solid fa-award"></i> Grade: <strong class="edu-grade">3.27</strong></span>
+                                <span class="edu-meta-item" style="color: #f59e0b;"><i class="fa-solid fa-medal"></i> Albukhary Foundation Full Scholar</span>
                             </div>
                             <div class="edu-details">
-                                <p><strong>Activities and societies:</strong> Community Engagement, Web Development core group.</p>
                                 <p>Building solid logic and structural backgrounds, handling data models, front-end styling, and DBMS foundations.</p>
                             </div>
-                            <div class="edu-skills-tags">
+
+
+                            <div class="edu-skills-tags" style="margin-top: 1.5rem;">
                                 <span class="edu-skills-tag">Front-End Development</span>
                                 <span class="edu-skills-tag">Database Management System (DBMS)</span>
                                 <span class="edu-skills-tag">HTML & CSS</span>
@@ -336,9 +362,10 @@
                                 Supporting IT operations, cloud services, and enterprise service delivery in a professional cloud-native environment.
                             </p>
                             <ul class="timeline-list">
-                                <li><strong>IT Operations:</strong> Assisted in activities involving Incident Management, Change Management, cloud operations, and ticket management using ServiceNow and Microsoft Azure.</li>
-                                <li><strong>Governance & Compliance:</strong> Gained practical exposure to enterprise IT governance, compliance procedures, and system monitoring.</li>
-                                <li><strong>Team Collaboration:</strong> Collaborated with cross-functional teams to ensure high service availability and operational efficiency.</li>
+                                <li><strong>IT Service Management:</strong> Managed incident, request, and change ticket lifecycles in ServiceNow, ensuring service stability and traceability through clear documentation.</li>
+                                <li><strong>Change & Infrastructure Patching:</strong> Drafted monthly Linux patching plans, including implementation procedures, rollback strategies, and risk assessments.</li>
+                                <li><strong>Cloud Operations & Monitoring:</strong> Monitored real-time system performance, alerts, and logs using Microsoft Azure and Dynatrace to support incident resolution.</li>
+                                <li><strong>IT Governance & Compliance:</strong> Gained hands-on knowledge of ASR reporting, RPD checks, and compliance guidelines, supported by Microsoft Cloud Support training.</li>
                             </ul>
                         </div>
                     </div>
@@ -396,7 +423,7 @@
                     <div class="vol-card glass-card">
                         <div class="vol-header">
                             <span class="vol-org">AIU Myanmar Student Association</span>
-                            <span class="vol-date">Nov 2022 – Present</span>
+                            <span class="vol-date">Nov 2022 – Oct 2023</span>
                         </div>
                         <h4 class="vol-role">Public Relation Unit Officer</h4>
                         <p class="vol-desc">Organizing external communications, cultural representation, and public coordination for traditional events at AIU.</p>
@@ -407,7 +434,7 @@
                     <div class="vol-card glass-card">
                         <div class="vol-header">
                             <span class="vol-org">AIU Myanmar Student Association</span>
-                            <span class="vol-date">Nov 2023 – Present</span>
+                            <span class="vol-date">Nov 2023 – Jul 2024</span>
                         </div>
                         <h4 class="vol-role">Art & Culture Unit Co-Representative</h4>
                         <p class="vol-desc">Promoting traditional arts, arranging cultural showcases, and leading performance units for university functions.</p>
@@ -449,67 +476,63 @@
                     <h2 class="tech-stack-title">Technologies I Work With</h2>
                 </div>
             </div>
-            <div class="marquee-container" id="marquee-container">
-                <canvas id="marquee-bg-canvas"></canvas>
-                <div class="marquee-fade-left"></div>
-                <div class="marquee-wrapper" id="marquee-wrapper">
-                    <div class="marquee-track" id="marquee-track">
-                        <!-- Group 1 of items -->
-                        <div class="marquee-item" data-tech="vscode">
-                            <i class="fa-solid fa-code" style="color: #007ACC;"></i>
-                            <span class="tech-name">VS Code</span>
-                        </div>
-                        <div class="marquee-item" data-tech="nlp">
-                            <i class="fa-solid fa-brain" style="color: #A855F7;"></i>
-                            <span class="tech-name">NLP</span>
-                        </div>
-                        <div class="marquee-item" data-tech="python">
-                            <i class="fa-brands fa-python" style="color: #3776AB;"></i>
-                            <span class="tech-name">Python</span>
-                        </div>
-                        <div class="marquee-item" data-tech="java">
-                            <i class="fa-brands fa-java" style="color: #E76F51;"></i>
-                            <span class="tech-name">Java</span>
-                        </div>
-                        <div class="marquee-item" data-tech="javascript">
-                            <i class="fa-brands fa-js" style="color: #F7DF1E;"></i>
-                            <span class="tech-name">JavaScript</span>
-                        </div>
-                        <div class="marquee-item" data-tech="html5">
-                            <i class="fa-brands fa-html5" style="color: #E34F26;"></i>
-                            <span class="tech-name">HTML5</span>
-                        </div>
-                        <div class="marquee-item" data-tech="css3">
-                            <i class="fa-brands fa-css3-alt" style="color: #1572B6;"></i>
-                            <span class="tech-name">CSS3</span>
-                        </div>
-                        <div class="marquee-item" data-tech="sql">
-                            <i class="fa-solid fa-database" style="color: #003B57;"></i>
-                            <span class="tech-name">SQL</span>
-                        </div>
-                        <div class="marquee-item" data-tech="git">
-                            <i class="fa-brands fa-git-alt" style="color: #F05032;"></i>
-                            <span class="tech-name">Git</span>
-                        </div>
-                        <div class="marquee-item" data-tech="react">
-                            <i class="fa-brands fa-react" style="color: #61DAFB;"></i>
-                            <span class="tech-name">React</span>
-                        </div>
-                        <div class="marquee-item" data-tech="nodejs">
-                            <i class="fa-brands fa-node-js" style="color: #339933;"></i>
-                            <span class="tech-name">Node.js</span>
-                        </div>
-                        <div class="marquee-item" data-tech="docker">
-                            <i class="fa-brands fa-docker" style="color: #2496ED;"></i>
-                            <span class="tech-name">Docker</span>
-                        </div>
-                        <div class="marquee-item" data-tech="azure">
-                            <i class="fa-solid fa-cloud" style="color: #0078D4;"></i>
-                            <span class="tech-name">Microsoft Azure</span>
-                        </div>
-                    </div>
+            <div class="orbit-container" id="orbit-container">
+                <canvas id="orbit-bg-canvas"></canvas>
+                <div class="orbit-ring" id="orbit-ring"></div>
+                <div class="orbit-center">
+                    <div class="bright-dot"></div>
                 </div>
-                <div class="marquee-fade-right"></div>
+                
+
+                <div class="orbit-item" data-tech="python">
+                    <i class="fa-brands fa-python" style="color: #3776AB;"></i>
+                    <span class="tech-name">Python</span>
+                </div>
+                <div class="orbit-item" data-tech="java">
+                    <i class="fa-brands fa-java" style="color: #E76F51;"></i>
+                    <span class="tech-name">Java</span>
+                </div>
+                <div class="orbit-item" data-tech="javascript">
+                    <i class="fa-brands fa-js" style="color: #F7DF1E;"></i>
+                    <span class="tech-name">JavaScript</span>
+                </div>
+
+                <div class="orbit-item" data-tech="sql">
+                    <i class="fa-solid fa-database" style="color: #003B57;"></i>
+                    <span class="tech-name">SQL</span>
+                </div>
+                <div class="orbit-item" data-tech="git">
+                    <i class="fa-brands fa-git-alt" style="color: #F05032;"></i>
+                    <span class="tech-name">Git</span>
+                </div>
+                <div class="orbit-item" data-tech="react">
+                    <i class="fa-brands fa-react" style="color: #61DAFB;"></i>
+                    <span class="tech-name">React</span>
+                </div>
+                <div class="orbit-item" data-tech="nodejs">
+                    <i class="fa-brands fa-node-js" style="color: #339933;"></i>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                <div class="orbit-item" data-tech="docker">
+                    <i class="fa-brands fa-docker" style="color: #2496ED;"></i>
+                    <span class="tech-name">Docker</span>
+                </div>
+                <div class="orbit-item" data-tech="azure">
+                    <i class="fa-solid fa-cloud" style="color: #0078D4;"></i>
+                    <span class="tech-name">Microsoft Azure</span>
+                </div>
+                <div class="orbit-item" data-tech="powerbi">
+                    <i class="fa-solid fa-chart-bar" style="color: #F2C811;"></i>
+                    <span class="tech-name">Power BI</span>
+                </div>
+                <div class="orbit-item" data-tech="excel">
+                    <i class="fa-solid fa-file-excel" style="color: #107C41;"></i>
+                    <span class="tech-name">Excel</span>
+                </div>
+                <div class="orbit-item" data-tech="servicenow">
+                    <i class="fa-solid fa-gears" style="color: #81B924;"></i>
+                    <span class="tech-name">ServiceNow</span>
+                </div>
             </div>
             <div class="container">
                 <div class="skill-description-box" id="skill-desc-box">
@@ -523,14 +546,9 @@
         <div class="container" style="margin-top: 5rem;">
             <h2 class="section-title reveal" style="margin-bottom: 3rem;"><span class="gradient-title">Skill Ecosystem Radar</span></h2>
             <div class="skills-container">
-                <!-- Skills Radar (Interactive Canvas) -->
-                <div class="skills-radar-wrapper reveal">
-                    <canvas id="skills-radar" class="skills-radar-canvas"></canvas>
-                </div>
-                
-                <!-- Skill lists grouped by categories -->
-                <div class="skills-grid reveal" style="transition-delay: 0.2s;">
-                    <div class="skill-category glass-card">
+                <!-- Left Column: Programming and Web Development -->
+                <div class="skills-side-col reveal">
+                    <div class="skill-category glass-card programming">
                         <h3 class="skill-category-title">Programming</h3>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Python</span>
@@ -541,7 +559,7 @@
                         </div>
                     </div>
                     
-                    <div class="skill-category glass-card">
+                    <div class="skill-category glass-card web-dev">
                         <h3 class="skill-category-title">Web Development</h3>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>React</span>
@@ -551,19 +569,27 @@
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Express.js</span>
                         </div>
                     </div>
-                    
-                    <div class="skill-category glass-card">
-                        <h3 class="skill-category-title">Data Science & AI</h3>
+                </div>
+
+                <!-- Skills Radar (Interactive Canvas in center) -->
+                <div class="skills-radar-wrapper reveal">
+                    <canvas id="skills-radar" class="skills-radar-canvas"></canvas>
+                </div>
+                
+                <!-- Right Column: Data Science & AI and Cloud & Infrastructure -->
+                <div class="skills-side-col reveal" style="transition-delay: 0.2s;">
+                    <div class="skill-category glass-card data-science">
+                        <h3 class="skill-category-title">Data Science</h3>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Pandas</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>NumPy</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Matplotlib</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Scikit-Learn</span>
-                            <span class="skill-tag"><span class="skill-tag-dot"></span>Machine Learning</span>
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>Data Engineering</span>
                         </div>
                     </div>
                     
-                    <div class="skill-category glass-card">
+                    <div class="skill-category glass-card cloud-infra">
                         <h3 class="skill-category-title">Cloud & Infrastructure</h3>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Microsoft Azure</span>
@@ -582,12 +608,13 @@
     <section id="projects" class="section" style="background: rgba(11, 17, 32, 0.2);">
         <div class="container">
             <h2 class="section-title reveal"><span class="gradient-title">Featured Projects</span></h2>
-            
+
+
             <div class="projects-grid reveal-stagger">
                 <!-- Project 1: Song Popularity Predictor -->
-                <div class="project-card glass-card accent-1" data-categories="ai-ml data">
+                <div class="project-card glass-card accent-1" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="earphone.png" alt="Song Popularity Predictor">
+                        <img src="earphone.webp" alt="Song Popularity Predictor">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -618,7 +645,7 @@
                 <!-- Project 2: AIU Postgraduate Monitoring System -->
                 <div class="project-card glass-card accent-2" data-categories="web academic">
                     <div class="project-thumb">
-                        <img src="thumb3.png" alt="AIU Postgraduate Monitoring System">
+                        <img src="thumb3.webp" alt="AIU Postgraduate Monitoring System">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -646,15 +673,15 @@
                 </div>
 
                 <!-- Project 3: ChatGPT Review Sentiment Analyzer -->
-                <div class="project-card glass-card accent-3" data-categories="ai-ml data">
+                <div class="project-card glass-card accent-3" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="thumb_chatgpt.png" alt="ChatGPT Review Sentiment Analyzer">
+                        <img src="thumb_chatgpt.webp" alt="ChatGPT Review Sentiment Analyzer">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
                         <h3 class="project-title">ChatGPT Review Sentiment Analyzer</h3>
                         <p class="project-description">
-                            Machine Learning web app featuring real-time classification (Positive/Negative) of reviews using TF-IDF and SVM, supplemented by LIME for model transparency.
+                            A text analysis web app featuring real-time classification (Positive/Negative) of reviews using TF-IDF and SVM, supplemented by LIME for model transparency.
                         </p>
                         <div class="project-details">
                             <div class="project-meta-item"><strong>Challenge:</strong> Explaining text SVM vector boundaries locally with Lime to explain predictions.</div>
@@ -676,9 +703,9 @@
                 </div>
 
                 <!-- Project 4: Credit Card Fraud Detection System -->
-                <div class="project-card glass-card accent-1" data-categories="ai-ml data">
+                <div class="project-card glass-card accent-1" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="thumb3.png" alt="Credit Card Fraud Detection System">
+                        <img src="thumb3.webp" alt="Credit Card Fraud Detection System">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -706,9 +733,9 @@
                 </div>
 
                 <!-- Project 5: FIFA World Cup Match Prediction -->
-                <div class="project-card glass-card accent-2" data-categories="ai-ml data academic">
+                <div class="project-card glass-card accent-2" data-categories="analysis data academic">
                     <div class="project-thumb">
-                        <img src="thumb1.png" alt="FIFA Match Prediction">
+                        <img src="thumb1.webp" alt="FIFA Match Prediction">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -764,7 +791,7 @@
                     <div class="achieve-icon">📁</div>
                     <span class="achieve-num" data-target="5">0</span>
                     <h3 class="achieve-title">Completed Projects</h3>
-                    <p class="achieve-desc">Built 5 featured projects encompassing machine learning, data engineering, and web platforms.</p>
+                    <p class="achieve-desc">Built 5 featured projects encompassing data analytics, data engineering, and web platforms.</p>
                 </div>
                 
                 <div class="achieve-card glass-card">
@@ -810,8 +837,8 @@
                 <div class="hire-card glass-card">
                     <div class="hire-num-badge">04</div>
                     <div class="hire-info">
-                        <h3>Data Analytics & ML Expertise</h3>
-                        <p>Adept at fetching and cleaning datasets, structuring databases, building interactive analysis dashboards, and optimizing predictive models.</p>
+                        <h3>Data Analytics & Database Management</h3>
+                        <p>Adept at fetching and cleaning datasets, structuring databases, building interactive analysis dashboards, and optimizing data workflows.</p>
                     </div>
                 </div>
                 
@@ -819,7 +846,7 @@
                     <div class="hire-num-badge">05</div>
                     <div class="hire-info">
                         <h3>Proactive Continuous Learner</h3>
-                        <p>Passionate about self-study; backed by 20+ certificates from Coursera, Microsoft, and IBM to stay at the cutting edge of industry technology.</p>
+                        <p>Passionate about self-study; backed by 6+ certificates from Coursera, Microsoft, and IBM to stay at the cutting edge of industry technology.</p>
                     </div>
                 </div>
                 
@@ -855,7 +882,7 @@
                     
                     <div class="contact-details">
                         <!-- Email -->
-                        <a href="mailto:mmk111203@gmail.com" class="contact-item">
+                        <a href="mailto:mmk111203@gmail.com" class="contact-item email-item">
                             <i class="fa-solid fa-envelope contact-item-icon"></i>
                             <div>
                                 <span class="contact-item-label">Email Me</span>
@@ -864,7 +891,7 @@
                         </a>
                         
                         <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/in/myat-min-khant-810bb3275/" target="_blank" class="contact-item">
+                        <a href="https://www.linkedin.com/in/myat-min-khant-810bb3275/" target="_blank" class="contact-item linkedin-item">
                             <i class="fa-brands fa-linkedin contact-item-icon"></i>
                             <div>
                                 <span class="contact-item-label">LinkedIn</span>
@@ -873,7 +900,7 @@
                         </a>
                         
                         <!-- GitHub -->
-                        <a href="https://github.com/myatminkhant123" target="_blank" class="contact-item">
+                        <a href="https://github.com/myatminkhant123" target="_blank" class="contact-item github-item">
                             <i class="fa-brands fa-github contact-item-icon"></i>
                             <div>
                                 <span class="contact-item-label">GitHub</span>
@@ -882,15 +909,42 @@
                         </a>
                     </div>
                     
-                    <!-- Futuristic Location Map Canvas -->
-                    <div class="map-canvas-container">
-                        <canvas id="map-canvas"></canvas>
+                    <!-- Career Status & Availability Card -->
+                    <div class="status-card glass-card" style="padding: 1.5rem; margin-top: 1.5rem;">
+                        <h3 class="status-title" style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
+                            <i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> Career Status & Availability
+                        </h3>
+                        <div class="status-grid-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; font-size: 0.9rem;">
+                            <div class="status-info-item">
+                                <span style="display: block; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Location</span>
+                                <strong style="color: var(--text-main); font-weight: 500;">Kuala Lumpur, Malaysia</strong>
+                            </div>
+                            <div class="status-info-item">
+                                <span style="display: block; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Relocation</span>
+                                <strong style="color: var(--text-main); font-weight: 500;">Open / Flexible</strong>
+                            </div>
+                            <div class="status-info-item">
+                                <span style="display: block; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Opportunity Type</span>
+                                <strong style="color: var(--text-main); font-weight: 500;">Junior & Entry-level</strong>
+                            </div>
+                            <div class="status-info-item">
+                                <span style="display: block; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Timeline</span>
+                                <strong style="color: var(--text-main); font-weight: 500;">Starting Nov 2026</strong>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                            Currently completing final-year Computer Science studies and finding the industrial experience at AIA digital + Malaysia as Cloud Operation Intern.
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Contact Form Column -->
                 <div class="contact-form-column reveal" style="transition-delay: 0.2s;">
                     <form class="contact-form glass-card" id="contactForm" onsubmit="event.preventDefault(); alert('Message sent successfully! 🚀'); this.reset();">
+                        <div class="form-terminal-header">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-title">SECURE COMMUNICATIONS CHANNEL</span>
+                        </div>
                         <div class="form-group">
                             <label class="form-label" for="name">Name</label>
                             <input class="form-input" type="text" id="name" required placeholder="Your Name">
@@ -932,6 +986,61 @@
         </a>
     </div>
 
+    <!-- Interactive AI Assistant Widget -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <button class="chatbot-trigger" id="chatbotTrigger" aria-label="Open AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+            <span class="pulse-ring"></span>
+        </button>
+
+        <div class="chatbot-window glass-card" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <span class="chatbot-status-dot"></span>
+                    <div>
+                        <h4 class="chatbot-header-title">MMK Assistant</h4>
+                        <p class="chatbot-header-subtitle">System: Operational // Active</p>
+                    </div>
+                </div>
+                <button class="chatbot-close-btn" id="chatbotCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-message bot">
+                    Hi! I am Myat's virtual assistant. Ask me anything about his skills, experience, education, or availability!
+                </div>
+            </div>
+
+            <div class="chatbot-suggestions" id="chatbotSuggestions">
+                <button class="suggestion-chip" data-question="skills">🛠️ Tech Stack</button>
+                <button class="suggestion-chip" data-question="experience">💼 Experience</button>
+                <button class="suggestion-chip" data-question="status">📍 Availability</button>
+                <button class="suggestion-chip" data-question="contact">📞 Contact Info</button>
+            </div>
+
+            <div class="chatbot-input-area">
+                <input type="text" id="chatbotInput" placeholder="Type a message...">
+                <button id="chatbotSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fa-solid fa-file-pdf" style="color: var(--cyan); margin-right: 0.5rem;"></i> Curriculum Vitae</h3>
+                <div class="modal-actions">
+                    <a href="CV_MMK.pdf" download class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Download</a>
+                    <button class="modal-close" id="closeResumeBtn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="modal-body" style="padding: 0; background: #0b1120; overflow: hidden;">
+                <iframe src="CV_MMK.pdf#toolbar=0" style="width: 100%; height: 100%; border: none; min-height: 70vh;"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Lightbox Modal for Photo Gallery -->
     <div id="photoLightbox" class="lightbox-modal">
         <span class="lightbox-close">&times;</span>
@@ -940,7 +1049,7 @@
     </div>
 
     <!-- main JS script -->
-    <script src="script.js?v=1.1"></script>
+    <script src="script.js?v=1.8"></script>
 </body>
 
 </html>
