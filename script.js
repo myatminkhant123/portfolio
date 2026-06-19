@@ -1,4 +1,5 @@
 function initPortfolio() {
+    let redrawRadarFn = null;
 
     // ===== DASHBOARD SIDEBAR & ROUTING =====
     const sidebar = document.getElementById('sidebar');
@@ -135,6 +136,7 @@ function initPortfolio() {
         });
     });
 
+
     // ===== DYNAMIC BACKGROUND PARTICLES CANVAS =====
     const bgCanvas = document.getElementById('bg-canvas');
     if (bgCanvas) {
@@ -208,10 +210,9 @@ function initPortfolio() {
     // ===== ROLE TYPEWRITER SWITCHER LOOP =====
     const roleText = document.getElementById('role-text');
     const roles = [
-        "Software Engineer",
-        "Data Analyst",
-        "Data Scientist",
-        "Cloud Engineer"
+        "Full-Stack Software engineer",
+        "Data Professional",
+        "Cloud Operations Engineer"
     ];
     let roleIdx = 0;
     let charIdx = 0;
@@ -389,6 +390,8 @@ function initPortfolio() {
                 rCtx.stroke();
             });
         }
+
+        redrawRadarFn = drawRadar;
 
         // Trigger radar animation on enter viewport
         const radarObserver = new IntersectionObserver((entries) => {
@@ -739,6 +742,18 @@ function initPortfolio() {
         }
     });
 
+    // ===== INTERACTIVE COURSE DETAILS ACCORDION =====
+    const courseItems = document.querySelectorAll('.courses-ul .course-item');
+    courseItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const isActive = item.classList.contains('active-course');
+            courseItems.forEach(c => c.classList.remove('active-course'));
+            if (!isActive) {
+                item.classList.add('active-course');
+            }
+        });
+    });
+
     // ===== INTERACTIVE AI ASSISTANT WIDGET LOGIC =====
     const chatbotTrigger = document.getElementById('chatbotTrigger');
     const chatbotWindow = document.getElementById('chatbotWindow');
@@ -871,6 +886,236 @@ function initPortfolio() {
         });
     });
 
+    // ===== INTERACTIVE CODE WINDOW TABS =====
+    const codeTabs = document.querySelectorAll('.code-tab');
+    const codeContainers = document.querySelectorAll('.code-body-container');
+    const terminalWindow = document.getElementById('terminal-window');
+    const runCodeBtn = document.getElementById('run-code-btn');
+
+    codeTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            codeTabs.forEach(t => t.classList.remove('active'));
+            // Hide all code bodies
+            codeContainers.forEach(container => container.style.display = 'none');
+
+            // Close terminal if open
+            if (terminalWindow) {
+                terminalWindow.classList.remove('active');
+            }
+            clearTimeouts();
+            if (runCodeBtn) {
+                runCodeBtn.disabled = false;
+            }
+            isRunningSim = false;
+
+            // Add active class to clicked tab
+            tab.classList.add('active');
+            // Show corresponding code body
+            const fileType = tab.getAttribute('data-file');
+            const targetContainer = document.getElementById(`code-${fileType}`);
+            if (targetContainer) {
+                targetContainer.style.display = 'block';
+            }
+        });
+    });
+
+    // ===== INTERACTIVE TERMINAL SIMULATION =====
+    const terminalClose = document.getElementById('terminal-close');
+    const terminalBody = document.getElementById('terminal-body');
+    let isRunningSim = false;
+    let typeTimeouts = [];
+
+    function clearTimeouts() {
+        typeTimeouts.forEach(t => clearTimeout(t));
+        typeTimeouts = [];
+    }
+
+    if (runCodeBtn && terminalWindow && terminalBody) {
+        runCodeBtn.addEventListener('click', () => {
+            if (isRunningSim) return;
+            
+            // Disable button during execution
+            runCodeBtn.disabled = true;
+            isRunningSim = true;
+
+            // Clear previous simulation run
+            clearTimeouts();
+            terminalWindow.classList.add('active');
+            terminalBody.innerHTML = '';
+
+            // Find currently active file type
+            const activeTab = document.querySelector('.code-tab.active');
+            const fileType = activeTab ? activeTab.getAttribute('data-file') : 'ts';
+
+            const sequences = {
+                ts: [
+                    { text: "$ npx ts-node pipeline.ts", type: "cmd" },
+                    { text: "[INFO] Initializing compilation context for developer 'Myat Min Khant'...", type: "info" },
+                    { text: "[INFO] Specialties verified: [\"Software Engineering\", \"Data Analytics\", \"Cloud Operations\"]", type: "info" },
+                    { text: "[INFO] Running async DataPipeline operations on raw input...", type: "info" },
+                    { text: "[SUCCESS] Scalable FullStackApplication successfully deployed to production (scaling: auto, reliability: 99.9%).", type: "success" }
+                ],
+                py: [
+                    { text: "$ python analytics.py", type: "cmd" },
+                    { text: "[INFO] Loading Pandas DataFrame pipeline...", type: "info" },
+                    { text: "[INFO] Analyzing data patterns: focus set to [\"Software Engineering\", \"Data Science\"]", type: "info" },
+                    { text: "[INFO] Running transform_and_analyze() operations...", type: "info" },
+                    { text: "[SUCCESS] PortfolioPipeline execution output: FullStackApp deployed. scale_out=True.", type: "success" }
+                ],
+                sql: [
+                    { text: "$ psql -f insights.sql", type: "cmd" },
+                    { text: "[INFO] Executing SELECT query on database table 'aiu_graduates'...", type: "info" },
+                    { text: "[INFO] Filtering constraints: skills IN ('Software Engineering', 'Data Analytics', 'Cloud Operations')", type: "info" },
+                    { text: "[INFO] Fetching records sorted by impact_level DESC...", type: "info" },
+                    { text: "[SUCCESS] Query complete: 1 record fetched (Myat Min Khant - Scalable & Reliable Systems) in 42ms.", type: "success" }
+                ]
+            };
+
+            const lines = sequences[fileType] || [];
+            let lineIdx = 0;
+
+            function printNextLine() {
+                if (lineIdx >= lines.length) {
+                    // Enable run button again
+                    runCodeBtn.disabled = false;
+                    isRunningSim = false;
+                    return;
+                }
+                
+                const lineData = lines[lineIdx];
+                const lineDiv = document.createElement('div');
+                lineDiv.className = `terminal-line terminal-${lineData.type}`;
+                terminalBody.appendChild(lineDiv);
+                
+                // Typewriter effect for text
+                let charIdx = 0;
+                function typeChar() {
+                    if (charIdx < lineData.text.length) {
+                        lineDiv.textContent += lineData.text[charIdx];
+                        charIdx++;
+                        terminalBody.scrollTop = terminalBody.scrollHeight;
+                        typeTimeouts.push(setTimeout(typeChar, lineData.type === 'cmd' ? 25 : 12));
+                    } else {
+                        lineIdx++;
+                        typeTimeouts.push(setTimeout(printNextLine, 300));
+                    }
+                }
+                typeChar();
+            }
+            printNextLine();
+        });
+    }
+
+    if (terminalClose && terminalWindow) {
+        terminalClose.addEventListener('click', () => {
+            terminalWindow.classList.remove('active');
+            clearTimeouts();
+            if (runCodeBtn) {
+                runCodeBtn.disabled = false;
+            }
+            isRunningSim = false;
+        });
+    }
+
+    // ===== 3D TILT HOVER EFFECT FOR PROJECT CARDS =====
+    const projectCards = document.querySelectorAll('.project-card');
+
+    projectCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const cardRect = card.getBoundingClientRect();
+            
+            // Calculate mouse position relative to card center (range -0.5 to 0.5)
+            const mouseX = (e.clientX - cardRect.left) / cardRect.width - 0.5;
+            const mouseY = (e.clientY - cardRect.top) / cardRect.height - 0.5;
+            
+            // Degrees of rotation (max 10deg)
+            const rotateX = -mouseY * 12;
+            const rotateY = mouseX * 12;
+            
+            // Translate slightly towards the user
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+    });
+
+    // ===== CONTACT FORM TERMINAL SIMULATION =====
+    const contactForm = document.getElementById('contactForm');
+    const formTerminalOverlay = document.getElementById('formTerminalOverlay');
+    const formTerminalBody = document.getElementById('formTerminalBody');
+    const formTerminalClose = document.getElementById('form-terminal-close');
+    let formTimeouts = [];
+
+    function clearFormTimeouts() {
+        formTimeouts.forEach(t => clearTimeout(t));
+        formTimeouts = [];
+    }
+
+    if (contactForm && formTerminalOverlay && formTerminalBody) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const visitorName = document.getElementById('name').value.trim() || 'Visitor';
+
+            // Show overlay
+            formTerminalOverlay.classList.add('active');
+            formTerminalBody.innerHTML = '';
+            clearFormTimeouts();
+
+            const seq = [
+                { text: `$ git push secure-smtp visitor-message --author="${visitorName}"`, type: "cmd" },
+                { text: "[INFO] Packaging communication payload...", type: "info" },
+                { text: "[INFO] Connecting to remote server mail.myatminkhant.dev...", type: "info" },
+                { text: "[INFO] Establishing secure TLS 1.3 channel...", type: "info" },
+                { text: "[INFO] Verifying SMTP authentication... Status: 250 OK", type: "info" },
+                { text: `[SUCCESS] Message successfully delivered to Myat's inbox! Thank you, ${visitorName}!`, type: "success" }
+            ];
+
+            let lineIdx = 0;
+
+            function printNextLine() {
+                if (lineIdx >= seq.length) {
+                    // Reset form after delay
+                    formTimeouts.push(setTimeout(() => {
+                        contactForm.reset();
+                    }, 1000));
+                    return;
+                }
+                
+                const lineData = seq[lineIdx];
+                const lineDiv = document.createElement('div');
+                lineDiv.className = `terminal-line terminal-${lineData.type}`;
+                formTerminalBody.appendChild(lineDiv);
+                
+                // Typewriter effect
+                let charIdx = 0;
+                function typeChar() {
+                    if (charIdx < lineData.text.length) {
+                        lineDiv.textContent += lineData.text[charIdx];
+                        charIdx++;
+                        formTerminalBody.scrollTop = formTerminalBody.scrollHeight;
+                        formTimeouts.push(setTimeout(typeChar, lineData.type === 'cmd' ? 25 : 12));
+                    } else {
+                        lineIdx++;
+                        formTimeouts.push(setTimeout(printNextLine, 350));
+                    }
+                }
+                typeChar();
+            }
+            printNextLine();
+        });
+    }
+
+    if (formTerminalClose && formTerminalOverlay) {
+        formTerminalClose.addEventListener('click', () => {
+            formTerminalOverlay.classList.remove('active');
+            clearFormTimeouts();
+        });
+    }
+
     // ===== DARK/LIGHT THEME SWITCHER =====
     const themeToggleSidebar = document.getElementById('themeToggleSidebar');
     const themeToggleMobile = document.getElementById('themeToggleMobile');
@@ -879,6 +1124,9 @@ function initPortfolio() {
         const isLightTheme = document.body.classList.toggle('light-theme');
         localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
         updateThemeIcons(isLightTheme);
+        if (redrawRadarFn) {
+            redrawRadarFn();
+        }
     }
 
     function updateThemeIcons(isLight) {

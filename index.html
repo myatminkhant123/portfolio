@@ -96,10 +96,10 @@
                     </h1>
                     <div class="role-switcher-container">
                         <span>I am a </span>
-                        <span class="role-switcher" id="role-text">Software Engineer</span>
+                        <span class="role-switcher" id="role-text">Full-Stack Software engineer</span>
                     </div>
                     <p class="hero-desc">
-                        Results-driven Computer Science student and <strong style="color: var(--cyan);">Albukhary Foundation Full Scholarship Awardee</strong> at <strong style="color: var(--cyan);">Albukhary International University</strong> with a strong foundation in Data Science, cloud operations, software development, and data analytics. Experienced in developing tech solutions and managing IT operations.
+                        Results-driven Computer Science honours student and <strong style="color: var(--cyan);">Albukhary Foundation Scholar</strong> at <strong style="color: var(--cyan);">Albukhary International University</strong>. Focused on engineering scalable web applications, analyzing complex datasets, and optimizing cloud-native systems.
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
@@ -150,12 +150,56 @@
             <div class="brand-grid">
                 <div class="story-container reveal">
                     <p>
-                        I am a final-year Computer Science student with a deep passion for solving real-world challenges through code, data, and intelligent algorithms. My education at Albukhary International University has grounded me in core computer science disciplines while instilling a commitment to social impact and continuous self-improvement.
+                        I am a final-year Computer Science student specializing in Data Science. I bridge the gap between engineering, analytics, and operational systems to build scalable, reliable software that solves real-world challenges and drives meaningful impact.
                     </p>
-                    <p>
-                        I specialize in translating raw data into actionable business intelligence and designing robust full-stack web applications. I bridge the gap between engineering, analytics, and operational systems, enabling me to build scalable and reliable systems.
-                    </p>
-                    <div class="story-passions">
+                    
+                    <div class="code-window-wrapper">
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="code-header-left">
+                                    <div class="code-dots">
+                                        <div class="code-dot red"></div>
+                                        <div class="code-dot yellow"></div>
+                                        <div class="code-dot green"></div>
+                                    </div>
+                                    <div class="code-tabs">
+                                        <button class="code-tab active" data-file="ts">pipeline.ts</button>
+                                        <button class="code-tab" data-file="py">analytics.py</button>
+                                        <button class="code-tab" data-file="sql">insights.sql</button>
+                                    </div>
+                                </div>
+                                <button class="run-code-btn" id="run-code-btn"><i class="fa-solid fa-play"></i> Run Code</button>
+                            </div>
+                            
+                            <div class="code-body-container" id="code-ts">
+                                <div class="code-body">
+                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">interface</span> <span class="code-name">Developer</span> {</span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt">  specialties: <span class="code-type">string</span>[];</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt">  deploySystem(rawData: <span class="code-type">any</span>): <span class="code-name">Promise</span>&lt;<span class="code-type">void</span>&gt;;</span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt">}</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt"><span class="code-keyword">export</span> <span class="code-keyword">class</span> <span class="code-name">MyatMinKhant</span> <span class="code-keyword">implements</span> <span class="code-name">Developer</span> {</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt">  specialties = [<span class="code-string">"Software Engineering"</span>, <span class="code-string">"Data Analytics"</span>, <span class="code-string">"Cloud Operations"</span>];</span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">  <span class="code-keyword">async</span> deploySystem(rawData: <span class="code-type">any</span>): <span class="code-name">Promise</span>&lt;<span class="code-type">void</span>&gt; {</span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt">    <span class="code-keyword">const</span> insights = <span class="code-keyword">await</span> <span class="code-name">DataPipeline</span>.process(rawData);</span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">    <span class="code-keyword">const</span> app = <span class="code-keyword">new</span> <span class="code-name">FullStackApplication</span>(insights);</span></div><div class="code-line"><span class="code-ln">12</span><span class="code-txt">    </span></div><div class="code-line"><span class="code-ln">13</span><span class="code-txt">    <span class="code-keyword">await</span> app.deploy({</span></div><div class="code-line"><span class="code-ln">14</span><span class="code-txt">      environment: <span class="code-string">"production"</span>,</span></div><div class="code-line"><span class="code-ln">15</span><span class="code-txt">      scaling: <span class="code-string">"auto"</span>,</span></div><div class="code-line"><span class="code-ln">16</span><span class="code-txt">      reliability: <span class="code-string">"99.9%"</span></span></div><div class="code-line"><span class="code-ln">17</span><span class="code-txt">    });</span></div><div class="code-line"><span class="code-ln">18</span><span class="code-txt">  }</span></div><div class="code-line"><span class="code-ln">19</span><span class="code-txt">}</span></div></code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="code-body-container" id="code-py" style="display: none;">
+                                <div class="code-body">
+                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">from</span> typing <span class="code-keyword">import</span> <span class="code-name">Dict</span>, <span class="code-name">List</span></span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt"><span class="code-keyword">class</span> <span class="code-name">PortfolioPipeline</span>:</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt">    <span class="code-keyword">def</span> <span class="code-name">__init__</span>(self):</span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt">        self.focus: <span class="code-name">List</span>[<span class="code-type">str</span>] = [<span class="code-string">"Software Engineering"</span>, <span class="code-string">"Data Science"</span>]</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt">        </span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt">    <span class="code-keyword">def</span> <span class="code-name">execute_workflow</span>(self, raw_data: <span class="code-name">Dict</span>) -&gt; <span class="code-name">Dict</span>:</span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">        <span class="code-comment"># Translate raw data into actionable intelligence</span></span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt">        insights = transform_and_analyze(raw_data)</span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">        </span></div><div class="code-line"><span class="code-ln">12</span><span class="code-txt">        <span class="code-comment"># Design and run a robust, scalable system</span></span></div><div class="code-line"><span class="code-ln">13</span><span class="code-txt">        system = FullStackApp(data=insights)</span></div><div class="code-line"><span class="code-ln">14</span><span class="code-txt">        <span class="code-keyword">return</span> system.deploy(scale_out=<span class="code-keyword">True</span>)</span></div></code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="code-body-container" id="code-sql" style="display: none;">
+                                <div class="code-body">
+                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">SELECT</span> </span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt">    developer_name,</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt">    specialties,</span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt">    mission_statement</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt"><span class="code-keyword">FROM</span> </span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt">    aiu_graduates</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt"><span class="code-keyword">WHERE</span> </span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt">    skills <span class="code-keyword">IN</span> (<span class="code-string">'Software Engineering'</span>, <span class="code-string">'Data Analytics'</span>, <span class="code-string">'Cloud Operations'</span>)</span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">    <span class="code-keyword">AND</span> focus = <span class="code-string">'Scalable & Reliable Systems'</span></span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt"><span class="code-keyword">ORDER BY</span> </span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">    impact_level <span class="code-keyword">DESC</span>;</span></div></code></pre>
+                                </div>
+                            </div>
+
+                            <div class="terminal-window" id="terminal-window">
+                                <div class="terminal-header">
+                                    <span>TERMINAL</span>
+                                    <button class="terminal-close" id="terminal-close" aria-label="Close terminal"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                                <div class="terminal-body" id="terminal-body"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="story-passions" style="margin-top: 2.5rem;">
                         <div class="passion-tag">
                             <span class="passion-icon">💻</span>
                             <span class="passion-name">Software Engineering</span>
@@ -319,17 +363,149 @@
                         <div class="cert-courses-list">
                             <h4 class="courses-list-title"><i class="fa-solid fa-list-check"></i> 11 Specialization Courses</h4>
                             <ul class="courses-ul">
-                                <li><span class="course-num">01</span> Introduction to Data Analytics</li>
-                                <li><span class="course-num">02</span> Excel Basics for Data Analysis</li>
-                                <li><span class="course-num">03</span> Data Visualization and Dashboards with Excel and Cognos</li>
-                                <li><span class="course-num">04</span> Python for Data Science, AI & Development</li>
-                                <li><span class="course-num">05</span> Python Project for Data Science</li>
-                                <li><span class="course-num">06</span> Databases and SQL for Data Science with Python</li>
-                                <li><span class="course-num">07</span> Data Analysis with Python</li>
-                                <li><span class="course-num">08</span> Data Visualization with Python</li>
-                                <li><span class="course-num">09</span> IBM Data Analyst Capstone Project</li>
-                                <li><span class="course-num">10</span> Generative AI: Enhance your Data Analytics Career</li>
-                                <li><span class="course-num">11</span> Data Analyst Career Guide and Interview Preparation</li>
+                                <li class="course-item" data-course="1">
+                                    <div class="course-item-header">
+                                        <span class="course-num">01</span>
+                                        <span class="course-item-title">Introduction to Data Analytics</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Analytical Case Study of Modern E-Commerce Platforms.</p>
+                                            <p><strong>Skills Verified:</strong> Data Analytics Lifecycle, Data Quality Assessment, Structured Problem Solving.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="2">
+                                    <div class="course-item-header">
+                                        <span class="course-num">02</span>
+                                        <span class="course-item-title">Excel Basics for Data Analysis</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Financial Performance Analytics Model for Sales Channels.</p>
+                                            <p><strong>Skills Verified:</strong> Pivot Tables, VLOOKUP/INDEX-MATCH, Data Cleaning & Formatting.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="3">
+                                    <div class="course-item-header">
+                                        <span class="course-num">03</span>
+                                        <span class="course-item-title">Data Visualization and Dashboards with Excel and Cognos</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Executive Revenue Dashboard in IBM Cognos analytics.</p>
+                                            <p><strong>Skills Verified:</strong> Interactive Dashboard Engineering, KPI metrics tracking, Pivot Charting.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="4">
+                                    <div class="course-item-header">
+                                        <span class="course-num">04</span>
+                                        <span class="course-item-title">Python for Data Science, AI & Development</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Custom Web Scraping & REST API Fetcher for Stock Market Analysis.</p>
+                                            <p><strong>Skills Verified:</strong> Python syntax, Jupyter Notebooks, Requests & BeautifulSoup, basic scripting.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="5">
+                                    <div class="course-item-header">
+                                        <span class="course-num">05</span>
+                                        <span class="course-item-title">Python Project for Data Science</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Automated Stock Performance Predictor and Dashboard.</p>
+                                            <p><strong>Skills Verified:</strong> Pandas DataFrames, Matplotlib plotting, dynamic Jupyter pipelines.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="6">
+                                    <div class="course-item-header">
+                                        <span class="course-num">06</span>
+                                        <span class="course-item-title">Databases and SQL for Data Science with Python</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Relational SQL Analytics Database for Urban Census Datasets.</p>
+                                            <p><strong>Skills Verified:</strong> Relational Schema Engineering, Complex JOINs, Subqueries, SQLite & PostgreSQL integration.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="7">
+                                    <div class="course-item-header">
+                                        <span class="course-num">07</span>
+                                        <span class="course-item-title">Data Analysis with Python</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Housing Market Pricing Regression Model using Scikit-Learn.</p>
+                                            <p><strong>Skills Verified:</strong> Exploratory Data Analysis (EDA), Linear Regression, Pandas Data Wrangling, Model Evaluation.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="8">
+                                    <div class="course-item-header">
+                                        <span class="course-num">08</span>
+                                        <span class="course-item-title">Data Visualization with Python</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Geographic Geospatial Distribution Map of Disease Outbreaks in Folium.</p>
+                                            <p><strong>Skills Verified:</strong> Matplotlib, Seaborn, Folium maps, Plotly interactive charts.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="9">
+                                    <div class="course-item-header">
+                                        <span class="course-num">09</span>
+                                        <span class="course-item-title">IBM Data Analyst Capstone Project</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Full-Scale Developer Talent Insights & Job Posting Dashboard.</p>
+                                            <p><strong>Skills Verified:</strong> REST API Aggregation, Data Processing Pipelines, Dash/Streamlit dashboards, final presentation.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="10">
+                                    <div class="course-item-header">
+                                        <span class="course-num">10</span>
+                                        <span class="course-item-title">Generative AI: Enhance your Data Analytics Career</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Prompt-Engineered Analytics Pipeline for Customer Sentiment Analysis.</p>
+                                            <p><strong>Skills Verified:</strong> LLM Prompting, Automated Code Gen, Sentiment Classification, GPT API Integration.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="11">
+                                    <div class="course-item-header">
+                                        <span class="course-num">11</span>
+                                        <span class="course-item-title">Data Analyst Career Guide and Interview Prep</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Mock Portfolio Case Studies & Professional Resume Realignment.</p>
+                                            <p><strong>Skills Verified:</strong> Technical Interviewing, Presentation Skills, Career Communications.</p>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -939,8 +1115,8 @@
                 </div>
                 
                 <!-- Contact Form Column -->
-                <div class="contact-form-column reveal" style="transition-delay: 0.2s;">
-                    <form class="contact-form glass-card" id="contactForm" onsubmit="event.preventDefault(); alert('Message sent successfully! 🚀'); this.reset();">
+                <div class="contact-form-column reveal" style="transition-delay: 0.2s; position: relative;">
+                    <form class="contact-form glass-card" id="contactForm">
                         <div class="form-terminal-header">
                             <span class="terminal-dot"></span>
                             <span class="terminal-title">SECURE COMMUNICATIONS CHANNEL</span>
@@ -963,6 +1139,15 @@
                         </div>
                         <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
                     </form>
+
+                    <!-- Contact Form Terminal Overlay -->
+                    <div class="form-terminal-overlay" id="formTerminalOverlay">
+                        <div class="terminal-header">
+                            <span>MAIL DISPATCH SERVICES</span>
+                            <button class="terminal-close" id="form-terminal-close" aria-label="Close terminal overlay"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="terminal-body" id="formTerminalBody"></div>
+                    </div>
                 </div>
             </div>
         </div>
