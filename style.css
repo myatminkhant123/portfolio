@@ -1368,6 +1368,18 @@ body.light-theme .form-terminal-overlay {
     color: var(--cyan);
     font-weight: 500;
     margin-right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.timeline-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #fff;
+    padding: 1px;
 }
 
 .timeline-duration {
@@ -2862,6 +2874,25 @@ textarea.form-input {
     transform: scale(1.05);
 }
 
+.edu-logo-img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--cyan);
+    object-fit: cover;
+    box-shadow: 0 0 15px var(--cyan-glow);
+    transition: var(--transition-smooth);
+    background: #fff;
+}
+
+.edu-card:hover .edu-logo-img {
+    border-color: var(--purple);
+    box-shadow: 0 0 20px var(--purple-glow);
+    transform: scale(1.05);
+}
+
 .edu-card:hover .edu-logo-glow {
     background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
 }
@@ -2995,7 +3026,7 @@ textarea.form-input {
 .vol-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 1rem;
     font-size: 0.8rem;
     flex-wrap: wrap;
@@ -3007,6 +3038,58 @@ textarea.form-input {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vol-logo-wrapper {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vol-logo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: transparent;
+    border: 1.5px solid var(--cyan);
+    box-shadow: 0 0 8px var(--cyan-glow);
+    transition: var(--transition-smooth);
+}
+
+.vol-logo-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1.5px solid var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan-glow);
+    transition: var(--transition-smooth);
+}
+
+.vol-card:hover .vol-logo-img {
+    border-color: var(--purple);
+    box-shadow: 0 0 12px var(--purple-glow);
+    transform: scale(1.05);
+}
+
+.vol-card:hover .vol-logo-fallback {
+    border-color: var(--purple);
+    color: var(--purple);
+    box-shadow: 0 0 12px var(--purple-glow);
+    transform: scale(1.05);
 }
 
 .vol-date {
@@ -3333,7 +3416,7 @@ textarea.form-input {
 /* ===== FEATURED CERTIFICATE CARD ===== */
 .featured-cert-card {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 0 auto 2.5rem auto;
     border-radius: 16px;
     padding: 2.5rem;
     position: relative;
@@ -3395,6 +3478,12 @@ textarea.form-input {
     color: var(--cyan);
     font-size: 1.4rem;
     box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.cert-logo-img {
+    max-width: 28px;
+    max-height: 28px;
+    object-fit: contain;
 }
 
 .issuer-name {
@@ -3799,6 +3888,18 @@ body.light-theme .course-num {
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
+.chat-link {
+    color: var(--cyan);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+}
+
+.chat-link:hover {
+    color: var(--purple);
+    text-shadow: 0 0 8px var(--purple-glow);
+}
+
 .chatbot-suggestions {
     display: flex;
     flex-wrap: wrap;
@@ -3892,6 +3993,9 @@ body.light-theme {
     --glass-bg: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(0, 0, 0, 0.08);
     --glass-border-hover: rgba(59, 130, 246, 0.35);
+    --cyan: #0891b2;    /* Hex Cyan (600) */
+    --primary: #2563eb; /* Hex Blue (600) */
+    --purple: #7c3aed;  /* Hex Violet (600) */
 }
 
 /* Section backgrounds overrides in light theme */
@@ -4418,4 +4522,33 @@ body.light-theme .module-icon {
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--text-main);
-}
+}
+
+/* Custom code sandbox editable fields styling */
+.code-editable {
+    border-bottom: 1px dashed var(--cyan);
+    outline: none;
+    padding: 0 2px;
+    cursor: text;
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+.code-editable:focus {
+    background: rgba(6, 182, 212, 0.15);
+    border-bottom: 1px solid var(--cyan);
+    border-radius: 2px;
+}
+body.light-theme .code-editable {
+    border-bottom-color: var(--primary);
+}
+body.light-theme .code-editable:focus {
+    background: rgba(59, 130, 246, 0.1);
+    border-bottom-color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .whatsapp-widget {
+        bottom: 5.5rem; /* Stack cleanly above the chatbot trigger */
+        right: 2rem;
+    }
+}

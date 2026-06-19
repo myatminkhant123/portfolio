@@ -245,31 +245,41 @@ function initPortfolio() {
     setTimeout(typeRole, 500);
 
     // ===== STATS COUNTER AND OBSERVER =====
+    function animateStatCounter(target) {
+        const endVal = parseFloat(target.getAttribute('data-target'));
+        const isFloat = endVal % 1 !== 0;
+        const noPlus = target.getAttribute('data-no-plus') === 'true';
+        const plusSuffix = noPlus ? "" : "+";
+        let startVal = 0;
+        const duration = 1500;
+        const steps = 60;
+        const stepTime = duration / steps;
+        const increment = endVal / steps;
+        let step = 0;
+
+        const counter = setInterval(() => {
+            step++;
+            startVal += increment;
+            if (step >= steps) {
+                target.textContent = isFloat ? endVal.toFixed(1) + plusSuffix : endVal + plusSuffix;
+                clearInterval(counter);
+                
+                // Wait 3 seconds, then restart the counter animation
+                setTimeout(() => {
+                    animateStatCounter(target);
+                }, 3000);
+            } else {
+                target.textContent = isFloat ? startVal.toFixed(1) + plusSuffix : Math.round(startVal) + plusSuffix;
+            }
+        }, stepTime);
+    }
+
     const statNums = document.querySelectorAll('.stat-num, .achieve-num');
     const statsObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const target = entry.target;
-                const endVal = parseFloat(target.getAttribute('data-target'));
-                const isFloat = endVal % 1 !== 0;
-                let startVal = 0;
-                const duration = 1500;
-                const steps = 60;
-                const stepTime = duration / steps;
-                const increment = endVal / steps;
-                let step = 0;
-
-                const counter = setInterval(() => {
-                    step++;
-                    startVal += increment;
-                    if (step >= steps) {
-                        target.textContent = isFloat ? endVal.toFixed(1) + "+" : endVal + "+";
-                        clearInterval(counter);
-                    } else {
-                        target.textContent = isFloat ? startVal.toFixed(1) + "+" : Math.round(startVal) + "+";
-                    }
-                }, stepTime);
-
+                animateStatCounter(target);
                 observer.unobserve(target);
             }
         });
@@ -286,6 +296,8 @@ function initPortfolio() {
         const pointsCount = labels.length;
         const radius = 120;
         let animatedRadiusScale = 0;
+
+        let hoveredPointIdx = -1;
 
         function resizeSkillsRadar() {
             const dpr = window.devicePixelRatio || 1;
@@ -353,6 +365,49 @@ function initPortfolio() {
             }
         }
 
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(x, y, width, height, radius);
+            } else {
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+            }
+            ctx.closePath();
+        }
+
+        function drawTooltip(pt, label, value) {
+            const text = `${label}: ${Math.round(value * 100)}%`;
+            rCtx.font = 'bold 11px Inter, sans-serif';
+            const textWidth = rCtx.measureText(text).width;
+            const paddingX = 8;
+            const tooltipW = textWidth + paddingX * 2;
+            const tooltipH = 22;
+            const tooltipX = pt.x - tooltipW / 2;
+            const tooltipY = pt.y - 32;
+
+            // Draw tooltip background box
+            rCtx.fillStyle = document.body.classList.contains('light-theme') ? '#ffffff' : '#0b1120';
+            rCtx.strokeStyle = '#06b6d4';
+            rCtx.lineWidth = 1;
+            drawRoundedRect(rCtx, tooltipX, tooltipY, tooltipW, tooltipH, 4);
+            rCtx.fill();
+            rCtx.stroke();
+
+            // Draw tooltip text
+            rCtx.fillStyle = document.body.classList.contains('light-theme') ? '#1f2937' : '#ffffff';
+            rCtx.textAlign = 'center';
+            rCtx.textBaseline = 'middle';
+            rCtx.fillText(text, pt.x, tooltipY + tooltipH / 2);
+        }
+
         function drawRadar() {
             rCtx.clearRect(0, 0, 380, 380);
             drawGrid();
@@ -389,9 +444,49 @@ function initPortfolio() {
                 rCtx.fill();
                 rCtx.stroke();
             });
+
+            // If hover is active, draw tooltip over hovered point
+            if (hoveredPointIdx !== -1 && hoveredPointIdx < pts.length) {
+                const pt = pts[hoveredPointIdx];
+                rCtx.beginPath();
+                rCtx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
+                rCtx.strokeStyle = 'rgba(6, 182, 212, 0.5)';
+                rCtx.lineWidth = 1.5;
+                rCtx.stroke();
+
+                drawTooltip(pt, labels[hoveredPointIdx], values[hoveredPointIdx]);
+            }
         }
 
         redrawRadarFn = drawRadar;
+
+        skillsRadar.addEventListener('mousemove', (e) => {
+            const rect = skillsRadar.getBoundingClientRect();
+            const cssX = (e.clientX - rect.left) * (380 / rect.width);
+            const cssY = (e.clientY - rect.top) * (380 / rect.height);
+
+            const pts = getPoints(animatedRadiusScale);
+            let foundIdx = -1;
+            for (let i = 0; i < pointsCount; i++) {
+                const dist = Math.hypot(cssX - pts[i].x, cssY - pts[i].y);
+                if (dist < 12) {
+                    foundIdx = i;
+                    break;
+                }
+            }
+
+            if (foundIdx !== hoveredPointIdx) {
+                hoveredPointIdx = foundIdx;
+                drawRadar();
+            }
+        });
+
+        skillsRadar.addEventListener('mouseleave', () => {
+            if (hoveredPointIdx !== -1) {
+                hoveredPointIdx = -1;
+                drawRadar();
+            }
+        });
 
         // Trigger radar animation on enter viewport
         const radarObserver = new IntersectionObserver((entries) => {
@@ -492,55 +587,99 @@ function initPortfolio() {
             servicenow: "#81B924"
         };
 
+        let isLockedOrbit = false;
+
+        function showTechDetails(tech) {
+            const text = techDetails[tech] || "Exploring premium software engineering capabilities.";
+            const color = brandColors[tech] || "var(--cyan)";
+            
+            if (skillDescText) {
+                skillDescText.style.opacity = '0';
+                setTimeout(() => {
+                    skillDescText.textContent = text;
+                    skillDescText.style.opacity = '1';
+                    skillDescText.style.color = 'var(--text-main)';
+                }, 150);
+            }
+            
+            if (skillDescBox) {
+                skillDescBox.classList.add('active');
+                skillDescBox.style.borderColor = color;
+                skillDescBox.style.boxShadow = `0 0 15px ${color}33`; // 33 is alpha in hex (20%)
+            }
+            if (infoIcon) {
+                infoIcon.style.color = color;
+                infoIcon.style.transform = 'scale(1.2) rotate(10deg)';
+            }
+        }
+
+        function clearTechDetails() {
+            if (skillDescText) {
+                skillDescText.style.opacity = '0';
+                setTimeout(() => {
+                    skillDescText.textContent = "Hover over any technology to explore my experience.";
+                    skillDescText.style.opacity = '1';
+                    skillDescText.style.color = 'var(--text-muted)';
+                }, 150);
+            }
+            
+            if (skillDescBox) {
+                skillDescBox.classList.remove('active');
+                skillDescBox.style.borderColor = 'var(--glass-border)';
+                skillDescBox.style.boxShadow = 'none';
+            }
+            if (infoIcon) {
+                infoIcon.style.color = 'var(--cyan)';
+                infoIcon.style.transform = 'scale(1) rotate(0deg)';
+            }
+        }
+
         // Hover functionality
         orbitItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
+                if (isLockedOrbit) return;
                 const tech = item.getAttribute('data-tech');
-                const text = techDetails[tech] || "Exploring premium software engineering capabilities.";
-                const color = brandColors[tech] || "var(--cyan)";
-                
-                if (skillDescText) {
-                    skillDescText.style.opacity = '0';
-                    setTimeout(() => {
-                        skillDescText.textContent = text;
-                        skillDescText.style.opacity = '1';
-                        skillDescText.style.color = 'var(--text-main)';
-                    }, 150);
-                }
-                
-                if (skillDescBox) {
-                    skillDescBox.classList.add('active');
-                    skillDescBox.style.borderColor = color;
-                    skillDescBox.style.boxShadow = `0 0 15px ${color}33`; // 33 is alpha in hex (20%)
-                }
-                if (infoIcon) {
-                    infoIcon.style.color = color;
-                    infoIcon.style.transform = 'scale(1.2) rotate(10deg)';
-                }
+                showTechDetails(tech);
                 isHoveringOrbit = true;
             });
 
             item.addEventListener('mouseleave', () => {
-                if (skillDescText) {
-                    skillDescText.style.opacity = '0';
-                    setTimeout(() => {
-                        skillDescText.textContent = "Hover over any technology to explore my experience.";
-                        skillDescText.style.opacity = '1';
-                        skillDescText.style.color = 'var(--text-muted)';
-                    }, 150);
-                }
-                
-                if (skillDescBox) {
-                    skillDescBox.classList.remove('active');
-                    skillDescBox.style.borderColor = 'var(--glass-border)';
-                    skillDescBox.style.boxShadow = 'none';
-                }
-                if (infoIcon) {
-                    infoIcon.style.color = 'var(--cyan)';
-                    infoIcon.style.transform = 'scale(1) rotate(0deg)';
-                }
+                if (isLockedOrbit) return;
+                clearTechDetails();
                 isHoveringOrbit = false;
             });
+
+            // Touch events for mobile/tablet
+            item.addEventListener('touchstart', (e) => {
+                e.stopPropagation(); // prevent document touchstart handler from clearing it
+                const tech = item.getAttribute('data-tech');
+                
+                // Toggle lock/unlock if tapping same item
+                if (isLockedOrbit && item.classList.contains('locked-active')) {
+                    item.classList.remove('locked-active');
+                    clearTechDetails();
+                    isHoveringOrbit = false;
+                    isLockedOrbit = false;
+                } else {
+                    orbitItems.forEach(el => el.classList.remove('locked-active'));
+                    item.classList.add('locked-active');
+                    showTechDetails(tech);
+                    isHoveringOrbit = true;
+                    isLockedOrbit = true;
+                }
+            });
+        });
+
+        // Document-level touchstart to unlock
+        document.addEventListener('touchstart', (e) => {
+            if (isLockedOrbit) {
+                if (!orbitContainer.contains(e.target)) {
+                    orbitItems.forEach(el => el.classList.remove('locked-active'));
+                    clearTechDetails();
+                    isHoveringOrbit = false;
+                    isLockedOrbit = false;
+                }
+            }
         });
 
         // Background canvas dimensions
@@ -612,8 +751,10 @@ function initPortfolio() {
                 item.style.opacity = opacity;
             });
 
-            // Increment angle offset (pause or slow down on hover)
-            if (isHoveringOrbit) {
+            // Increment angle offset (pause or slow down on hover/lock)
+            if (isLockedOrbit) {
+                // Pause rotation completely
+            } else if (isHoveringOrbit) {
                 angleOffset += 0.0003;
             } else {
                 angleOffset += 0.0018;
@@ -708,6 +849,19 @@ function initPortfolio() {
         if (resumeModal) {
             resumeModal.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Mobile UA check to show download fallback
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const iframe = document.getElementById('resume-iframe');
+            const fallback = document.getElementById('pdf-mobile-fallback');
+
+            if (isMobile && iframe && fallback) {
+                iframe.style.display = 'none';
+                fallback.style.display = 'block';
+            } else if (iframe && fallback) {
+                iframe.style.display = 'block';
+                fallback.style.display = 'none';
+            }
         }
     }
 
@@ -747,7 +901,12 @@ function initPortfolio() {
     courseItems.forEach(item => {
         item.addEventListener('click', () => {
             const isActive = item.classList.contains('active-course');
-            courseItems.forEach(c => c.classList.remove('active-course'));
+            const parentUl = item.closest('.courses-ul');
+            if (parentUl) {
+                parentUl.querySelectorAll('.course-item').forEach(c => c.classList.remove('active-course'));
+            } else {
+                courseItems.forEach(c => c.classList.remove('active-course'));
+            }
             if (!isActive) {
                 item.classList.add('active-course');
             }
@@ -769,26 +928,30 @@ function initPortfolio() {
                 "• **Languages:** Python, Java, JavaScript, C++, SQL\n" +
                 "• **Web Frameworks:** React, Node.js, Express.js\n" +
                 "• **Cloud & Systems:** Microsoft Azure, Linux Systems, Docker, Git/GitHub, VS Code\n" +
-                "• **Data Tools:** Pandas, NumPy, Scikit-Learn, Power BI, Excel",
+                "• **Data Tools:** Pandas, NumPy, Scikit-Learn, Power BI, Excel\n\n" +
+                "🔗 View his work in the [Featured Projects](#projects) section or hover over the [Skills Radar](#skills) to learn more.",
         experience: "Myat has solid hands-on experience in enterprise IT operations and systems:\n\n" +
                     "💼 **AIA Digital +** — *Cloud Operations Intern* (Apr 2026 - Present)\n" +
                     "Assisting in Incident Management, Change Management (drafting monthly Linux patching changes), and performance monitoring using Dynatrace and ServiceNow.\n\n" +
                     "💼 **Print With Sahel** — *Founder & Owner* (Apr 2024 - Feb 2026)\n" +
-                    "Managed operations systems, client support, and data analytics to optimize operations.",
+                    "Managed operations systems, client support, and data analytics to optimize operations.\n\n" +
+                    "🔗 View his work timeline in the [Experience Section](#experience) or click to [Download CV PDF](CV_MMK.pdf).",
         status: "📍 **Availability Status:**\n" +
                 "• **Target Role:** Software Engineering, Data Analytics, or Cloud Operations (Junior / Entry-level / Industrial Training)\n" +
                 "• **Location:** Kuala Lumpur, Malaysia\n" +
                 "• **Relocation:** Fully open & flexible to regional/international relocation\n" +
-                "• **Availability Timeline:** Starting from **November 2026**",
+                "• **Availability Timeline:** Starting from **November 2026**\n\n" +
+                "🔗 If you would like to hire Myat, send a message in the [Contact Form](#contact).",
         contact: "You can reach Myat directly via these secure channels:\n\n" +
                  "📧 **Email:** mmk111203@gmail.com\n" +
                  "💼 **LinkedIn:** linkedin.com/in/myat-min-khant-810bb3275\n" +
                  "📂 **GitHub:** github.com/myatminkhant123\n\n" +
-                 "Or scroll down to the contact form on this page to send a secure message!",
+                 "🔗 Or message him directly via [WhatsApp Direct](https://wa.me/601164597291) or fill in the [Secure SMTP Contact Form](#contact)!",
         education: "Myat is a final-year **Bachelor of Computer Science (Honours)** student at **Albukhary International University** (Oct 2023 - Nov 2026).\n\n" +
                    "• **CGPA Honor:** 3.53\n" +
                    "• **Scholarship:** Albukhary Foundation Full Scholar\n" +
-                   "• **Certifications:** IBM Data Analyst Professional Certificate"
+                   "• **Certifications:** IBM Data Analyst & DeepLearning.AI Generative AI for Software Development Professional Certificates\n\n" +
+                   "🔗 Credentials verification: [IBM Professional Certificate](https://coursera.org/verify/professional-cert/CLPHAOPC673C) & [DeepLearning.AI Professional Certificate](https://coursera.org/verify/professional-cert/TRP5PIXN0JQS)."
     };
 
     function toggleChatbot() {
@@ -808,9 +971,33 @@ function initPortfolio() {
         
         let formattedText = text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
+                if (url.startsWith('#')) {
+                    return `<a href="${url}" class="chat-link scroll-link">${linkText}</a>`;
+                }
+                return `<a href="${url}" target="_blank" class="chat-link">${linkText}</a>`;
+            })
             .replace(/\n/g, '<br>');
         
         msgDiv.innerHTML = formattedText;
+        
+        // Add scroll-link click listeners to close chatbot and scroll smoothly
+        msgDiv.querySelectorAll('.scroll-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSec = document.querySelector(targetId);
+                
+                if (chatbotWindow) {
+                    chatbotWindow.classList.remove('active');
+                }
+                
+                if (targetSec) {
+                    targetSec.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
         chatbotMessages.appendChild(msgDiv);
         
         chatbotMessages.scrollTo({
@@ -948,29 +1135,45 @@ function initPortfolio() {
             const activeTab = document.querySelector('.code-tab.active');
             const fileType = activeTab ? activeTab.getAttribute('data-file') : 'ts';
 
-            const sequences = {
-                ts: [
+            // Extract variables dynamically from contenteditable fields
+            const sequences = {};
+
+            if (fileType === 'ts') {
+                const spec1 = document.getElementById('edit-ts-spec1')?.textContent.trim() || 'Software Engineering';
+                const spec2 = document.getElementById('edit-ts-spec2')?.textContent.trim() || 'Data Analytics';
+                const spec3 = document.getElementById('edit-ts-spec3')?.textContent.trim() || 'Cloud Operations';
+                
+                sequences.ts = [
                     { text: "$ npx ts-node pipeline.ts", type: "cmd" },
                     { text: "[INFO] Initializing compilation context for developer 'Myat Min Khant'...", type: "info" },
-                    { text: "[INFO] Specialties verified: [\"Software Engineering\", \"Data Analytics\", \"Cloud Operations\"]", type: "info" },
+                    { text: `[INFO] Specialties verified: ["${spec1}", "${spec2}", "${spec3}"]`, type: "info" },
                     { text: "[INFO] Running async DataPipeline operations on raw input...", type: "info" },
                     { text: "[SUCCESS] Scalable FullStackApplication successfully deployed to production (scaling: auto, reliability: 99.9%).", type: "success" }
-                ],
-                py: [
+                ];
+            } else if (fileType === 'py') {
+                const focus1 = document.getElementById('edit-py-focus1')?.textContent.trim() || 'Software Engineering';
+                const focus2 = document.getElementById('edit-py-focus2')?.textContent.trim() || 'Data Science';
+                
+                sequences.py = [
                     { text: "$ python analytics.py", type: "cmd" },
                     { text: "[INFO] Loading Pandas DataFrame pipeline...", type: "info" },
-                    { text: "[INFO] Analyzing data patterns: focus set to [\"Software Engineering\", \"Data Science\"]", type: "info" },
+                    { text: `[INFO] Analyzing data patterns: focus set to ["${focus1}", "${focus2}"]`, type: "info" },
                     { text: "[INFO] Running transform_and_analyze() operations...", type: "info" },
                     { text: "[SUCCESS] PortfolioPipeline execution output: FullStackApp deployed. scale_out=True.", type: "success" }
-                ],
-                sql: [
+                ];
+            } else if (fileType === 'sql') {
+                const skill1 = document.getElementById('edit-sql-skill1')?.textContent.trim() || 'Software Engineering';
+                const skill2 = document.getElementById('edit-sql-skill2')?.textContent.trim() || 'Data Analytics';
+                const skill3 = document.getElementById('edit-sql-skill3')?.textContent.trim() || 'Cloud Operations';
+                
+                sequences.sql = [
                     { text: "$ psql -f insights.sql", type: "cmd" },
                     { text: "[INFO] Executing SELECT query on database table 'aiu_graduates'...", type: "info" },
-                    { text: "[INFO] Filtering constraints: skills IN ('Software Engineering', 'Data Analytics', 'Cloud Operations')", type: "info" },
+                    { text: `[INFO] Filtering constraints: skills IN ('${skill1}', '${skill2}', '${skill3}')`, type: "info" },
                     { text: "[INFO] Fetching records sorted by impact_level DESC...", type: "info" },
                     { text: "[SUCCESS] Query complete: 1 record fetched (Myat Min Khant - Scalable & Reliable Systems) in 42ms.", type: "success" }
-                ]
-            };
+                ];
+            }
 
             const lines = sequences[fileType] || [];
             let lineIdx = 0;
@@ -1054,58 +1257,80 @@ function initPortfolio() {
         formTimeouts = [];
     }
 
+    // Typewriter print helper for sequential async terminal logs
+    function printFormTerminalLine(text, type) {
+        return new Promise((resolve) => {
+            const lineDiv = document.createElement('div');
+            lineDiv.className = `terminal-line terminal-${type}`;
+            formTerminalBody.appendChild(lineDiv);
+            
+            let charIdx = 0;
+            function typeChar() {
+                if (charIdx < text.length) {
+                    lineDiv.textContent += text[charIdx];
+                    charIdx++;
+                    formTerminalBody.scrollTop = formTerminalBody.scrollHeight;
+                    const delay = type === 'cmd' ? 25 : 12;
+                    formTimeouts.push(setTimeout(typeChar, delay));
+                } else {
+                    formTimeouts.push(setTimeout(resolve, 350));
+                }
+            }
+            typeChar();
+        });
+    }
+
     if (contactForm && formTerminalOverlay && formTerminalBody) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const visitorName = document.getElementById('name').value.trim() || 'Visitor';
+            const visitorEmail = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
 
             // Show overlay
             formTerminalOverlay.classList.add('active');
             formTerminalBody.innerHTML = '';
             clearFormTimeouts();
 
-            const seq = [
-                { text: `$ git push secure-smtp visitor-message --author="${visitorName}"`, type: "cmd" },
-                { text: "[INFO] Packaging communication payload...", type: "info" },
-                { text: "[INFO] Connecting to remote server mail.myatminkhant.dev...", type: "info" },
-                { text: "[INFO] Establishing secure TLS 1.3 channel...", type: "info" },
-                { text: "[INFO] Verifying SMTP authentication... Status: 250 OK", type: "info" },
-                { text: `[SUCCESS] Message successfully delivered to Myat's inbox! Thank you, ${visitorName}!`, type: "success" }
-            ];
-
-            let lineIdx = 0;
-
-            function printNextLine() {
-                if (lineIdx >= seq.length) {
-                    // Reset form after delay
+            try {
+                await printFormTerminalLine(`$ git push secure-smtp visitor-message --author="${visitorName}"`, 'cmd');
+                await printFormTerminalLine("[INFO] Packaging communication payload...", 'info');
+                await printFormTerminalLine("[INFO] Connecting to remote server mail.myatminkhant.dev...", 'info');
+                await printFormTerminalLine("[INFO] Establishing secure TLS 1.3 channel...", 'info');
+                await printFormTerminalLine("[INFO] Transmitting encrypted message payload...", 'info');
+                
+                // Contact API via Fetch request
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        access_key: "YOUR_ACCESS_KEY_HERE", // Replace this placeholder with your real Web3Forms Access Token!
+                        name: visitorName,
+                        email: visitorEmail,
+                        subject: subject,
+                        message: message
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    await printFormTerminalLine(`[SUCCESS] Message successfully delivered to Myat's inbox! Thank you, ${visitorName}!`, 'success');
                     formTimeouts.push(setTimeout(() => {
                         contactForm.reset();
                     }, 1000));
-                    return;
+                } else {
+                    throw new Error(data.message || "Remote SMTP server rejected credentials check authorization.");
                 }
-                
-                const lineData = seq[lineIdx];
-                const lineDiv = document.createElement('div');
-                lineDiv.className = `terminal-line terminal-${lineData.type}`;
-                formTerminalBody.appendChild(lineDiv);
-                
-                // Typewriter effect
-                let charIdx = 0;
-                function typeChar() {
-                    if (charIdx < lineData.text.length) {
-                        lineDiv.textContent += lineData.text[charIdx];
-                        charIdx++;
-                        formTerminalBody.scrollTop = formTerminalBody.scrollHeight;
-                        formTimeouts.push(setTimeout(typeChar, lineData.type === 'cmd' ? 25 : 12));
-                    } else {
-                        lineIdx++;
-                        formTimeouts.push(setTimeout(printNextLine, 350));
-                    }
-                }
-                typeChar();
+            } catch (error) {
+                await printFormTerminalLine(`[ERROR] Transmission failed: ${error.message}`, 'error');
+                await printFormTerminalLine("[ERROR] Git push rejected. Secure mail channel closed.", 'error');
             }
-            printNextLine();
         });
     }
 

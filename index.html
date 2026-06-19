@@ -41,8 +41,8 @@
 
 <body>
     <!-- Custom Cursor Glow Effects -->
-    <div class="custom-cursor" id="custom-cursor"></div>
-    <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="custom-cursor" id="custom-cursor" aria-hidden="true" role="none"></div>
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true" role="none"></div>
 
     <!-- Interactive Background Canvas & Grid overlay -->
     <canvas id="bg-canvas"></canvas>
@@ -114,7 +114,7 @@
                             <span class="stat-lbl">Projects</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num" data-target="6">0</span>
+                            <span class="stat-num" data-target="2" data-no-plus="true">0</span>
                             <span class="stat-lbl">Certifications</span>
                         </div>
                         <div class="stat-item">
@@ -133,7 +133,7 @@
                         <div class="profile-ring"></div>
                         <div class="profile-ring-outer"></div>
                         <div class="profile-glow"></div>
-                        <img src="CVphoto.webp" alt="Myat Min Khant Profile" class="profile-image">
+                        <img src="CVphoto.webp" alt="Myat Min Khant Profile" class="profile-image" width="320" height="320">
                         
                         <!-- Floating Technology Icons -->
                         <div class="floating-tech-icon icon-1" title="Python"><i class="fa-brands fa-python" style="color: #3776AB;"></i></div>
@@ -173,19 +173,19 @@
                             
                             <div class="code-body-container" id="code-ts">
                                 <div class="code-body">
-                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">interface</span> <span class="code-name">Developer</span> {</span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt">  specialties: <span class="code-type">string</span>[];</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt">  deploySystem(rawData: <span class="code-type">any</span>): <span class="code-name">Promise</span>&lt;<span class="code-type">void</span>&gt;;</span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt">}</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt"><span class="code-keyword">export</span> <span class="code-keyword">class</span> <span class="code-name">MyatMinKhant</span> <span class="code-keyword">implements</span> <span class="code-name">Developer</span> {</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt">  specialties = [<span class="code-string">"Software Engineering"</span>, <span class="code-string">"Data Analytics"</span>, <span class="code-string">"Cloud Operations"</span>];</span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">  <span class="code-keyword">async</span> deploySystem(rawData: <span class="code-type">any</span>): <span class="code-name">Promise</span>&lt;<span class="code-type">void</span>&gt; {</span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt">    <span class="code-keyword">const</span> insights = <span class="code-keyword">await</span> <span class="code-name">DataPipeline</span>.process(rawData);</span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">    <span class="code-keyword">const</span> app = <span class="code-keyword">new</span> <span class="code-name">FullStackApplication</span>(insights);</span></div><div class="code-line"><span class="code-ln">12</span><span class="code-txt">    </span></div><div class="code-line"><span class="code-ln">13</span><span class="code-txt">    <span class="code-keyword">await</span> app.deploy({</span></div><div class="code-line"><span class="code-ln">14</span><span class="code-txt">      environment: <span class="code-string">"production"</span>,</span></div><div class="code-line"><span class="code-ln">15</span><span class="code-txt">      scaling: <span class="code-string">"auto"</span>,</span></div><div class="code-line"><span class="code-ln">16</span><span class="code-txt">      reliability: <span class="code-string">"99.9%"</span></span></div><div class="code-line"><span class="code-ln">17</span><span class="code-txt">    });</span></div><div class="code-line"><span class="code-ln">18</span><span class="code-txt">  }</span></div><div class="code-line"><span class="code-ln">19</span><span class="code-txt">}</span></div></code></pre>
+                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">interface</span> <span class="code-name">Developer</span> {</span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt">  specialties: <span class="code-type">string</span>[];</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt">  deploySystem(rawData: <span class="code-type">any</span>): <span class="code-name">Promise</span>&lt;<span class="code-type">void</span>&gt;;</span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt">}</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt"><span class="code-keyword">export</span> <span class="code-keyword">class</span> <span class="code-name">MyatMinKhant</span> <span class="code-keyword">implements</span> <span class="code-name">Developer</span> {</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt">  specialties = [<span class="code-string">"<span contenteditable="true" id="edit-ts-spec1" class="code-editable">Software Engineering</span>"</span>, <span class="code-string">"<span contenteditable="true" id="edit-ts-spec2" class="code-editable">Data Analytics</span>"</span>, <span class="code-string">"<span contenteditable="true" id="edit-ts-spec3" class="code-editable">Cloud Operations</span>"</span>];</span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">  <span class="code-keyword">async</span> deploySystem(rawData: <span class="code-type">any</span>): <span class="code-name">Promise</span>&lt;<span class="code-type">void</span>&gt; {</span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt">    <span class="code-keyword">const</span> insights = <span class="code-keyword">await</span> <span class="code-name">DataPipeline</span>.process(rawData);</span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">    <span class="code-keyword">const</span> app = <span class="code-keyword">new</span> <span class="code-name">FullStackApplication</span>(insights);</span></div><div class="code-line"><span class="code-ln">12</span><span class="code-txt">    </span></div><div class="code-line"><span class="code-ln">13</span><span class="code-txt">    <span class="code-keyword">await</span> app.deploy({</span></div><div class="code-line"><span class="code-ln">14</span><span class="code-txt">      environment: <span class="code-string">"production"</span>,</span></div><div class="code-line"><span class="code-ln">15</span><span class="code-txt">      scaling: <span class="code-string">"auto"</span>,</span></div><div class="code-line"><span class="code-ln">16</span><span class="code-txt">      reliability: <span class="code-string">"99.9%"</span></span></div><div class="code-line"><span class="code-ln">17</span><span class="code-txt">    });</span></div><div class="code-line"><span class="code-ln">18</span><span class="code-txt">  }</span></div><div class="code-line"><span class="code-ln">19</span><span class="code-txt">}</span></div></code></pre>
                                 </div>
                             </div>
                             
                             <div class="code-body-container" id="code-py" style="display: none;">
                                 <div class="code-body">
-                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">from</span> typing <span class="code-keyword">import</span> <span class="code-name">Dict</span>, <span class="code-name">List</span></span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt"><span class="code-keyword">class</span> <span class="code-name">PortfolioPipeline</span>:</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt">    <span class="code-keyword">def</span> <span class="code-name">__init__</span>(self):</span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt">        self.focus: <span class="code-name">List</span>[<span class="code-type">str</span>] = [<span class="code-string">"Software Engineering"</span>, <span class="code-string">"Data Science"</span>]</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt">        </span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt">    <span class="code-keyword">def</span> <span class="code-name">execute_workflow</span>(self, raw_data: <span class="code-name">Dict</span>) -&gt; <span class="code-name">Dict</span>:</span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">        <span class="code-comment"># Translate raw data into actionable intelligence</span></span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt">        insights = transform_and_analyze(raw_data)</span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">        </span></div><div class="code-line"><span class="code-ln">12</span><span class="code-txt">        <span class="code-comment"># Design and run a robust, scalable system</span></span></div><div class="code-line"><span class="code-ln">13</span><span class="code-txt">        system = FullStackApp(data=insights)</span></div><div class="code-line"><span class="code-ln">14</span><span class="code-txt">        <span class="code-keyword">return</span> system.deploy(scale_out=<span class="code-keyword">True</span>)</span></div></code></pre>
+                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">from</span> typing <span class="code-keyword">import</span> <span class="code-name">Dict</span>, <span class="code-name">List</span></span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt"><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt"></span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt"><span class="code-keyword">class</span> <span class="code-name">PortfolioPipeline</span>:</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt">    <span class="code-keyword">def</span> <span class="code-name">__init__</span>(self):</span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt">        self.focus: <span class="code-name">List</span>[<span class="code-type">str</span>] = [<span class="code-string">"<span contenteditable="true" id="edit-py-focus1" class="code-editable">Software Engineering</span>"</span>, <span class="code-string">"<span contenteditable="true" id="edit-py-focus2" class="code-editable">Data Science</span>"</span>]</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt">        </span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt">    <span class="code-keyword">def</span> <span class="code-name">execute_workflow</span>(self, raw_data: <span class="code-name">Dict</span>) -&gt; <span class="code-name">Dict</span>:</span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">        <span class="code-comment"># Translate raw data into actionable intelligence</span></span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt">        insights = transform_and_analyze(raw_data)</span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">        </span></div><div class="code-line"><span class="code-ln">12</span><span class="code-txt">        <span class="code-comment"># Design and run a robust, scalable system</span></span></div><div class="code-line"><span class="code-ln">13</span><span class="code-txt">        system = FullStackApp(data=insights)</span></div><div class="code-line"><span class="code-ln">14</span><span class="code-txt">        <span class="code-keyword">return</span> system.deploy(scale_out=<span class="code-keyword">True</span>)</span></div></code></pre>
                                 </div>
                             </div>
                             
                             <div class="code-body-container" id="code-sql" style="display: none;">
                                 <div class="code-body">
-                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">SELECT</span> </span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt">    developer_name,</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt">    specialties,</span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt">    mission_statement</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt"><span class="code-keyword">FROM</span> </span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt">    aiu_graduates</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt"><span class="code-keyword">WHERE</span> </span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt">    skills <span class="code-keyword">IN</span> (<span class="code-string">'Software Engineering'</span>, <span class="code-string">'Data Analytics'</span>, <span class="code-string">'Cloud Operations'</span>)</span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">    <span class="code-keyword">AND</span> focus = <span class="code-string">'Scalable & Reliable Systems'</span></span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt"><span class="code-keyword">ORDER BY</span> </span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">    impact_level <span class="code-keyword">DESC</span>;</span></div></code></pre>
+                                    <pre><code><div class="code-line"><span class="code-ln">1</span><span class="code-txt"><span class="code-keyword">SELECT</span> </span></div><div class="code-line"><span class="code-ln">2</span><span class="code-txt">    developer_name,</span></div><div class="code-line"><span class="code-ln">3</span><span class="code-txt">    specialties,</span></div><div class="code-line"><span class="code-ln">4</span><span class="code-txt">    mission_statement</span></div><div class="code-line"><span class="code-ln">5</span><span class="code-txt"><span class="code-keyword">FROM</span> </span></div><div class="code-line"><span class="code-ln">6</span><span class="code-txt">    aiu_graduates</span></div><div class="code-line"><span class="code-ln">7</span><span class="code-txt"><span class="code-keyword">WHERE</span> </span></div><div class="code-line"><span class="code-ln">8</span><span class="code-txt">    skills <span class="code-keyword">IN</span> ('<span contenteditable="true" id="edit-sql-skill1" class="code-editable">Software Engineering</span>', '<span contenteditable="true" id="edit-sql-skill2" class="code-editable">Data Analytics</span>', '<span contenteditable="true" id="edit-sql-skill3" class="code-editable">Cloud Operations</span>')</span></div><div class="code-line"><span class="code-ln">9</span><span class="code-txt">    <span class="code-keyword">AND</span> focus = <span class="code-string">'Scalable & Reliable Systems'</span></span></div><div class="code-line"><span class="code-ln">10</span><span class="code-txt"><span class="code-keyword">ORDER BY</span> </span></div><div class="code-line"><span class="code-ln">11</span><span class="code-txt">    impact_level <span class="code-keyword">DESC</span>;</span></div></code></pre>
                                 </div>
                             </div>
 
@@ -266,7 +266,7 @@
                     <div class="edu-card glass-card reveal">
                         <div class="edu-logo-wrapper">
                             <div class="edu-logo-glow"></div>
-                            <div class="edu-logo-fallback"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <img src="aiu_logo.png" alt="Albukhary International University Logo" class="edu-logo-img">
                         </div>
                         <div class="edu-info">
                             <h3 class="edu-uni">Albukhary International University</h3>
@@ -296,7 +296,7 @@
                     <div class="edu-card glass-card reveal" style="transition-delay: 0.1s;">
                         <div class="edu-logo-wrapper">
                             <div class="edu-logo-glow"></div>
-                            <div class="edu-logo-fallback"><i class="fa-solid fa-building-columns"></i></div>
+                            <img src="aiu_logo.png" alt="Albukhary International University Logo" class="edu-logo-img">
                         </div>
                         <div class="edu-info">
                             <h3 class="edu-uni">Albukhary International University</h3>
@@ -327,12 +327,94 @@
             <div class="edu-sub-section reveal" style="margin-top: 5rem;">
                 <h3 class="exp-sub-title" style="margin-bottom: 2rem;"><i class="fa-solid fa-award"></i> Professional Certifications</h3>
                 
+                <!-- Generative AI for Software Development Professional Certificate -->
+                <div class="featured-cert-card glass-card reveal" style="margin-bottom: 2.5rem;">
+                    <div class="cert-card-grid">
+                        <div class="cert-main-info">
+                            <div class="cert-header">
+                                <div class="cert-issuer">
+                                    <div class="cert-badge-icon"><img src="https://home-wordpress.deeplearning.ai/wp-content/uploads/2024/05/deeplearning-ai.png" alt="DeepLearning.AI Logo" class="cert-logo-img"></div>
+                                    <div>
+                                        <h4 class="issuer-name">DeepLearning.AI</h4>
+                                        <p class="cert-platform-text"><i class="fa-solid fa-graduation-cap"></i> Professional Certificate via Coursera</p>
+                                    </div>
+                                </div>
+                                <span class="cert-date-badge"><i class="fa-solid fa-calendar-check"></i> Jun 2026</span>
+                            </div>
+                            
+                            <h3 class="cert-main-title">Generative AI for Software Development</h3>
+                            <p class="cert-main-desc">
+                                A specialized 3-course professional credential focusing on leveraging Large Language Models (LLMs) to augment software engineering workflows, automate code generation, streamline unit testing, and design AI-native system architectures.
+                            </p>
+                            
+                            <div class="cert-tools-used">
+                                <span class="tool-tag"><i class="fa-solid fa-robot"></i> Generative AI</span>
+                                <span class="tool-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Prompt Engineering</span>
+                                <span class="tool-tag"><i class="fa-solid fa-gears"></i> System Design</span>
+                                <span class="tool-tag"><i class="fa-solid fa-code"></i> Software Development</span>
+                                <span class="tool-tag"><i class="fa-solid fa-terminal"></i> AI Coding Tools</span>
+                            </div>
+                            
+                            <div class="cert-actions-row">
+                                <span class="status-verified"><i class="fa-solid fa-circle-check"></i> Credential Verified</span>
+                                <a href="https://coursera.org/verify/professional-cert/TRP5PIXN0JQS" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential</a>
+                            </div>
+                        </div>
+                        
+                        <div class="cert-courses-list">
+                            <h4 class="courses-list-title"><i class="fa-solid fa-list-check"></i> 3 Specialization Courses</h4>
+                            <ul class="courses-ul">
+                                <li class="course-item" data-course="1">
+                                    <div class="course-item-header">
+                                        <span class="course-num">01</span>
+                                        <span class="course-item-title">Introduction to Generative AI for Software Development</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Prompt-engineering structured code translation and debugging scenarios.</p>
+                                            <p><strong>Skills Verified:</strong> LLM Selection, Prompt Engineering, Code Explanations, AI-assisted Debugging.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="2">
+                                    <div class="course-item-header">
+                                        <span class="course-num">02</span>
+                                        <span class="course-item-title">Team Software Engineering with AI</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Utilizing LLMs for collaborative planning, documenting APIs, and generating test suites.</p>
+                                            <p><strong>Skills Verified:</strong> AI Code Reviews, Automated Test Generation, Documentation, Git workflows with AI.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="course-item" data-course="3">
+                                    <div class="course-item-header">
+                                        <span class="course-num">03</span>
+                                        <span class="course-item-title">AI-Powered Software and System Design</span>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                    </div>
+                                    <div class="course-item-drawer">
+                                        <div class="course-drawer-content">
+                                            <p><strong>Key Project:</strong> Designing multi-tier system architectures and implementing design patterns with AI assistance.</p>
+                                            <p><strong>Skills Verified:</strong> AI System Design, Architecture Design Patterns, API Integration.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IBM Data Analyst Professional Certificate -->
                 <div class="featured-cert-card glass-card reveal">
                     <div class="cert-card-grid">
                         <div class="cert-main-info">
                             <div class="cert-header">
                                 <div class="cert-issuer">
-                                    <div class="cert-badge-icon"><i class="fa-solid fa-chart-line"></i></div>
+                                    <div class="cert-badge-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo" class="cert-logo-img"></div>
                                     <div>
                                         <h4 class="issuer-name">IBM Skills Network</h4>
                                         <p class="cert-platform-text"><i class="fa-solid fa-graduation-cap"></i> Professional Certificate via Coursera</p>
@@ -529,7 +611,7 @@
                         <div class="timeline-header">
                             <div>
                                 <h4 class="timeline-role">Cloud Operations Intern</h4>
-                                <span class="timeline-company"><i class="fa-solid fa-building"></i> AIA Digital +</span>
+                                <span class="timeline-company"><img src="aia_logo.png" alt="AIA Logo" class="timeline-logo-img"> AIA Digital +</span>
                             </div>
                             <span class="timeline-duration">Apr 2026 – Present</span>
                         </div>
@@ -577,7 +659,12 @@
                     <!-- Volunteer 1: SCI Committee -->
                     <div class="vol-card glass-card">
                         <div class="vol-header">
-                            <span class="vol-org">SCI Committee, AIU</span>
+                            <span class="vol-org">
+                                <span class="vol-logo-wrapper">
+                                    <img src="sci_committee_logo.png" alt="SCI Committee Logo" class="vol-logo-img">
+                                </span>
+                                SCI Committee, AIU
+                            </span>
                             <span class="vol-date">Aug 2025</span>
                         </div>
                         <h4 class="vol-role">Committee Member & Event Organizer</h4>
@@ -588,28 +675,42 @@
                     <!-- Volunteer 2: Chumbaka -->
                     <div class="vol-card glass-card">
                         <div class="vol-header">
-                            <span class="vol-org">Chumbaka</span>
+                            <span class="vol-org">
+                                <span class="vol-logo-wrapper">
+                                    <img src="chumbaka_logo.png" alt="Chumbaka Logo" class="vol-logo-img">
+                                </span>
+                                Chumbaka
+                            </span>
                             <span class="vol-date">May – Jun 2025</span>
                         </div>
                         <h4 class="vol-role">Mentor & Trainer</h4>
                         <p class="vol-desc">Mentored students for the YIC 2025 after completing an intensive Train-the-Trainer workshop on Arduino IoT and AI prototyping.</p>
                     </div>
 
-                    <!-- Volunteer 3: PR officer MSA -->
+                    <!-- Volunteer 5: Thunderbirds -->
                     <div class="vol-card glass-card">
                         <div class="vol-header">
-                            <span class="vol-org">AIU Myanmar Student Association</span>
-                            <span class="vol-date">Nov 2022 – Oct 2023</span>
+                            <span class="vol-org">
+                                <span class="vol-logo-wrapper">
+                                    <img src="thunderbirds_logo.png" alt="Thunderbirds Frisbee Club Logo" class="vol-logo-img">
+                                </span>
+                                Thunderbirds Frisbee Club
+                            </span>
+                            <span class="vol-date">Nov 2023 – Apr 2025</span>
                         </div>
-                        <h4 class="vol-role">Public Relation Unit Officer</h4>
-                        <p class="vol-desc">Organizing external communications, cultural representation, and public coordination for traditional events at AIU.</p>
-                        
+                        <h4 class="vol-role">Event Organizer & Coordinator</h4>
+                        <p class="vol-desc">Coordinated club events, scheduled matches, and organized friendly inter-university ultimate frisbee events.</p>
                     </div>
 
                     <!-- Volunteer 4: MSA Rep -->
                     <div class="vol-card glass-card">
                         <div class="vol-header">
-                            <span class="vol-org">AIU Myanmar Student Association</span>
+                            <span class="vol-org">
+                                <span class="vol-logo-wrapper">
+                                    <img src="amsa_logo.png" alt="AMSA Logo" class="vol-logo-img">
+                                </span>
+                                AIU Myanmar Student Association
+                            </span>
                             <span class="vol-date">Nov 2023 – Jul 2024</span>
                         </div>
                         <h4 class="vol-role">Art & Culture Unit Co-Representative</h4>
@@ -617,20 +718,31 @@
                         
                     </div>
 
-                    <!-- Volunteer 5: Thunderbirds -->
+                    <!-- Volunteer 3: PR officer MSA -->
                     <div class="vol-card glass-card">
                         <div class="vol-header">
-                            <span class="vol-org">Thunderbirds Frisbee Club</span>
-                            <span class="vol-date">Nov 2023 – Apr 2025</span>
+                            <span class="vol-org">
+                                <span class="vol-logo-wrapper">
+                                    <img src="amsa_logo.png" alt="AMSA Logo" class="vol-logo-img">
+                                </span>
+                                AIU Myanmar Student Association
+                            </span>
+                            <span class="vol-date">Nov 2022 – Oct 2023</span>
                         </div>
-                        <h4 class="vol-role">Event Organizer & Coordinator</h4>
-                        <p class="vol-desc">Coordinated club events, scheduled matches, and organized friendly inter-university ultimate frisbee events.</p>
+                        <h4 class="vol-role">Public Relation Unit Officer</h4>
+                        <p class="vol-desc">Organizing external communications, cultural representation, and public coordination for traditional events at AIU.</p>
+                        
                     </div>
 
                     <!-- Volunteer 7: Tutoring -->
                     <div class="vol-card glass-card">
                         <div class="vol-header">
-                            <span class="vol-org">Community Tutoring</span>
+                            <span class="vol-org">
+                                <span class="vol-logo-wrapper">
+                                    <span class="vol-logo-fallback"><i class="fa-solid fa-book-open"></i></span>
+                                </span>
+                                Community Tutoring
+                            </span>
                             <span class="vol-date">Jun 2020 – Mar 2022</span>
                         </div>
                         <h4 class="vol-role">Volunteer Teacher</h4>
@@ -790,7 +902,7 @@
                 <!-- Project 1: Song Popularity Predictor -->
                 <div class="project-card glass-card accent-1" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="earphone.webp" alt="Song Popularity Predictor">
+                        <img src="earphone.webp" alt="Song Popularity Predictor" loading="lazy" width="360" height="200">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -821,7 +933,7 @@
                 <!-- Project 2: AIU Postgraduate Monitoring System -->
                 <div class="project-card glass-card accent-2" data-categories="web academic">
                     <div class="project-thumb">
-                        <img src="thumb3.webp" alt="AIU Postgraduate Monitoring System">
+                        <img src="thumb3.webp" alt="AIU Postgraduate Monitoring System" loading="lazy" width="360" height="200">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -851,7 +963,7 @@
                 <!-- Project 3: ChatGPT Review Sentiment Analyzer -->
                 <div class="project-card glass-card accent-3" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="thumb_chatgpt.webp" alt="ChatGPT Review Sentiment Analyzer">
+                        <img src="thumb_chatgpt.webp" alt="ChatGPT Review Sentiment Analyzer" loading="lazy" width="360" height="200">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -881,7 +993,7 @@
                 <!-- Project 4: Credit Card Fraud Detection System -->
                 <div class="project-card glass-card accent-1" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="thumb3.webp" alt="Credit Card Fraud Detection System">
+                        <img src="thumb3.webp" alt="Credit Card Fraud Detection System" loading="lazy" width="360" height="200">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -911,7 +1023,7 @@
                 <!-- Project 5: FIFA World Cup Match Prediction -->
                 <div class="project-card glass-card accent-2" data-categories="analysis data academic">
                     <div class="project-thumb">
-                        <img src="thumb1.webp" alt="FIFA Match Prediction">
+                        <img src="thumb1.webp" alt="FIFA Match Prediction" loading="lazy" width="360" height="200">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -958,9 +1070,9 @@
                 
                 <div class="achieve-card glass-card">
                     <div class="achieve-icon">📜</div>
-                    <span class="achieve-num" data-target="1">0</span>
+                    <span class="achieve-num" data-target="2">0</span>
                     <h3 class="achieve-title">Certifications Earned</h3>
-                    <p class="achieve-desc">IBM Certified Data Analyst Professional Certificate.</p>
+                    <p class="achieve-desc">IBM Data Analyst & DeepLearning.AI Generative AI Professional Certificates.</p>
                 </div>
                 
                 <div class="achieve-card glass-card">
@@ -1221,7 +1333,14 @@
                 </div>
             </div>
             <div class="modal-body" style="padding: 0; background: #0b1120; overflow: hidden;">
-                <iframe src="CV_MMK.pdf#toolbar=0" style="width: 100%; height: 100%; border: none; min-height: 70vh;"></iframe>
+                <!-- Mobile PDF Fallback UI -->
+                <div id="pdf-mobile-fallback" class="glass-card" style="display: none; margin: 2rem; text-align: center; border-color: var(--cyan); box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);">
+                    <i class="fa-solid fa-file-pdf" style="font-size: 3.5rem; color: #ef4444; margin-bottom: 1.5rem;"></i>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem;">Mobile PDF View Limitation</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Your mobile device/browser does not support inline PDF previews.</p>
+                    <a href="CV_MMK.pdf" download class="btn btn-primary" style="padding: 0.8rem 1.5rem;"><i class="fa-solid fa-download"></i> Download Resume PDF</a>
+                </div>
+                <iframe id="resume-iframe" src="CV_MMK.pdf#toolbar=0" style="width: 100%; height: 100%; border: none; min-height: 70vh;"></iframe>
             </div>
         </div>
     </div>
