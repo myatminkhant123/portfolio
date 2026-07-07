@@ -291,8 +291,8 @@ function initPortfolio() {
     const skillsRadar = document.getElementById('skills-radar');
     if (skillsRadar) {
         const rCtx = skillsRadar.getContext('2d');
-        const labels = ['Programming', 'Web Dev', 'Data Science', 'Cloud & Ops', 'Tools & Sys'];
-        const values = [0.90, 0.85, 0.90, 0.80, 0.85]; // Skills percentages
+        const labels = ['Databases', 'Cloud & Ops', 'Programming', 'Web Dev', 'Tools & Systems'];
+        const values = [0.95, 0.92, 0.85, 0.80, 0.78]; // Skills percentages
         const pointsCount = labels.length;
         const radius = 120;
         let animatedRadiusScale = 0;
@@ -553,15 +553,17 @@ function initPortfolio() {
             nlp: "Natural Language Processing: Sentiment analysis models, TF-IDF vectorizers, word tokenization, and model transparency integrations.",
             python: "Python: Data analysis, scripting and automation, database integration, web scraping, and data manipulation using Pandas.",
             java: "Java: Solid object-oriented software engineering principles, system design patterns, and enterprise backend architectures.",
-            javascript: "JavaScript: Creating high-performance interactive client experiences and modular Node.js REST API systems.",
+            javascript: "JavaScript & MERN Stack: Developing interactive web front-ends with React.js and engineering scalable backend services/APIs with Node.js & Express.",
             html5: "HTML5: Structuring clean semantic layouts with a focus on SEO best practices and page speed optimization.",
             css3: "CSS3: Formulating premium styling patterns, fluid animation keyframes, HSL color tokens, and robust layouts.",
-            sql: "SQL: Advanced schema engineering, normalization, indexing, and indexing query optimizations in PostgreSQL & SQLite.",
-            git: "Git: Professional version control, branching strategies, collaborative PR code reviews, and automated CI/CD triggers.",
-            react: "React: Developing highly interactive stateful SPAs, customized React Hooks, and responsive web dashboards.",
-            nodejs: "Node.js: Engineering scalable runtime servers with Express, JWT authentication, and structured MongoDB access pipelines.",
-            docker: "Docker: Containerizing environments to guarantee 100% execution consistency from development to cloud hosting.",
+            mssql: "MSSQL Server: Advanced schema engineering, query optimizations, indexing, and enterprise relational database administration.",
+            mysql: "MySQL: Managing relational databases, writing queries, and designing scalable schemas for transactional web apps.",
+            git: "Git & GitHub: Professional version control, branching strategies, repository management, collaborative PR code reviews, and workflow automation.",
             azure: "Microsoft Azure: Virtual network routing, resource group structures, role-based access lists, and cloud VM provisioning.",
+            aks: "AKS (Azure Kubernetes Service): Orchestrating containerized deployments, Kubernetes cluster scaling, network routing, and config management.",
+            docker: "Docker: Containerizing environments to guarantee 100% execution consistency from development to cloud hosting.",
+            linux: "Linux Systems: System administration, bash shell scripting, job automation, and server patching management.",
+            powershell: "PowerShell: Scripting automations, command-line operations, tasks execution, and cloud/Windows infrastructure deployment.",
             powerbi: "Power BI: Creating interactive executive business dashboards, advanced DAX queries, data transformations, and scheduled gateway refreshes.",
             excel: "Microsoft Excel: Advanced spreadsheets, pivot tables, VLOOKUP/INDEX-MATCH, VBA macros, and financial data modeling.",
             servicenow: "ServiceNow: Managing IT Service Management (ITSM) workflows, system incidents tracking, asset management, and ticketing pipelines."
@@ -576,12 +578,14 @@ function initPortfolio() {
             javascript: "#F7DF1E",
             html5: "#E34F26",
             css3: "#1572B6",
-            sql: "#003B57",
-            git: "#F05032",
-            react: "#61DAFB",
-            nodejs: "#339933",
-            docker: "#2496ED",
+            mssql: "#CC292B",
+            mysql: "#00758F",
+            git: "#f3f4f6",
             azure: "#0078D4",
+            aks: "#326CE5",
+            docker: "#2496ED",
+            linux: "#FCC624",
+            powershell: "#0078D4",
             powerbi: "#F2C811",
             excel: "#107C41",
             servicenow: "#81B924"
@@ -731,35 +735,6 @@ function initPortfolio() {
                 orbitRing.style.height = `${ry * 2}px`;
             }
 
-            // Update items positions
-            const N = orbitItems.length;
-            orbitItems.forEach((item, index) => {
-                // Symmetrically distribute items around the circle
-                const theta = (index / N) * Math.PI * 2 + angleOffset;
-                const x = rx * Math.cos(theta);
-                const y = ry * Math.sin(theta);
-                
-                // Depth effects (using sine of theta to simulate 3D projection)
-                const depth = Math.sin(theta); // Ranges from -1 (back) to 1 (front)
-                
-                const scale = 0.8 + 0.3 * ((depth + 1) / 2);
-                const zIndex = Math.round(10 + 10 * depth);
-                const opacity = 0.45 + 0.55 * ((depth + 1) / 2);
-                
-                item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
-                item.style.zIndex = zIndex;
-                item.style.opacity = opacity;
-            });
-
-            // Increment angle offset (pause or slow down on hover/lock)
-            if (isLockedOrbit) {
-                // Pause rotation completely
-            } else if (isHoveringOrbit) {
-                angleOffset += 0.0003;
-            } else {
-                angleOffset += 0.0018;
-            }
-
             // Draw Background Particles & faint lines
             oBgCtx.clearRect(0, 0, orbitBgCanvas.width, orbitBgCanvas.height);
             
@@ -788,6 +763,52 @@ function initPortfolio() {
                 oBgCtx.fillStyle = 'rgba(6, 182, 212, 0.12)';
                 oBgCtx.fill();
             });
+
+            // Symmetrically distribute all items around the circle (equally distributed in layout)
+            const N = orbitItems.length;
+            orbitItems.forEach((item, index) => {
+                const theta = (index / N) * Math.PI * 2 + angleOffset;
+                
+                // Base calculations for x, y
+                let x = rx * Math.cos(theta);
+                let y = ry * Math.sin(theta);
+                
+                // Depth effects
+                const depth = Math.sin(theta);
+                let scale = 0.8 + 0.3 * ((depth + 1) / 2);
+                const zIndex = Math.round(10 + 10 * depth);
+                const opacity = 0.45 + 0.55 * ((depth + 1) / 2);
+                
+                // De-emphasize ServiceNow, Excel, and Power BI
+                const cat = item.getAttribute('data-category') || 'general';
+                if (cat === 'general') {
+                    scale *= 0.75;
+                    x *= 1.15;
+                    y *= 1.15;
+                }
+                
+                item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
+                item.style.zIndex = zIndex;
+                item.style.opacity = opacity;
+                
+                // Draw connecting dotted line to center
+                oBgCtx.strokeStyle = document.body.classList.contains('light-theme') ? 'rgba(0, 0, 0, 0.12)' : 'rgba(6, 182, 212, 0.22)';
+                oBgCtx.lineWidth = 1;
+                oBgCtx.setLineDash([4, 4]);
+                oBgCtx.beginPath();
+                oBgCtx.moveTo(centerX, centerY);
+                oBgCtx.lineTo(centerX + x, centerY + y);
+                oBgCtx.stroke();
+            });
+
+            // Increment angle offset (pause or slow down on hover/lock)
+            if (isLockedOrbit) {
+                // Pause rotation completely
+            } else if (isHoveringOrbit) {
+                angleOffset += 0.0003;
+            } else {
+                angleOffset += 0.0018;
+            }
 
             requestAnimationFrame(animateOrbit);
         }
@@ -950,8 +971,8 @@ function initPortfolio() {
         education: "Myat is a final-year **Bachelor of Computer Science (Honours)** student at **Albukhary International University** (Oct 2023 - Nov 2026).\n\n" +
                    "• **CGPA Honor:** 3.53\n" +
                    "• **Scholarship:** Albukhary Foundation Full Scholar\n" +
-                   "• **Certifications:** IBM Data Analyst & DeepLearning.AI Generative AI for Software Development Professional Certificates\n\n" +
-                   "🔗 Credentials verification: [IBM Professional Certificate](https://coursera.org/verify/professional-cert/CLPHAOPC673C) & [DeepLearning.AI Professional Certificate](https://coursera.org/verify/professional-cert/TRP5PIXN0JQS)."
+                   "• **Certifications:** IBM Data Analyst, DeepLearning.AI Generative AI for Software Development, and TechNexus Full MERN Stack Bootcamp Certificates\n\n" +
+                   "🔗 Credentials verification: [IBM Professional Certificate](https://coursera.org/verify/professional-cert/CLPHAOPC673C), [DeepLearning.AI Professional Certificate](https://coursera.org/verify/professional-cert/TRP5PIXN0JQS), and [TechNexus MERN Stack Bootcamp](technexus_cert.png)."
     };
 
     function toggleChatbot() {
@@ -1309,7 +1330,7 @@ function initPortfolio() {
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        access_key: "YOUR_ACCESS_KEY_HERE", // Replace this placeholder with your real Web3Forms Access Token!
+                        access_key: "d666c9c0-1339-4a3a-9a96-7f74ca7f3018",
                         name: visitorName,
                         email: visitorEmail,
                         subject: subject,

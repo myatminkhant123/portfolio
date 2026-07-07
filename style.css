@@ -17,6 +17,8 @@
     --purple: #8b5cf6;       /* Purple */
     --purple-glow: rgba(139, 92, 246, 0.4);
     --indigo: #6366f1;       /* Indigo */
+    --emerald: #10b981;      /* Emerald Green */
+    --emerald-glow: rgba(16, 185, 129, 0.4);
     --text-main: #f3f4f6;
     --text-muted: #9ca3af;
     --glass-bg: rgba(11, 17, 32, 0.7);
@@ -1586,12 +1588,14 @@ body.light-theme .form-terminal-overlay {
 .orbit-item[data-tech="javascript"]:hover { border-color: #F7DF1E; box-shadow: 0 0 20px rgba(247, 223, 30, 0.4); }
 .orbit-item[data-tech="html5"]:hover { border-color: #E34F26; box-shadow: 0 0 20px rgba(227, 79, 38, 0.4); }
 .orbit-item[data-tech="css3"]:hover { border-color: #1572B6; box-shadow: 0 0 20px rgba(21, 114, 182, 0.4); }
-.orbit-item[data-tech="sql"]:hover { border-color: #003B57; box-shadow: 0 0 20px rgba(0, 59, 87, 0.4); }
-.orbit-item[data-tech="git"]:hover { border-color: #F05032; box-shadow: 0 0 20px rgba(240, 80, 50, 0.4); }
-.orbit-item[data-tech="react"]:hover { border-color: #61DAFB; box-shadow: 0 0 20px rgba(97, 218, 251, 0.4); }
-.orbit-item[data-tech="nodejs"]:hover { border-color: #339933; box-shadow: 0 0 20px rgba(51, 153, 51, 0.4); }
-.orbit-item[data-tech="docker"]:hover { border-color: #2496ED; box-shadow: 0 0 20px rgba(36, 150, 237, 0.4); }
+.orbit-item[data-tech="mssql"]:hover { border-color: #CC292B; box-shadow: 0 0 20px rgba(204, 41, 43, 0.4); }
+.orbit-item[data-tech="mysql"]:hover { border-color: #00758F; box-shadow: 0 0 20px rgba(0, 117, 143, 0.4); }
+.orbit-item[data-tech="git"]:hover { border-color: #f3f4f6; box-shadow: 0 0 20px rgba(243, 244, 246, 0.4); }
 .orbit-item[data-tech="azure"]:hover { border-color: #0078D4; box-shadow: 0 0 20px rgba(0, 120, 212, 0.4); }
+.orbit-item[data-tech="aks"]:hover { border-color: #326CE5; box-shadow: 0 0 20px rgba(50, 108, 229, 0.4); }
+.orbit-item[data-tech="docker"]:hover { border-color: #2496ED; box-shadow: 0 0 20px rgba(36, 150, 237, 0.4); }
+.orbit-item[data-tech="linux"]:hover { border-color: #FCC624; box-shadow: 0 0 20px rgba(252, 198, 236, 0.4); }
+.orbit-item[data-tech="powershell"]:hover { border-color: #0078D4; box-shadow: 0 0 20px rgba(0, 120, 212, 0.4); }
 
 /* Interactive Description Box */
 .skill-description-box {
@@ -1638,8 +1642,9 @@ body.light-theme .form-terminal-overlay {
 
 @media (min-width: 993px) {
     .skills-container {
-        grid-template-columns: 1fr auto 1fr;
+        grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
         gap: 3rem;
+        align-items: start;
     }
 }
 
@@ -1652,8 +1657,10 @@ body.light-theme .form-terminal-overlay {
 
 .skills-radar-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2.25rem;
     position: relative;
     width: 100%;
 }
@@ -1672,6 +1679,9 @@ body.light-theme .form-terminal-overlay {
 }
 
 .skill-category {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
@@ -1690,6 +1700,9 @@ body.light-theme .form-terminal-overlay {
 }
 
 /* Category-specific top border gradients */
+.skill-category.databases::before {
+    background: linear-gradient(90deg, var(--emerald), transparent);
+}
 .skill-category.programming::before {
     background: linear-gradient(90deg, var(--cyan), transparent);
 }
@@ -1704,6 +1717,11 @@ body.light-theme .form-terminal-overlay {
 }
 
 /* Category hover state glows */
+.skill-category.databases:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+    transform: translateY(-3px);
+}
 .skill-category.programming:hover {
     border-color: rgba(6, 182, 212, 0.3);
     box-shadow: 0 10px 30px rgba(6, 182, 212, 0.1);
@@ -1730,12 +1748,24 @@ body.light-theme .form-terminal-overlay {
     font-size: 1.15rem;
     font-weight: 600;
     color: var(--text-main);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
     transition: var(--transition-smooth);
 }
 
+.skill-category-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-family: var(--font-body);
+}
+
 /* Border bottom subtle highlight for titles */
+.skill-category.databases .skill-category-title {
+    border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+}
 .skill-category.programming .skill-category-title {
     border-bottom: 1px solid rgba(6, 182, 212, 0.15);
 }
@@ -1781,11 +1811,38 @@ body.light-theme .form-terminal-overlay {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--cyan);
 }
 
-.skill-category:nth-child(2n) .skill-tag-dot {
-    background: var(--purple);
+.skill-category.databases .skill-tag-dot { background: var(--emerald); }
+.skill-category.cloud-infra .skill-tag-dot { background: var(--indigo); }
+.skill-category.programming .skill-tag-dot { background: var(--cyan); }
+.skill-category.web-dev .skill-tag-dot { background: var(--purple); }
+.skill-category.data-science .skill-tag-dot { background: var(--primary); }
+
+.skill-category.databases .skill-tag:hover {
+    background: rgba(16, 185, 129, 0.05);
+    border-color: var(--emerald);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+.skill-category.cloud-infra .skill-tag:hover {
+    background: rgba(99, 102, 241, 0.05);
+    border-color: var(--indigo);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+}
+.skill-category.programming .skill-tag:hover {
+    background: rgba(6, 182, 212, 0.05);
+    border-color: var(--cyan);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+}
+.skill-category.web-dev .skill-tag:hover {
+    background: rgba(139, 92, 246, 0.05);
+    border-color: var(--purple);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+}
+.skill-category.data-science .skill-tag:hover {
+    background: rgba(59, 130, 246, 0.05);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
 }
 
 
@@ -2761,58 +2818,33 @@ textarea.form-input {
 /* ===== WHATSAPP WIDGET ===== */
 .whatsapp-widget {
     position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 100;
+    right: 2rem;
+    bottom: 6.5rem;
+    z-index: 1400;
 }
 
 .whatsapp-button {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: rgba(37, 211, 102, 0.15);
-    border: 1px solid rgba(37, 211, 102, 0.3);
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 2rem;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: var(--transition-smooth);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.whatsapp-button:hover {
-    background: rgba(37, 211, 102, 0.25);
-    border-color: #25D366;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
-}
-
-.whatsapp-icon {
-    width: 28px;
-    height: 28px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background: #25D366;
     color: #fff;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.95rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
-.whatsapp-text {
-    display: inline-block;
+.whatsapp-button:hover {
+    background: #128C7E;
+    transform: scale(1.1) rotate(-10deg);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
 }
 
-@media (max-width: 480px) {
-    .whatsapp-text {
-        display: none;
-    }
-}
+
 
 /* ===== EDUCATION SECTION ===== */
 .education-grid {
@@ -3973,12 +4005,7 @@ body.light-theme .course-num {
     transform: scale(1.05);
 }
 
-@media (min-width: 769px) {
-    .whatsapp-widget {
-        bottom: 2rem;
-        right: 7rem;
-    }
-}
+
 
 /* ===== LIGHT THEME ADJUSTMENTS ===== */
 body {
@@ -4546,9 +4573,4 @@ body.light-theme .code-editable:focus {
     border-bottom-color: var(--primary);
 }
 
-@media (max-width: 768px) {
-    .whatsapp-widget {
-        bottom: 5.5rem; /* Stack cleanly above the chatbot trigger */
-        right: 2rem;
-    }
-}
+
