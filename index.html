@@ -44,9 +44,9 @@
     <div class="custom-cursor" id="custom-cursor" aria-hidden="true" role="none"></div>
     <div class="cursor-glow" id="cursor-glow" aria-hidden="true" role="none"></div>
 
-    <!-- Interactive Background Canvas & Grid overlay -->
-    <canvas id="bg-canvas"></canvas>
-    <div class="bg-grid"></div>
+    <!-- IT Network Grid Background Canvas -->
+    <canvas id="network-grid-canvas" aria-hidden="true"></canvas>
+    <!-- Subtle aurora depth blobs (kept very faint) -->
     <div class="aurora-container">
         <div class="aurora-blob blob-1"></div>
         <div class="aurora-blob blob-2"></div>
@@ -54,19 +54,25 @@
     </div>
 
     <!-- Sidebar Navigation -->
-    <aside id="sidebar">
+    <aside id="sidebar" role="navigation" aria-label="Main navigation">
         <div class="sidebar-brand" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <div class="sidebar-logo">MMK</div>
             <button id="themeToggleSidebar" class="theme-toggle-btn" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
         </div>
-        <ul class="sidebar-menu">
-            <li><a href="#home" class="sidebar-link active" data-section="home"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
-            <li><a href="#education" class="sidebar-link" data-section="education"><i class="fa-solid fa-graduation-cap"></i> <span>Education & Certificates</span></a></li>
-            <li><a href="#experience" class="sidebar-link" data-section="experience"><i class="fa-solid fa-briefcase"></i> <span>Experience</span></a></li>
-            <li><a href="#skills" class="sidebar-link" data-section="skills"><i class="fa-solid fa-layer-group"></i> <span>Skills</span></a></li>
-            <li><a href="#projects" class="sidebar-link" data-section="projects"><i class="fa-solid fa-code"></i> <span>Projects</span></a></li>
-            <li><a href="#contact" class="sidebar-link" data-section="contact"><i class="fa-solid fa-envelope"></i> <span>Contact</span></a></li>
-        </ul>
+        <!-- Nav with progress rail -->
+        <div class="sidebar-nav-wrapper">
+            <div class="nav-progress-rail" aria-hidden="true">
+                <div class="nav-progress-fill" id="nav-progress-fill"></div>
+            </div>
+            <ul class="sidebar-menu" role="list">
+                <li><a href="#home" class="sidebar-link active" data-section="home" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i> <span>Home</span></a></li>
+                <li><a href="#education" class="sidebar-link" data-section="education"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span>Education &amp; Certificates</span></a></li>
+                <li><a href="#experience" class="sidebar-link" data-section="experience"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> <span>Experience</span></a></li>
+                <li><a href="#skills" class="sidebar-link" data-section="skills"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span>Skills</span></a></li>
+                <li><a href="#projects" class="sidebar-link" data-section="projects"><i class="fa-solid fa-code" aria-hidden="true"></i> <span>Projects</span></a></li>
+                <li><a href="#contact" class="sidebar-link" data-section="contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i> <span>Contact</span></a></li>
+            </ul>
+        </div>
         <div class="sidebar-footer">
             <a href="CV_MMK.pdf" target="_blank" class="btn btn-primary" id="viewResumeBtn" style="padding: 0.8rem 1.5rem; font-size: 0.95rem; width: 100%;"><i class="fa-solid fa-file-pdf"></i> Resume</a>
         </div>
@@ -89,22 +95,33 @@
             <div class="hero-grid">
                 <div class="hero-text reveal">
                     <div class="hero-tag">
-                        <i class="fa-solid fa-terminal"></i> Ready to Build & Innovate
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data Science Specialist &nbsp;&middot;&nbsp; <i class="fa-solid fa-code" aria-hidden="true"></i> Software Engineer
                     </div>
                     <h1 class="hero-title">
-                        Hello, I'm <span class="gradient-text">Myat Min Khant</span>
+                        Hi, I'm <span class="gradient-text">Myat Min Khant</span>
                     </h1>
+                    <p class="hero-specialization">
+                        Specializing in <strong>Data Science</strong>, <strong>Machine Learning</strong> &amp; Data-Driven Software Engineering
+                    </p>
                     <div class="role-switcher-container">
-                        <span>I am a </span>
-                        <span class="role-switcher" id="role-text">Full-Stack Software engineer</span>
+                        <span>I build </span>
+                        <span class="role-switcher" id="role-text">Cloud-Native Systems</span>
                     </div>
                     <p class="hero-desc">
-                        Results-driven Computer Science honours student and <strong style="color: var(--cyan);">Albukhary Foundation Scholar</strong> at <strong style="color: var(--cyan);">Albukhary International University</strong>. Focused on engineering scalable web applications, analyzing complex datasets, and optimizing cloud-native systems.
+                        <strong style="color: var(--cyan);">Albukhary Foundation Scholar</strong> at <strong style="color: var(--cyan);">Albukhary International University</strong>.
+                        Final-year CS honours student specializing in <strong style="color: var(--text-main);">Data Science</strong> — building ML models, data pipelines, and analytics systems,
+                        with a solid full-stack software-engineering background to ship end-to-end solutions.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
-                        <a href="CV_MMK.pdf" target="_blank" class="btn btn-secondary" id="heroResumeBtn"><i class="fa-solid fa-file-pdf"></i> View Resume</a>
-                        <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+                        <a href="CV_MMK.pdf" target="_blank" class="btn btn-resume" id="heroResumeBtn">
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Download Resume
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <i class="fa-solid fa-code" aria-hidden="true"></i> View Projects
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Get in Touch
+                        </a>
                     </div>
                     
                     <!-- Live Statistics Grid -->
@@ -926,6 +943,24 @@
                     <span class="tech-name">ServiceNow</span>
                 </div>
             </div>
+            
+            <!-- Mobile Fallback list of technology pills (replaces interactive orbit on screens <480px) -->
+            <div class="orbit-mobile-fallback reveal">
+                <div class="orbit-mobile-pill"><i class="fa-brands fa-python" style="color: #3776AB;"></i> Python</div>
+                <div class="orbit-mobile-pill"><i class="fa-brands fa-java" style="color: #E76F51;"></i> Java</div>
+                <div class="orbit-mobile-pill"><i class="fa-brands fa-js" style="color: #F7DF1E;"></i> JS & MERN</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-database" style="color: #CC292B;"></i> MSSQL</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-database" style="color: #00758F;"></i> MySQL</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-cloud" style="color: #0078D4;"></i> Azure</div>
+                <div class="orbit-mobile-pill"><i class="fa-brands fa-docker" style="color: #2496ED;"></i> Docker</div>
+                <div class="orbit-mobile-pill"><i class="fa-brands fa-linux" style="color: #FCC624;"></i> Linux</div>
+                <div class="orbit-mobile-pill"><i class="fa-brands fa-github" style="color: #f3f4f6;"></i> Git</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-terminal" style="color: #0078D4;"></i> PowerShell</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-file-excel" style="color: #107C41;"></i> Excel</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-chart-bar" style="color: #F2C811;"></i> Power BI</div>
+                <div class="orbit-mobile-pill"><i class="fa-solid fa-gears" style="color: #81B924;"></i> ServiceNow</div>
+            </div>
+
             <div class="container">
                 <div class="skill-description-box" id="skill-desc-box">
                     <i class="fa-solid fa-circle-info info-icon"></i>
@@ -1447,7 +1482,7 @@
                         <p class="chatbot-header-subtitle">System: Operational // Active</p>
                     </div>
                 </div>
-                <button class="chatbot-close-btn" id="chatbotCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+                <button class="chatbot-close-btn" id="chatbotCloseBtn" aria-label="Close assistant window"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <div class="chatbot-messages" id="chatbotMessages">
@@ -1455,21 +1490,21 @@
                     Hi! I am Myat's virtual assistant. Ask me anything about his skills, experience, education, or availability!
                 </div>
             </div>
-
+ 
             <div class="chatbot-suggestions" id="chatbotSuggestions">
                 <button class="suggestion-chip" data-question="skills">🛠️ Tech Stack</button>
                 <button class="suggestion-chip" data-question="experience">💼 Experience</button>
                 <button class="suggestion-chip" data-question="status">📍 Availability</button>
                 <button class="suggestion-chip" data-question="contact">📞 Contact Info</button>
             </div>
-
+ 
             <div class="chatbot-input-area">
                 <input type="text" id="chatbotInput" placeholder="Type a message...">
-                <button id="chatbotSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                <button id="chatbotSendBtn" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
-
+ 
     <!-- Resume Modal -->
     <div id="resumeModal" class="modal-overlay">
         <div class="modal-window">
@@ -1477,7 +1512,7 @@
                 <h3 class="modal-title"><i class="fa-solid fa-file-pdf" style="color: var(--cyan); margin-right: 0.5rem;"></i> Curriculum Vitae</h3>
                 <div class="modal-actions">
                     <a href="CV_MMK.pdf" download class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Download</a>
-                    <button class="modal-close" id="closeResumeBtn"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="modal-close" id="closeResumeBtn" aria-label="Close resume preview"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
             <div class="modal-body" style="padding: 0; background: #0b1120; overflow: hidden;">
@@ -1492,14 +1527,14 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- Lightbox Modal for Photo Gallery -->
     <div id="photoLightbox" class="lightbox-modal">
-        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-close" aria-label="Close photo preview" style="background: none; border: none;">&times;</button>
         <img class="lightbox-content" id="lightboxImage" alt="Enlarged photo">
         <div id="lightboxCaption" class="lightbox-caption"></div>
     </div>
-
+ 
     <!-- main JS script -->
     <script src="script.js?v=1.8"></script>
 </body>

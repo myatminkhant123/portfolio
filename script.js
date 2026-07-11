@@ -4,12 +4,16 @@ function initPortfolio() {
     // ===== DASHBOARD SIDEBAR & ROUTING =====
     const sidebar = document.getElementById('sidebar');
     const navToggle = document.getElementById('navToggle');
+    const navProgressFill = document.getElementById('nav-progress-fill');
 
     // Toggle sidebar on mobile
     if (navToggle && sidebar) {
+        // Initial state
+        navToggle.setAttribute('aria-expanded', 'false');
         navToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            sidebar.classList.toggle('active');
+            const isOpen = sidebar.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
     }
 
@@ -17,10 +21,36 @@ function initPortfolio() {
     document.addEventListener('click', (e) => {
         if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(e.target) && (navToggle && !navToggle.contains(e.target))) {
             sidebar.classList.remove('active');
+            if (navToggle) {
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
         }
     });
 
-    // Switch section logic (Dashboard routing)
+    // ── setActiveLink: updates visual + ARIA state on all sidebar links ──
+    function setActiveLink(targetId) {
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            const isActive = link.getAttribute('href') === targetId;
+            link.classList.toggle('active', isActive);
+            // aria-current="page" for screen readers; remove attribute when inactive
+            if (isActive) {
+                link.setAttribute('aria-current', 'page');
+            } else {
+                link.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    // ── updateScrollProgress: fills the rail based on scroll within active section ──
+    function updateScrollProgress() {
+        if (!navProgressFill) return;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) * 100 : 0;
+        navProgressFill.style.height = pct + '%';
+    }
+
+    // ── switchSection: core routing function ──
     function switchSection(targetId) {
         const targetSection = document.querySelector(targetId);
         if (!targetSection) return;
@@ -33,27 +63,27 @@ function initPortfolio() {
         // Show target section
         targetSection.classList.add('active-section');
 
-        // Instantly activate reveal effects in target section so user sees them animate immediately
+        // Instantly activate reveal effects so user sees them animate immediately
         targetSection.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
             el.classList.add('active');
         });
 
-        // Update active class on sidebar links
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === targetId) {
-                link.classList.add('active');
-            }
-        });
+        // Update active link + aria-current immediately (no waiting)
+        setActiveLink(targetId);
 
         // Close sidebar on mobile after clicking
         if (sidebar) {
             sidebar.classList.remove('active');
+            if (navToggle) {
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
         }
 
-        // Reset scroll position to top
+        // Reset scroll position to top of section
         window.scrollTo({ top: 0, behavior: 'instant' });
-        // Dispatch window resize event to force hidden canvases/containers to recalculate client dimensions
+        // Reset progress rail to 0 when switching sections
+        updateScrollProgress();
+        // Dispatch resize to force hidden canvases to recalculate
         window.dispatchEvent(new Event('resize'));
     }
 
@@ -61,13 +91,31 @@ function initPortfolio() {
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
-            if (targetId.startsWith('#')) {
+            if (targetId && targetId.startsWith('#')) {
                 e.preventDefault();
+                // Immediately mark as active before section animation starts
+                setActiveLink(targetId);
                 switchSection(targetId);
                 // Update URL hash without jumping
                 history.pushState(null, null, targetId);
             }
         });
+    });
+
+    // Handle clicks on in-content links like "View Projects" hero button
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        if (!link.classList.contains('sidebar-link')) {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection && targetSection.closest('.main-content')) {
+                    e.preventDefault();
+                    setActiveLink(targetId);
+                    switchSection(targetId);
+                    history.pushState(null, null, targetId);
+                }
+            });
+        }
     });
 
     // Handle initial load hash router
@@ -93,126 +141,330 @@ function initPortfolio() {
         });
     });
 
+    // ── Scroll progress rail: updates on scroll within the active section ──
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress(); // initialise
+
     // ===== INTERACTIVE CUSTOM CURSOR WITH LERP =====
+    // Skip entirely on touch/mobile devices (no pointer cursor exists)
+    const _isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     const cursor = document.getElementById('custom-cursor');
     const glow = document.getElementById('cursor-glow');
     let mouseX = 0, mouseY = 0;
     let cursorX = 0, cursorY = 0;
     let glowX = 0, glowY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
+    if (!_isTouchDevice) {
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-    function updateCursor() {
-        // Linear Interpolation (lerp) for smooth trailing
-        cursorX += (mouseX - cursorX) * 0.15;
-        cursorY += (mouseY - cursorY) * 0.15;
-        glowX += (mouseX - glowX) * 0.06;
-        glowY += (mouseY - glowY) * 0.06;
+        function updateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            glowX += (mouseX - glowX) * 0.06;
+            glowY += (mouseY - glowY) * 0.06;
 
-        if (cursor) {
-            cursor.style.left = `${cursorX}px`;
-            cursor.style.top = `${cursorY}px`;
-        }
-        if (glow) {
-            glow.style.left = `${glowX}px`;
-            glow.style.top = `${glowY}px`;
+            if (cursor) {
+                cursor.style.left = `${cursorX}px`;
+                cursor.style.top = `${cursorY}px`;
+            }
+            if (glow) {
+                glow.style.left = `${glowX}px`;
+                glow.style.top = `${glowY}px`;
+            }
+            requestAnimationFrame(updateCursor);
         }
         requestAnimationFrame(updateCursor);
+
+        // Hover elements interactions with cursor
+        document.querySelectorAll('a, button, .skill-tag, .filter-tab, .project-card, .cert-card, .interactive-step, .interactive-edu-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                if (glow) glow.style.background = 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%)';
+            });
+            el.addEventListener('mouseleave', () => {
+                if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                if (glow) glow.style.background = 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)';
+            });
+        });
+    } else {
+        if (cursor) cursor.style.display = 'none';
+        if (glow) glow.style.display = 'none';
     }
-    requestAnimationFrame(updateCursor);
 
-    // Hover elements interactions with cursor
-    document.querySelectorAll('a, button, .skill-tag, .filter-tab, .project-card, .cert-card, .interactive-step, .interactive-edu-card').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
-            if (glow) glow.style.background = 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%)';
+
+    // ===== NETWORK TOPOLOGY BACKGROUND CANVAS =====
+    const networkCanvas = document.getElementById('network-grid-canvas');
+    if (networkCanvas) {
+        const nCtx = networkCanvas.getContext('2d');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Detect touch/mobile: no cursor interaction, fewer nodes
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+        // ── Config ──────────────────────────────────────────────────────────
+        const NODE_COUNT        = isTouchDevice ? 30 : 60;  // halved on mobile
+        const CONNECT_DIST      = 150;         // px — max line distance
+        const CONNECT_DIST_SQ   = CONNECT_DIST * CONNECT_DIST;
+        const NODE_SPEED_MIN    = 0.18;        // px/frame
+        const NODE_SPEED_MAX    = 0.55;
+        const NODE_RADIUS       = 2.2;         // base dot size
+        const NODE_COLOR        = '6, 182, 212';  // cyan RGB components
+        const LINE_COLOR        = '6, 182, 212';
+        const CURSOR_DIST       = 150;         // cursor interaction radius
+        const CURSOR_DIST_SQ    = CURSOR_DIST * CURSOR_DIST;
+        const REPEL_STRENGTH    = isTouchDevice ? 0 : 1.8;  // no repel on touch
+        const REPEL_DECAY       = 0.88;        // velocity friction for repel
+        const PULSE_INTERVAL_MIN = 3500;       // ms between random pulses
+        const PULSE_INTERVAL_MAX = 7000;
+        const PULSE_DURATION    = 1200;        // ms per pulse
+
+        // ── State ────────────────────────────────────────────────────────────
+        let W = 0, H = 0;
+        let nodes = [];
+        let mouseX = -9999, mouseY = -9999;
+        let isTabVisible = !document.hidden;
+        let rafId = null;
+        let lastTs = 0;
+
+        // ── DPR-aware resize ─────────────────────────────────────────────────
+        function resize() {
+            const dpr = window.devicePixelRatio || 1;
+            W = window.innerWidth;
+            H = window.innerHeight;
+            networkCanvas.width  = W * dpr;
+            networkCanvas.height = H * dpr;
+            networkCanvas.style.width  = W + 'px';
+            networkCanvas.style.height = H + 'px';
+            nCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // ── Node class ───────────────────────────────────────────────────────
+        class Node {
+            constructor() { this.reset(true); }
+
+            reset(randomPos) {
+                if (randomPos) {
+                    this.x = Math.random() * W;
+                    this.y = Math.random() * H;
+                } else {
+                    // Enter from a random edge
+                    const edge = Math.floor(Math.random() * 4);
+                    if (edge === 0) { this.x = Math.random() * W; this.y = 0; }
+                    else if (edge === 1) { this.x = W; this.y = Math.random() * H; }
+                    else if (edge === 2) { this.x = Math.random() * W; this.y = H; }
+                    else              { this.x = 0;  this.y = Math.random() * H; }
+                }
+                const speed = NODE_SPEED_MIN + Math.random() * (NODE_SPEED_MAX - NODE_SPEED_MIN);
+                const angle = Math.random() * Math.PI * 2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.rx = 0; this.ry = 0; // repulsion velocity
+                this.baseAlpha = 0.55 + Math.random() * 0.35;
+                this.pulseEnd  = 0;        // timestamp when current pulse ends
+                this.r = NODE_RADIUS;
+            }
+
+            update(now) {
+                if (prefersReducedMotion) return;
+                // Apply repulsion then decay
+                this.rx *= REPEL_DECAY;
+                this.ry *= REPEL_DECAY;
+                this.x += this.vx + this.rx;
+                this.y += this.vy + this.ry;
+
+                // Soft bounce at edges (margin = CONNECT_DIST/2 so connections
+                // don't abruptly pop in/out at borders)
+                const M = 5;
+                if (this.x < M)      { this.x = M;   this.vx = Math.abs(this.vx); }
+                if (this.x > W - M)  { this.x = W-M; this.vx = -Math.abs(this.vx); }
+                if (this.y < M)      { this.y = M;   this.vy = Math.abs(this.vy); }
+                if (this.y > H - M)  { this.y = H-M; this.vy = -Math.abs(this.vy); }
+            }
+
+            get isPulsing() { return performance.now() < this.pulseEnd; }
+
+            draw(now) {
+                const pulsing = this.isPulsing;
+                const pulseProgress = pulsing
+                    ? 1 - (this.pulseEnd - now) / PULSE_DURATION
+                    : 0;
+                // Pulse: grow bright then fade back
+                const pulseGlow = pulsing
+                    ? Math.sin(pulseProgress * Math.PI) // 0→1→0
+                    : 0;
+                const alpha = this.baseAlpha + pulseGlow * 0.4;
+                const radius = this.r + pulseGlow * 3;
+
+                // Glow halo
+                if (pulseGlow > 0.05) {
+                    const grad = nCtx.createRadialGradient(this.x, this.y, 0, this.x, this.y, radius * 5);
+                    grad.addColorStop(0, `rgba(${NODE_COLOR}, ${pulseGlow * 0.35})`);
+                    grad.addColorStop(1, `rgba(${NODE_COLOR}, 0)`);
+                    nCtx.beginPath();
+                    nCtx.arc(this.x, this.y, radius * 5, 0, Math.PI * 2);
+                    nCtx.fillStyle = grad;
+                    nCtx.fill();
+                }
+
+                // Core dot
+                nCtx.beginPath();
+                nCtx.arc(this.x, this.y, radius, 0, Math.PI * 2);
+                nCtx.fillStyle = `rgba(${NODE_COLOR}, ${Math.min(alpha, 1)})`;
+                nCtx.fill();
+            }
+
+            triggerPulse() {
+                this.pulseEnd = performance.now() + PULSE_DURATION;
+            }
+        }
+
+        // ── Build nodes ──────────────────────────────────────────────────────
+        for (let i = 0; i < NODE_COUNT; i++) nodes.push(new Node());
+
+        // ── Random node pulser ───────────────────────────────────────────────
+        function schedulePulse() {
+            if (prefersReducedMotion) return;
+            const delay = PULSE_INTERVAL_MIN + Math.random() * (PULSE_INTERVAL_MAX - PULSE_INTERVAL_MIN);
+            setTimeout(() => {
+                if (nodes.length) {
+                    nodes[Math.floor(Math.random() * nodes.length)].triggerPulse();
+                }
+                schedulePulse();
+            }, delay);
+        }
+        schedulePulse();
+
+        // ── Cursor tracking ──────────────────────────────────────────────────
+        if (!prefersReducedMotion) {
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            document.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; });
+        }
+
+        // ── Repulsion (throttled — runs only every other frame) ──────────────
+        let repelFrame = 0;
+        function applyRepulsion() {
+            if (mouseX < -1000) return;
+            for (let i = 0; i < nodes.length; i++) {
+                const n = nodes[i];
+                const dx = n.x - mouseX;
+                const dy = n.y - mouseY;
+                const distSq = dx * dx + dy * dy;
+                if (distSq < CURSOR_DIST_SQ && distSq > 0) {
+                    const dist = Math.sqrt(distSq);  // only when needed
+                    const force = (CURSOR_DIST - dist) / CURSOR_DIST * REPEL_STRENGTH;
+                    n.rx += (dx / dist) * force;
+                    n.ry += (dy / dist) * force;
+                }
+            }
+        }
+
+        // ── Tab visibility pause ─────────────────────────────────────────────
+        document.addEventListener('visibilitychange', () => {
+            isTabVisible = !document.hidden;
+            if (isTabVisible && !rafId) {
+                lastTs = performance.now();
+                rafId = requestAnimationFrame(draw);
+            }
         });
-        el.addEventListener('mouseleave', () => {
-            if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            if (glow) glow.style.background = 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)';
-        });
-    });
 
-
-    // ===== DYNAMIC BACKGROUND PARTICLES CANVAS =====
-    const bgCanvas = document.getElementById('bg-canvas');
-    if (bgCanvas) {
-        const bgCtx = bgCanvas.getContext('2d');
-        let particles = [];
-        const maxParticles = 65;
-
-        function resizeBgCanvas() {
-            bgCanvas.width = window.innerWidth;
-            bgCanvas.height = window.innerHeight;
-        }
-        resizeBgCanvas();
-        window.addEventListener('resize', resizeBgCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * bgCanvas.width;
-                this.y = Math.random() * bgCanvas.height;
-                this.vx = (Math.random() - 0.5) * 0.35;
-                this.vy = (Math.random() - 0.5) * 0.35;
-                this.radius = Math.random() * 1.5 + 0.5;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > bgCanvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > bgCanvas.height) this.vy *= -1;
-            }
-            draw() {
-                bgCtx.beginPath();
-                bgCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                bgCtx.fillStyle = 'rgba(6, 182, 212, 0.18)';
-                bgCtx.fill();
-            }
-        }
-
-        for (let i = 0; i < maxParticles; i++) {
-            particles.push(new Particle());
-        }
-
+        // ── Draw connections (cursor as virtual node) ────────────────────────
         function drawConnections() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-                    if (dist < 120) {
-                        const alpha = (1 - dist / 120) * 0.08;
-                        bgCtx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
-                        bgCtx.lineWidth = 0.5;
-                        bgCtx.beginPath();
-                        bgCtx.moveTo(particles[i].x, particles[i].y);
-                        bgCtx.lineTo(particles[j].x, particles[j].y);
-                        bgCtx.stroke();
+            const hasCursor = mouseX > -1000;
+            nCtx.lineWidth = 0.7;
+
+            // Node-to-node
+            for (let i = 0; i < nodes.length; i++) {
+                const a = nodes[i];
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const b = nodes[j];
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < CONNECT_DIST_SQ) {
+                        const alpha = (1 - distSq / CONNECT_DIST_SQ) * 0.18;
+                        nCtx.strokeStyle = `rgba(${LINE_COLOR}, ${alpha})`;
+                        nCtx.beginPath();
+                        nCtx.moveTo(a.x, a.y);
+                        nCtx.lineTo(b.x, b.y);
+                        nCtx.stroke();
+                    }
+                }
+                // Node-to-cursor
+                if (hasCursor) {
+                    const dx = a.x - mouseX;
+                    const dy = a.y - mouseY;
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < CONNECT_DIST_SQ) {
+                        const alpha = (1 - distSq / CONNECT_DIST_SQ) * 0.30;
+                        nCtx.strokeStyle = `rgba(${LINE_COLOR}, ${alpha})`;
+                        nCtx.beginPath();
+                        nCtx.moveTo(a.x, a.y);
+                        nCtx.lineTo(mouseX, mouseY);
+                        nCtx.stroke();
                     }
                 }
             }
         }
 
-        function animateBg() {
-            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            drawConnections();
-            requestAnimationFrame(animateBg);
+        // ── Draw cursor dot ──────────────────────────────────────────────────
+        function drawCursorNode() {
+            if (mouseX < -1000) return;
+            nCtx.beginPath();
+            nCtx.arc(mouseX, mouseY, NODE_RADIUS * 1.4, 0, Math.PI * 2);
+            nCtx.fillStyle = `rgba(${NODE_COLOR}, 0.7)`;
+            nCtx.fill();
         }
-        requestAnimationFrame(animateBg);
+
+        // ── Main draw loop ───────────────────────────────────────────────────
+        function draw(ts) {
+            if (!isTabVisible) {
+                rafId = null;
+                return;
+            }
+            rafId = requestAnimationFrame(draw);
+
+            const now = performance.now();
+            nCtx.clearRect(0, 0, W, H);
+
+            // Throttle repulsion to every other frame
+            repelFrame++;
+            if (!prefersReducedMotion && repelFrame % 2 === 0) applyRepulsion();
+
+            // Update + draw
+            drawConnections();
+            for (const node of nodes) {
+                node.update(now);
+                node.draw(now);
+            }
+            drawCursorNode();
+        }
+
+        // Kick off — static single frame for reduced-motion, loop otherwise
+        if (prefersReducedMotion) {
+            // Render one static snapshot
+            drawConnections();
+            for (const node of nodes) node.draw(performance.now());
+        } else {
+            lastTs = performance.now();
+            rafId = requestAnimationFrame(draw);
+        }
     }
+
 
     // ===== ROLE TYPEWRITER SWITCHER LOOP =====
     const roleText = document.getElementById('role-text');
     const roles = [
-        "Full-Stack Software engineer",
-        "Data Professional",
-        "Cloud Operations Engineer"
+        "Data Science Solutions",
+        "ML-Powered Systems",
+        "Data-Driven Applications",
+        "Full-Stack Software"
     ];
     let roleIdx = 0;
     let charIdx = 0;
@@ -920,6 +1172,9 @@ function initPortfolio() {
     // ===== INTERACTIVE COURSE DETAILS ACCORDION =====
     const courseItems = document.querySelectorAll('.courses-ul .course-item');
     courseItems.forEach(item => {
+        // Add tabindex for keyboard accessibility
+        item.setAttribute('tabindex', '0');
+
         item.addEventListener('click', () => {
             const isActive = item.classList.contains('active-course');
             const parentUl = item.closest('.courses-ul');
@@ -930,6 +1185,14 @@ function initPortfolio() {
             }
             if (!isActive) {
                 item.classList.add('active-course');
+            }
+        });
+
+        // Keypress accessibility: enter or space to expand course drawers
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
             }
         });
     });

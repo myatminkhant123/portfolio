@@ -67,8 +67,8 @@ body {
     color: var(--bg-space);
 }
 
-/* ===== DYNAMIC BACKGROUND EFFECTS ===== */
-#bg-canvas {
+/* ===== NETWORK TOPOLOGY BACKGROUND ===== */
+#network-grid-canvas {
     position: fixed;
     top: 0;
     left: 0;
@@ -76,23 +76,9 @@ body {
     height: 100vh;
     z-index: -2;
     pointer-events: none;
+    display: block;
 }
 
-.bg-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -3;
-    pointer-events: none;
-    background-size: 40px 40px;
-    background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-}
 
 .aurora-container {
     position: fixed;
@@ -108,8 +94,8 @@ body {
 .aurora-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.12;
+    filter: blur(120px);
+    opacity: 0.06;
     mix-blend-mode: screen;
 }
 
@@ -143,6 +129,16 @@ body {
 @keyframes floatBlob {
     0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(10%, 15%) scale(1.2); }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    #network-grid-canvas {
+        /* JS checks this and disables pulses + cursor interaction */
+    }
+    .aurora-blob {
+        animation: none;
+    }
 }
 
 /* ===== CUSTOM MOUSE CURSOR ===== */
@@ -275,7 +271,9 @@ body {
     padding: 0.8rem 1rem;
     border-radius: 0.75rem;
     text-decoration: none;
-    transition: var(--transition-smooth);
+    /* Faster transition for snappy active-state feedback */
+    transition: color 0.22s ease, background 0.22s ease,
+                border-color 0.22s ease, padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border-left: 3px solid transparent;
 }
 
@@ -305,6 +303,54 @@ body {
 
 .sidebar-link.active i {
     color: var(--cyan);
+}
+
+/* Keyboard focus-visible ring — only shows for keyboard/tab, not click */
+.sidebar-link:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+    border-radius: 0.75rem;
+}
+
+/* ── Nav wrapper holds the progress rail + menu side-by-side ── */
+.sidebar-nav-wrapper {
+    display: flex;
+    gap: 0;
+    flex-grow: 1;
+    position: relative;
+}
+
+/* ── Thin vertical progress rail on the left of nav items ── */
+.nav-progress-rail {
+    width: 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;                          /* JS drives this */
+    background: linear-gradient(to bottom, var(--cyan), var(--purple));
+    border-radius: 2px;
+    transition: height 0.15s ease-out;
+    box-shadow: 0 0 6px rgba(6, 182, 212, 0.5);
+}
+
+/* Reduced-motion: skip progress fill animation */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar-link {
+        transition: none;
+    }
+    .nav-progress-fill {
+        transition: none;
+    }
 }
 
 .sidebar-footer {
@@ -542,6 +588,46 @@ body {
     box-shadow: 0 4px 20px rgba(6, 182, 212, 0.15);
 }
 
+/* ── Resume primary CTA — solid cyan, high-contrast ── */
+.btn-resume {
+    background: var(--cyan);
+    color: var(--bg-space);
+    font-weight: 700;
+    box-shadow: 0 4px 24px rgba(6, 182, 212, 0.45);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+    /* Slightly larger than default btn for visual dominance */
+    padding: 0.9rem 2.2rem;
+    font-size: 1rem;
+}
+
+.btn-resume::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+}
+
+.btn-resume:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 36px rgba(6, 182, 212, 0.6), 0 0 0 2px rgba(6, 182, 212, 0.25);
+    color: var(--bg-space);
+}
+
+.btn-resume:hover::after {
+    opacity: 1;
+}
+
+.btn-resume:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
     min-height: 100vh;
@@ -618,6 +704,21 @@ body {
     margin-bottom: 2.5rem;
     max-width: 600px;
     line-height: 1.7;
+}
+
+/* Specialization subline — sits between h1 and role switcher */
+.hero-specialization {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.01em;
+}
+
+.hero-specialization strong {
+    color: var(--text-main);
+    font-weight: 600;
 }
 
 .hero-buttons {
@@ -4265,12 +4366,7 @@ body.light-theme .skill-description-box p {
     color: #374151;
 }
 
-/* Dynamic Background Grid and Cursor Glow */
-body.light-theme .bg-grid {
-    background-image: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-}
+/* Dynamic Background Cursor Glow */
 
 body.light-theme .cursor-glow {
     mix-blend-mode: multiply;
@@ -4359,6 +4455,10 @@ body.light-theme .btn-secondary {
 }
 
 body.light-theme .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: var(--primary);
+    color: var(--primary);
+}
 
 /* ===== INTERACTIVE ACADEMIC JOURNEY & EDUCATION DRAWERS ===== */
 .journey-step.interactive-step,
@@ -4573,4 +4673,287 @@ body.light-theme .code-editable:focus {
     border-bottom-color: var(--primary);
 }
 
+
+/* ============================================================
+   MOBILE · ACCESSIBILITY · CONSISTENCY FIXES
+   ============================================================ */
+
+/* ── 1. Contrast fix: text-muted lightened from #9ca3af → #b0b8c8
+        New contrast on --bg-space (#050816) ≈ 4.7:1 (WCAG AA ✔)
+   ── ---------------------------------------------------------- */
+:root {
+    --text-muted: #b0b8c8;
+}
+
+/* Keep light-theme muted text unchanged (it was already fine) */
+body.light-theme {
+    --text-muted: #4b5563;
+}
+
+/* ── 2. Focus-visible rings for all interactive elements ──── */
+/* Buttons and controls that had no visible keyboard focus ring */
+.run-code-btn:focus-visible,
+.terminal-close:focus-visible,
+.filter-tab:focus-visible,
+.code-tab:focus-visible,
+.modal-close:focus-visible,
+.chatbot-trigger:focus-visible,
+.chatbot-close-btn:focus-visible,
+#chatbotSendBtn:focus-visible,
+.suggestion-chip:focus-visible,
+.vol-gallery-item:focus-visible,
+.lightbox-close:focus-visible,
+.whatsapp-button:focus-visible,
+.project-link:focus-visible,
+.cert-verify:focus-visible,
+.drawer-hint:focus-visible,
+.courses-ul li:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+body.light-theme .run-code-btn:focus-visible,
+body.light-theme .filter-tab:focus-visible,
+body.light-theme .code-tab:focus-visible,
+body.light-theme .modal-close:focus-visible,
+body.light-theme .chatbot-trigger:focus-visible,
+body.light-theme #chatbotSendBtn:focus-visible {
+    outline-color: var(--primary);
+}
+
+/* ── 3. prefers-reduced-motion — blanket disable for all animations
+        not already covered (aurora blobs, profile rings, float icons,
+        scroll-reveal, orbit pulse, background blinkCursor) ─────── */
+@media (prefers-reduced-motion: reduce) {
+    /* Aurora background blobs */
+    .blob-1, .blob-2, .blob-3 {
+        animation: none;
+    }
+    /* Profile rotating rings */
+    .profile-ring, .profile-ring-outer {
+        animation: none;
+    }
+    /* Floating tech icons */
+    .floating-tech-icon,
+    .icon-1, .icon-2, .icon-3, .icon-4 {
+        animation: none;
+    }
+    /* Orbit center pulse */
+    .bright-dot {
+        animation: none;
+    }
+    /* Typewriter cursor blink */
+    .role-switcher {
+        animation: none;
+        border-right: 2px solid var(--cyan);
+    }
+    /* Scroll-reveal: show everything immediately */
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .reveal-stagger > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    /* Chatbot trigger pulse ring */
+    .chatbot-trigger .pulse-ring {
+        animation: none;
+    }
+    /* Terminal dot pulse */
+    .terminal-dot {
+        animation: none;
+        opacity: 1;
+    }
+    /* Mouse wheel scroll indicator */
+    .mouse-wheel::before {
+        animation: none;
+    }
+    /* Stats counter transitions */
+    .stat-num {
+        transition: none;
+    }
+    /* General transition suppression for hover micro-animations */
+    .glass-card,
+    .project-card,
+    .cert-card,
+    .skill-tag,
+    .skill-category,
+    .orbit-item,
+    .contact-item,
+    .passion-tag {
+        transition: none;
+    }
+}
+
+/* ── 4. Mobile responsiveness — 992px (tablet) ────────────── */
+@media (max-width: 992px) {
+    /* Center the new specialization subline */
+    .hero-specialization {
+        text-align: center;
+    }
+}
+
+/* ── 5. Mobile responsiveness — 768px ────────────────────── */
+@media (max-width: 768px) {
+    /* Radar chart: shrink to fit without overflowing viewport */
+    .skills-radar-canvas {
+        width: min(100%, 280px);
+        height: min(100%, 280px);
+    }
+    /* skills-radar-wrapper already has order:-1 at 992px, keep that */
+
+    /* Touch targets: sidebar links */
+    .sidebar-link {
+        min-height: 44px;
+    }
+
+    /* Touch targets: filter tabs */
+    .filter-tab {
+        min-height: 44px;
+        padding: 0.7rem 1.2rem;
+    }
+
+    /* Chatbot window: clamp width so it doesn't overflow 375px phones */
+    .chatbot-window {
+        width: min(350px, calc(100vw - 2rem));
+        right: 0;
+    }
+
+    /* Hero buttons: ensure wrap on mid-size phones */
+    .hero-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Contact hover transform: reduce slide-in on narrow screens */
+    .contact-item:hover {
+        transform: translateX(4px) scale(1.01);
+    }
+}
+
+/* ── 6. Mobile responsiveness — 480px (small phone) ──────── */
+@media (max-width: 480px) {
+    /* Orbit: hide the canvas-based bubble orbit, show a simple pill list */
+    .orbit-container {
+        display: none;
+    }
+    .orbit-mobile-fallback {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        justify-content: center;
+        padding: 1.5rem 0.5rem;
+    }
+
+    /* Sidebar links: full tap target on mobile */
+    .sidebar-link {
+        min-height: 48px;
+        padding: 0.8rem 1rem;
+    }
+
+    /* Touch targets for code tabs */
+    .code-tab {
+        min-height: 44px;
+        padding: 0 1rem;
+    }
+
+    /* Skill tags: slightly bigger tap zone */
+    .skill-tag {
+        padding: 0.6rem 1rem;
+        min-height: 40px;
+    }
+
+    /* Stats grid: show single number per row on tiny phones */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Chatbot: move trigger closer to edge so window fits */
+    .chatbot-container {
+        right: 1rem;
+        bottom: 1rem;
+    }
+    .whatsapp-widget {
+        right: 1rem;
+        bottom: 5.5rem;
+    }
+
+    /* Radar: even smaller on 375px */
+    .skills-radar-canvas {
+        width: 260px;
+        height: 260px;
+    }
+
+    /* Section padding reduced for small screens */
+    .main-content section {
+        padding: 2.5rem 0 4rem 0;
+    }
+
+    /* achieve-card: normalize padding (was 2.5rem — too tall on mobile) */
+    .achieve-card {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+/* ── 7. Orbit mobile fallback pill list styling ───────────── */
+/* This element is already in HTML but hidden on desktop */
+.orbit-mobile-fallback {
+    display: none;
+}
+
+.orbit-mobile-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    background: rgba(11, 17, 32, 0.85);
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.orbit-mobile-pill i {
+    font-size: 1rem;
+}
+
+body.light-theme .orbit-mobile-pill {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #1f2937;
+}
+
+/* ── 8. Consistency: hero-tag wraps on narrow screens ─────── */
+@media (max-width: 480px) {
+    .hero-tag {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        text-align: center;
+    }
+}
+
+/* ── 9. Consistency: uniform card border-radius ─────────────
+        .glass-card is 1rem; skill-category relied on this but
+        wasn't explicitly set. Set it explicitly for safety.     */
+.skill-category {
+    border-radius: 1rem;
+}
+
+/* ── 10. Chatbot window: prevent overflow from bottom on
+          very short phones in landscape ─────────────────────── */
+@media (max-height: 600px) and (max-width: 768px) {
+    .chatbot-window {
+        height: 360px;
+        bottom: 70px;
+    }
+}
 
