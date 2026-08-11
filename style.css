@@ -2487,13 +2487,7 @@ body.light-theme .form-terminal-overlay {
 .contact-info-column {
     display: flex;
     flex-direction: column;
-    gap: 6.0rem;
-}
-
-.contact-intro-text {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    line-height: 1.7;
+    gap: 2.0rem;
 }
 
 .contact-details {
