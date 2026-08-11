@@ -4,13 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myat Min Khant</title>
+    <title>Myat Min Khant | Software Engineer &amp; Data Science</title>
     <meta name="description"
-        content="Futuristic Computer Science portfolio of Myat Min Khant. Final year CS Student at AIU specializing in Software Engineering, AI, and Data Analytics. Check out my projects and certifications.">
+        content="Portfolio of Myat Min Khant — CS Honours student specializing in ML pipelines, data analytics, full-stack development, and cloud operations. Albukhary Foundation Scholar at AIU.">
+    
+    <!-- Open Graph & Twitter Cards -->
+    <meta property="og:title" content="Myat Min Khant | Software Engineer &amp; Data Science">
+    <meta property="og:description" content="Final-year CS student building ML models, data pipelines, and full-stack apps. Cloud Operations Intern @ AIA Digital+.">
+    <meta property="og:image" content="https://myatminkhant.dev/CVphoto.webp">
+    <meta property="og:image:alt" content="Myat Min Khant — portfolio profile photo">
+    <meta property="og:url" content="https://myatminkhant.dev/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Myat Min Khant | Software Engineer &amp; Data Science">
+    <meta name="twitter:description" content="ML pipelines, data analytics, full-stack delivery, and cloud ops. Available from Nov 2026.">
+    <meta name="twitter:image" content="https://myatminkhant.dev/CVphoto.webp">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome for futuristic icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=1.8">
+    <link rel="stylesheet" href="style.css?v=1.9">
     
     <!-- JSON-LD Structured Schema Metadata (SEO) -->
     <script type="application/ld+json">
@@ -40,6 +58,7 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Custom Cursor Glow Effects -->
     <div class="custom-cursor" id="custom-cursor" aria-hidden="true" role="none"></div>
     <div class="cursor-glow" id="cursor-glow" aria-hidden="true" role="none"></div>
@@ -74,7 +93,17 @@
             </ul>
         </div>
         <div class="sidebar-footer">
-            <a href="CV_MMK.pdf" target="_blank" class="btn btn-primary" id="viewResumeBtn" style="padding: 0.8rem 1.5rem; font-size: 0.95rem; width: 100%;"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+            <!-- Futuristic Theme Accent Picker -->
+            <div class="accent-picker-wrapper">
+                <span class="accent-picker-title">Accent Theme</span>
+                <div class="accent-dots">
+                    <button class="accent-dot active" data-accent="cyan" title="Cyber Cyan" aria-label="Cyber Cyan Accent" style="background: #06b6d4;"></button>
+                    <button class="accent-dot" data-accent="violet" title="Electric Violet" aria-label="Electric Violet Accent" style="background: #8b5cf6;"></button>
+                    <button class="accent-dot" data-accent="emerald" title="Emerald Matrix" aria-label="Emerald Matrix Accent" style="background: #10b981;"></button>
+                    <button class="accent-dot" data-accent="amber" title="Neon Amber" aria-label="Neon Amber Accent" style="background: #f59e0b;"></button>
+                </div>
+            </div>
+            <a href="CV_MMK.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="viewResumeBtn" style="padding: 0.8rem 1.5rem; font-size: 0.95rem; width: 100%;"><i class="fa-solid fa-file-pdf"></i> Resume</a>
         </div>
     </aside>
 
@@ -88,20 +117,20 @@
         </div>
     </header>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content">
         <!-- Hero Section -->
         <section id="home" class="hero active-section">
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-text reveal">
                     <div class="hero-tag">
-                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data Science Specialist &nbsp;&middot;&nbsp; <i class="fa-solid fa-code" aria-hidden="true"></i> Software Engineer
+                        <i class="fa-solid fa-microchip" aria-hidden="true"></i> Adaptive Tech &nbsp;&middot;&nbsp; <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Data Enthusiast
                     </div>
                     <h1 class="hero-title">
                         Hi, I'm <span class="gradient-text">Myat Min Khant</span>
                     </h1>
                     <p class="hero-specialization">
-                        Specializing in <strong>Data Science</strong>, <strong>Machine Learning</strong> &amp; Data-Driven Software Engineering
+                        CS Honours · <strong>ML &amp; Data Pipelines</strong> · Full-Stack Delivery · Cloud Ops @ AIA
                     </p>
                     <div class="role-switcher-container">
                         <span>I build </span>
@@ -113,7 +142,7 @@
                         with a solid full-stack software-engineering background to ship end-to-end solutions.
                     </p>
                     <div class="hero-buttons">
-                        <a href="CV_MMK.pdf" target="_blank" class="btn btn-resume" id="heroResumeBtn">
+                        <a href="CV_MMK.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-resume" id="heroResumeBtn">
                             <i class="fa-solid fa-download" aria-hidden="true"></i> Download Resume
                         </a>
                         <a href="#projects" class="btn btn-secondary">
@@ -124,25 +153,7 @@
                         </a>
                     </div>
                     
-                    <!-- Live Statistics Grid -->
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-num" data-target="6">0</span>
-                            <span class="stat-lbl">Projects</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-num" data-target="3" data-no-plus="true">0</span>
-                            <span class="stat-lbl">Certifications</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-num" data-target="4">0</span>
-                            <span class="stat-lbl">Years Learning</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-num" data-target="14">0</span>
-                            <span class="stat-lbl">Tech Stack</span>
-                        </div>
-                    </div>
+
                 </div>
                 
                 <div class="hero-visual reveal" style="transition-delay: 0.2s;">
@@ -167,7 +178,7 @@
             <div class="brand-grid">
                 <div class="story-container reveal">
                     <p>
-                        I am a final-year Computer Science student specializing in Data Science. I bridge the gap between engineering, analytics, and operational systems to build scalable, reliable software that solves real-world challenges and drives meaningful impact.
+                        As an <strong>Adaptive Tech &amp; Data Enthusiast</strong>, I bridge the gap between software engineering, machine learning pipelines, and cloud operations. I continuously adapt to emerging technologies to build scalable, reliable software that transforms raw data into actionable intelligence and solves real-world challenges.
                     </p>
                     
                     <div class="code-window-wrapper">
@@ -208,10 +219,14 @@
 
                             <div class="terminal-window" id="terminal-window">
                                 <div class="terminal-header">
-                                    <span>TERMINAL</span>
+                                    <span>TERMINAL &mdash; INTERACTIVE CLI</span>
                                     <button class="terminal-close" id="terminal-close" aria-label="Close terminal"><i class="fa-solid fa-xmark"></i></button>
                                 </div>
                                 <div class="terminal-body" id="terminal-body"></div>
+                                <div class="terminal-input-bar">
+                                    <span class="terminal-prompt">$</span>
+                                    <input type="text" id="terminal-cli-input" placeholder="Type 'help', 'skills', 'projects', 'clear'..." autocomplete="off" aria-label="Terminal CLI input">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,6 +280,41 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+        <!-- Milestones & Achievements -->
+        <div class="container subsection-block">
+            <h2 class="section-title reveal"><span class="gradient-title">Milestones &amp; Achievements</span></h2>
+            
+            <div class="achievements-grid reveal-stagger">
+                <div class="achieve-card glass-card">
+                    <div class="achieve-icon">🎯</div>
+                    <span class="achieve-num" data-target="3.53" data-no-plus="true">0</span>
+                    <h3 class="achieve-title">CGPA Academic Honor</h3>
+                    <p class="achieve-desc">Consistently ranked in the top percentile of the Computer Science cohort at AIU.</p>
+                </div>
+                
+                <div class="achieve-card glass-card">
+                    <div class="achieve-icon">📜</div>
+                    <span class="achieve-num" data-target="3">0</span>
+                    <h3 class="achieve-title">Certifications Earned</h3>
+                    <p class="achieve-desc">IBM, DeepLearning.AI, and TechNexus MERN Stack Bootcamp Certificates.</p>
+                </div>
+                
+                <div class="achieve-card glass-card">
+                    <div class="achieve-icon">📁</div>
+                    <span class="achieve-num" data-target="6">0</span>
+                    <h3 class="achieve-title">Completed Projects</h3>
+                    <p class="achieve-desc">Built 6 featured projects encompassing data analytics, data engineering, IoT, and web platforms.</p>
+                </div>
+                
+                <div class="achieve-card glass-card">
+                    <div class="achieve-icon">👔</div>
+                    <span class="achieve-num" data-target="1">0</span>
+                    <h3 class="achieve-title">Internship Placed</h3>
+                    <p class="achieve-desc">Industrial training at a professional cloud infrastructure services provider.</p>
                 </div>
             </div>
         </div>
@@ -374,7 +424,7 @@
                             
                             <div class="cert-actions-row">
                                 <span class="status-verified"><i class="fa-solid fa-circle-check"></i> Credential Verified</span>
-                                <a href="https://coursera.org/verify/professional-cert/TRP5PIXN0JQS" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential</a>
+                                <a href="https://coursera.org/verify/professional-cert/TRP5PIXN0JQS" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential</a>
                             </div>
                         </div>
                         
@@ -382,12 +432,12 @@
                             <h4 class="courses-list-title"><i class="fa-solid fa-list-check"></i> 3 Specialization Courses</h4>
                             <ul class="courses-ul">
                                 <li class="course-item" data-course="1">
-                                    <div class="course-item-header">
+                                    <div class="course-item-header" role="button" tabindex="0" aria-expanded="false" aria-controls="course-drawer-1-1">
                                         <span class="course-num">01</span>
                                         <span class="course-item-title">Introduction to Generative AI for Software Development</span>
-                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow" aria-hidden="true"></i>
                                     </div>
-                                    <div class="course-item-drawer">
+                                    <div class="course-item-drawer" id="course-drawer-1-1">
                                         <div class="course-drawer-content">
                                             <p><strong>Key Project:</strong> Prompt-engineering structured code translation and debugging scenarios.</p>
                                             <p><strong>Skills Verified:</strong> LLM Selection, Prompt Engineering, Code Explanations, AI-assisted Debugging.</p>
@@ -395,12 +445,12 @@
                                     </div>
                                 </li>
                                 <li class="course-item" data-course="2">
-                                    <div class="course-item-header">
+                                    <div class="course-item-header" role="button" tabindex="0" aria-expanded="false" aria-controls="course-drawer-1-2">
                                         <span class="course-num">02</span>
                                         <span class="course-item-title">Team Software Engineering with AI</span>
-                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow" aria-hidden="true"></i>
                                     </div>
-                                    <div class="course-item-drawer">
+                                    <div class="course-item-drawer" id="course-drawer-1-2">
                                         <div class="course-drawer-content">
                                             <p><strong>Key Project:</strong> Utilizing LLMs for collaborative planning, documenting APIs, and generating test suites.</p>
                                             <p><strong>Skills Verified:</strong> AI Code Reviews, Automated Test Generation, Documentation, Git workflows with AI.</p>
@@ -408,12 +458,12 @@
                                     </div>
                                 </li>
                                 <li class="course-item" data-course="3">
-                                    <div class="course-item-header">
+                                    <div class="course-item-header" role="button" tabindex="0" aria-expanded="false" aria-controls="course-drawer-1-3">
                                         <span class="course-num">03</span>
                                         <span class="course-item-title">AI-Powered Software and System Design</span>
-                                        <i class="fa-solid fa-chevron-down course-item-arrow"></i>
+                                        <i class="fa-solid fa-chevron-down course-item-arrow" aria-hidden="true"></i>
                                     </div>
-                                    <div class="course-item-drawer">
+                                    <div class="course-item-drawer" id="course-drawer-1-3">
                                         <div class="course-drawer-content">
                                             <p><strong>Key Project:</strong> Designing multi-tier system architectures and implementing design patterns with AI assistance.</p>
                                             <p><strong>Skills Verified:</strong> AI System Design, Architecture Design Patterns, API Integration.</p>
@@ -455,7 +505,7 @@
                             
                             <div class="cert-actions-row">
                                 <span class="status-verified"><i class="fa-solid fa-circle-check"></i> Credential Verified</span>
-                                <a href="https://coursera.org/verify/professional-cert/CLPHAOPC673C" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential</a>
+                                <a href="https://coursera.org/verify/professional-cert/CLPHAOPC673C" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Credential</a>
                             </div>
                         </div>
                         
@@ -640,7 +690,7 @@
                             
                             <div class="cert-actions-row">
                                 <span class="status-verified"><i class="fa-solid fa-circle-check"></i> Credential Verified</span>
-                                <a href="technexus_cert.png" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-image"></i> View Certificate</a>
+                                <a href="technexus_cert.png" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;"><i class="fa-solid fa-image"></i> View Certificate</a>
                             </div>
                         </div>
                         
@@ -1051,6 +1101,24 @@
         <div class="container">
             <h2 class="section-title reveal"><span class="gradient-title">Featured Projects</span></h2>
 
+            <!-- Project Category Filter Buttons -->
+            <div class="project-filters reveal" id="project-filters">
+                <button class="project-filter-btn active" data-filter="all">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i> All Projects
+                </button>
+                <button class="project-filter-btn" data-filter="data">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Data &amp; AI
+                </button>
+                <button class="project-filter-btn" data-filter="web">
+                    <i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Web Apps
+                </button>
+                <button class="project-filter-btn" data-filter="iot">
+                    <i class="fa-solid fa-microchip" aria-hidden="true"></i> IoT &amp; Hardware
+                </button>
+                <button class="project-filter-btn" data-filter="academic">
+                    <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Academic
+                </button>
+            </div>
 
             <div class="projects-grid reveal-stagger">
                 <!-- Project 1: Song Popularity Predictor -->
@@ -1077,8 +1145,8 @@
                         </div>
                         <div class="project-footer">
                             <div class="project-links">
-                                <a href="https://github.com/myatminkhant123/Song_Popularity_Prediction_ML_Project" target="_blank" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
-                                <a href="https://songpopularitypredictionmlproject.streamlit.app/" target="_blank" class="project-link"><i class="fa-solid fa-rocket"></i> Live Demo</a>
+                                <a href="https://github.com/myatminkhant123/Song_Popularity_Prediction_ML_Project" target="_blank" rel="noopener noreferrer" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
+                                <a href="https://songpopularitypredictionmlproject.streamlit.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-rocket"></i> Live Demo</a>
                             </div>
                         </div>
                     </div>
@@ -1093,7 +1161,7 @@
                     <div class="project-body">
                         <h3 class="project-title">AIU Postgrad Monitoring System</h3>
                         <p class="project-description">
-                            Collaborative web application built for Albukhary International University to monitor research milestones, advisor reviews, and thesis progress of postgraduates.
+                            Collaborative web application built for Albukhary International University to monitor research milestones, advisor reviews, and thesis progress of postgraduates. Private university deployment — repository not public.
                         </p>
                         <div class="project-details">
                             <div class="project-meta-item"><strong>Challenge:</strong> Complex state workflows for approvals and automated email queues for notifications.</div>
@@ -1107,8 +1175,7 @@
                         </div>
                         <div class="project-footer">
                             <div class="project-links">
-                                <a href="https://github.com/myatminkhant123" target="_blank" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
-                                <span class="project-link" style="color: var(--text-muted);"><i class="fa-solid fa-lock"></i> University Only</span>
+                                <span class="project-link" style="color: var(--text-muted);"><i class="fa-solid fa-lock"></i> Private Repository</span>
                             </div>
                         </div>
                     </div>
@@ -1137,8 +1204,8 @@
                         </div>
                         <div class="project-footer">
                             <div class="project-links">
-                                <a href="https://github.com/myatminkhant123/sentiment_analysis-.git" target="_blank" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
-                                <a href="https://chatgptsentimentanalysis.streamlit.app/" target="_blank" class="project-link"><i class="fa-solid fa-rocket"></i> Live Demo</a>
+                                <a href="https://github.com/myatminkhant123/sentiment_analysis-.git" target="_blank" rel="noopener noreferrer" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
+                                <a href="https://chatgptsentimentanalysis.streamlit.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-rocket"></i> Live Demo</a>
                             </div>
                         </div>
                     </div>
@@ -1147,7 +1214,7 @@
                 <!-- Project 4: Credit Card Fraud Detection System -->
                 <div class="project-card glass-card accent-1" data-categories="analysis data">
                     <div class="project-thumb">
-                        <img src="thumb3.webp" alt="Credit Card Fraud Detection System" loading="lazy" width="360" height="200">
+                        <img src="thumb2.webp" alt="Credit Card Fraud Detection System" loading="lazy" width="360" height="200">
                         <div class="project-overlay"></div>
                     </div>
                     <div class="project-body">
@@ -1167,7 +1234,7 @@
                         </div>
                         <div class="project-footer">
                             <div class="project-links">
-                                <a href="https://github.com/myatminkhant123/Credit_Card_Fraud_Detection_and_Customer_Personalization" target="_blank" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
+                                <a href="https://github.com/myatminkhant123/Credit_Card_Fraud_Detection_and_Customer_Personalization" target="_blank" rel="noopener noreferrer" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
                                 <span class="project-link" style="color: var(--text-muted);"><i class="fa-solid fa-lock"></i> Database Off</span>
                             </div>
                         </div>
@@ -1187,7 +1254,7 @@
                         </p>
                         <div class="project-details">
                             <div class="project-meta-item"><strong>Challenge:</strong> Factoring in squad ranks and match contexts.</div>
-                            <div class="project-meta-item"><strong>Impact:</strong> Reached 98.6% training accuracy, successfully predicting top knockout stages.</div>
+                            <div class="project-meta-item"><strong>Impact:</strong> Reached 98.6% accuracy on stratified cross-validated test splits; successfully predicted top knockout-stage outcomes.</div>
                         </div>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -1197,8 +1264,8 @@
                         </div>
                         <div class="project-footer">
                             <div class="project-links">
-                                <a href="https://github.com/myatminkhant123/FIFA_WorldCup2022_Match_Prediction" target="_blank" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
-                                <a href="https://fifawcmatchprediction.streamlit.app/" target="_blank" class="project-link"><i class="fa-solid fa-rocket"></i> Live Demo</a>
+                                <a href="https://github.com/myatminkhant123/FIFA_WorldCup2022_Match_Prediction" target="_blank" rel="noopener noreferrer" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
+                                <a href="https://fifawcmatchprediction.streamlit.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-rocket"></i> Live Demo</a>
                             </div>
                         </div>
                     </div>
@@ -1213,7 +1280,7 @@
                     <div class="project-body">
                         <h3 class="project-title">Smart Greenhouse System</h3>
                         <p class="project-description">
-                            A real-time environmental monitoring IoT system powered by an ESP32 microcontroller, aggregating data from DHT22, soil moisture, and gas sensors.
+                            A real-time environmental monitoring IoT system powered by an ESP32 microcontroller, aggregating data from DHT22, soil moisture, and gas sensors. Team capstone — I contributed ESP32 firmware, sensor calibration, and MQTT telemetry integration.
                         </p>
                         <div class="project-details">
                             <div class="project-meta-item"><strong>Challenge:</strong> Calibrating threshold values to trigger local hardware alerts (irrigation LED, buzzer) while formatting MQTT payloads.</div>
@@ -1228,114 +1295,64 @@
                         </div>
                         <div class="project-footer">
                             <div class="project-links">
-                                <a href="https://github.com/rominswe/smart_agriculture-greenhouse_monitoring" target="_blank" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
+                                <a href="https://github.com/rominswe/smart_agriculture-greenhouse_monitoring" target="_blank" rel="noopener noreferrer" class="project-link code-link"><i class="fa-brands fa-github"></i> Code</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
+            <!-- GitHub Activity (part of Projects) -->
+            <div class="subsection-block" id="github">
+                <h2 class="section-title reveal"><span class="gradient-title">GitHub Activity &amp; Open Source</span></h2>
+                
+                <div class="github-stats-card glass-card reveal">
+                    <div class="github-header">
+                        <div class="github-user-info">
+                            <div class="github-avatar-glow"><i class="fa-brands fa-github"></i></div>
+                            <div>
+                                <h3 class="github-name">Myat Min Khant</h3>
+                                <span class="github-handle">@myatminkhant123</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/myatminkhant123" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Profile</a>
+                    </div>
 
+                    <div class="github-metrics-grid">
+                        <div class="gh-metric-box">
+                            <span class="gh-metric-val" id="gh-metric-repos">12+</span>
+                            <span class="gh-metric-lbl">Public Repos</span>
+                        </div>
+                        <div class="gh-metric-box">
+                            <span class="gh-metric-val" id="gh-metric-followers">25+</span>
+                            <span class="gh-metric-lbl">Followers</span>
+                        </div>
+                        <div class="gh-metric-box">
+                            <span class="gh-metric-val" id="gh-metric-since">—</span>
+                            <span class="gh-metric-lbl">GitHub Member Since</span>
+                        </div>
+                        <div class="gh-metric-box">
+                            <span class="gh-metric-val">ML / Full-Stack</span>
+                            <span class="gh-metric-lbl">Primary Focus</span>
+                        </div>
+                    </div>
 
-    <!-- Achievements Dashboard Section -->
-    <section id="achievements" class="section" style="background: rgba(11, 17, 32, 0.2);">
-        <div class="container">
-            <h2 class="section-title reveal"><span class="gradient-title">Milestones & Achievements</span></h2>
-            
-            <div class="achievements-grid reveal-stagger">
-                <div class="achieve-card glass-card">
-                    <div class="achieve-icon">🎯</div>
-                    <span class="achieve-num" data-target="3.9">0</span>
-                    <h3 class="achieve-title">CGPA Academic Honor</h3>
-                    <p class="achieve-desc">Consistently ranked in the top percentile of the Computer Science cohort at AIU.</p>
-                </div>
-                
-                <div class="achieve-card glass-card">
-                    <div class="achieve-icon">📜</div>
-                    <span class="achieve-num" data-target="3">0</span>
-                    <h3 class="achieve-title">Certifications Earned</h3>
-                    <p class="achieve-desc">IBM, DeepLearning.AI, and TechNexus MERN Stack Bootcamp Certificates.</p>
-                </div>
-                
-                <div class="achieve-card glass-card">
-                    <div class="achieve-icon">📁</div>
-                    <span class="achieve-num" data-target="6">0</span>
-                    <h3 class="achieve-title">Completed Projects</h3>
-                    <p class="achieve-desc">Built 6 featured projects encompassing data analytics, data engineering, IoT, and web platforms.</p>
-                </div>
-                
-                <div class="achieve-card glass-card">
-                    <div class="achieve-icon">👔</div>
-                    <span class="achieve-num" data-target="1">0</span>
-                    <h3 class="achieve-title">Internship Placed</h3>
-                    <p class="achieve-desc">Finished industrial training inside a professional cloud infrastructure services provider.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Recruiter Impact / Why Hire Me Section -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title reveal"><span class="gradient-title">Why Hire Me?</span></h2>
-            
-            <div class="hire-grid reveal-stagger">
-                <div class="hire-card glass-card">
-                    <div class="hire-num-badge">01</div>
-                    <div class="hire-info">
-                        <h3>Strong Computer Science Foundation</h3>
-                        <p>Deep academic coursework in Data Structures, Algorithms, Software Engineering principles, and systems infrastructure architectures.</p>
+                    <div class="github-languages-section">
+                        <h4 class="gh-lang-title"><i class="fa-solid fa-code"></i> Tech Distribution across Repositories</h4>
+                        <div class="gh-lang-bar" id="gh-lang-bar">
+                            <div class="gh-bar-segment" style="width: 45%; background: #3776AB;" title="Python 45%"></div>
+                            <div class="gh-bar-segment" style="width: 30%; background: #F7DF1E;" title="JavaScript 30%"></div>
+                            <div class="gh-bar-segment" style="width: 15%; background: #CC292B;" title="SQL 15%"></div>
+                            <div class="gh-bar-segment" style="width: 10%; background: #E76F51;" title="Java & Shell 10%"></div>
+                        </div>
+                        <div class="gh-lang-legend" id="gh-lang-legend">
+                            <span><span class="dot" style="background: #3776AB;"></span> Python (45%)</span>
+                            <span><span class="dot" style="background: #F7DF1E;"></span> JavaScript (30%)</span>
+                            <span><span class="dot" style="background: #CC292B;"></span> SQL (15%)</span>
+                            <span><span class="dot" style="background: #E76F51;"></span> Java &amp; Shell (10%)</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="hire-card glass-card">
-                    <div class="hire-num-badge">02</div>
-                    <div class="hire-info">
-                        <h3>Hands-on Project Experience</h3>
-                        <p>Proven track record of building complex applications from scratch, deploying model engines, and addressing real challenges.</p>
-                    </div>
-                </div>
-                
-                <div class="hire-card glass-card">
-                    <div class="hire-num-badge">03</div>
-                    <div class="hire-info">
-                        <h3>Cloud Operations Intern Experience</h3>
-                        <p>Solid grasp of enterprise operations protocols (ITIL framework, patch management scripts, ticket tracking, cloud networks setup, and server monitoring).</p>
-                    </div>
-                </div>
-                
-                <div class="hire-card glass-card">
-                    <div class="hire-num-badge">04</div>
-                    <div class="hire-info">
-                        <h3>Data Analytics & Database Management</h3>
-                        <p>Adept at fetching and cleaning datasets, structuring databases, building interactive analysis dashboards, and optimizing data workflows.</p>
-                    </div>
-                </div>
-                
-                <div class="hire-card glass-card">
-                    <div class="hire-num-badge">05</div>
-                    <div class="hire-info">
-                        <h3>Proactive Continuous Learner</h3>
-                        <p>Passionate about self-study; backed by 6+ certificates from Coursera, Microsoft, and IBM to stay at the cutting edge of industry technology.</p>
-                    </div>
-                </div>
-                
-                <div class="hire-card glass-card">
-                    <div class="hire-num-badge">06</div>
-                    <div class="hire-info">
-                        <h3>Logical Problem-Solving Mindset</h3>
-                        <p>Approaching software challenges analytically, prioritizing system scalability, optimized logic pipelines, and clean readable codebases.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Call to Action -->
-            <div class="cta-box glass-card reveal">
-                <h3>Let's Build Something Amazing Together</h3>
-                <p>I am seeking industrial training and entry-level positions where I can write high-quality code, query datasets, and deploy efficient software systems.</p>
-                <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get In Touch Now</a>
             </div>
         </div>
     </section>
@@ -1344,14 +1361,71 @@
     <section id="contact" class="section" style="background: rgba(11, 17, 32, 0.2);">
         <div class="container">
             <h2 class="section-title reveal"><span class="gradient-title">Get In Touch</span></h2>
+
+            <!-- Why Hire Me (part of Contact) -->
+            <div class="subsection-block">
+                <h2 class="section-title reveal"><span class="gradient-title">Why Hire Me?</span></h2>
+                
+                <div class="hire-grid reveal-stagger">
+                    <div class="hire-card glass-card">
+                        <div class="hire-num-badge">01</div>
+                        <div class="hire-info">
+                            <h3>Strong Computer Science Foundation</h3>
+                            <p>Deep academic coursework in Data Structures, Algorithms, Software Engineering principles, and systems infrastructure architectures.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hire-card glass-card">
+                        <div class="hire-num-badge">02</div>
+                        <div class="hire-info">
+                            <h3>Hands-on Project Experience</h3>
+                            <p>Proven track record of building complex applications from scratch, deploying model engines, and addressing real challenges.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hire-card glass-card">
+                        <div class="hire-num-badge">03</div>
+                        <div class="hire-info">
+                            <h3>Cloud Operations Intern Experience</h3>
+                            <p>Solid grasp of enterprise operations protocols (ITIL framework, patch management scripts, ticket tracking, cloud networks setup, and server monitoring).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hire-card glass-card">
+                        <div class="hire-num-badge">04</div>
+                        <div class="hire-info">
+                            <h3>Data Analytics &amp; Database Management</h3>
+                            <p>Adept at fetching and cleaning datasets, structuring databases, building interactive analysis dashboards, and optimizing data workflows.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hire-card glass-card">
+                        <div class="hire-num-badge">05</div>
+                        <div class="hire-info">
+                            <h3>Proactive Continuous Learner</h3>
+                            <p>Passionate about self-study; backed by 3 professional certificates from IBM, DeepLearning.AI, and TechNexus.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hire-card glass-card">
+                        <div class="hire-num-badge">06</div>
+                        <div class="hire-info">
+                            <h3>Logical Problem-Solving Mindset</h3>
+                            <p>Approaching software challenges analytically, prioritizing system scalability, optimized logic pipelines, and clean readable codebases.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-box glass-card reveal">
+                    <h3>Let's Build Something Amazing Together</h3>
+                    <p>I am seeking industrial training and entry-level positions where I can write high-quality code, query datasets, and deploy efficient software systems.</p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mmk111203@gmail.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get In Touch Now</a>
+                </div>
+            </div>
             
             <div class="contact-grid">
                 <!-- Info Column & Location Map -->
                 <div class="contact-info-column reveal">
-                    <p class="contact-intro-text">
-                        I am currently seeking software engineering, data analytics, and cloud engineering opportunities. Feel free to contact me for collaboration, queries, or interviews!
-                    </p>
-                    
                     <div class="contact-details">
                         <!-- Email -->
                         <a href="mailto:mmk111203@gmail.com" class="contact-item email-item">
@@ -1363,7 +1437,7 @@
                         </a>
                         
                         <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/in/myat-min-khant-810bb3275/" target="_blank" class="contact-item linkedin-item">
+                        <a href="https://www.linkedin.com/in/myat-min-khant-810bb3275/" target="_blank" rel="noopener noreferrer" class="contact-item linkedin-item">
                             <i class="fa-brands fa-linkedin contact-item-icon"></i>
                             <div>
                                 <span class="contact-item-label">LinkedIn</span>
@@ -1372,7 +1446,7 @@
                         </a>
                         
                         <!-- GitHub -->
-                        <a href="https://github.com/myatminkhant123" target="_blank" class="contact-item github-item">
+                        <a href="https://github.com/myatminkhant123" target="_blank" rel="noopener noreferrer" class="contact-item github-item">
                             <i class="fa-brands fa-github contact-item-icon"></i>
                             <div>
                                 <span class="contact-item-label">GitHub</span>
@@ -1382,7 +1456,7 @@
                     </div>
                     
                     <!-- Career Status & Availability Card -->
-                    <div class="status-card glass-card" style="padding: 1.5rem; margin-top: 1.5rem;">
+                    <div class="status-card glass-card" style="padding: 1.5rem;">
                         <h3 class="status-title" style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-main);">
                             <i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> Career Status & Availability
                         </h3>
@@ -1404,9 +1478,7 @@
                                 <strong style="color: var(--text-main); font-weight: 500;">Starting Nov 2026</strong>
                             </div>
                         </div>
-                        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-                            Currently completing final-year Computer Science studies and finding the industrial experience at AIA digital + Malaysia as Cloud Operation Intern.
-                        </div>
+
                     </div>
                 </div>
                 
@@ -1468,7 +1540,7 @@
 
     <!-- Interactive AI Assistant Widget -->
     <div class="chatbot-container" id="chatbotContainer">
-        <button class="chatbot-trigger" id="chatbotTrigger" aria-label="Open AI Assistant">
+        <button class="chatbot-trigger" id="chatbotTrigger" aria-label="Open portfolio assistant">
             <i class="fa-solid fa-robot"></i>
             <span class="pulse-ring"></span>
         </button>
@@ -1478,8 +1550,8 @@
                 <div class="chatbot-header-info">
                     <span class="chatbot-status-dot"></span>
                     <div>
-                        <h4 class="chatbot-header-title">MMK Assistant</h4>
-                        <p class="chatbot-header-subtitle">System: Operational // Active</p>
+                        <h4 class="chatbot-header-title">Portfolio Assistant</h4>
+                        <p class="chatbot-header-subtitle">Ask about skills, experience, or availability</p>
                     </div>
                 </div>
                 <button class="chatbot-close-btn" id="chatbotCloseBtn" aria-label="Close assistant window"><i class="fa-solid fa-xmark"></i></button>
@@ -1487,7 +1559,7 @@
             
             <div class="chatbot-messages" id="chatbotMessages">
                 <div class="chat-message bot">
-                    Hi! I am Myat's virtual assistant. Ask me anything about his skills, experience, education, or availability!
+                    Hi! I'm Myat's portfolio assistant. Ask about skills, experience, education, or availability.
                 </div>
             </div>
  
@@ -1536,7 +1608,7 @@
     </div>
  
     <!-- main JS script -->
-    <script src="script.js?v=1.8"></script>
+    <script src="script.js?v=1.9"></script>
 </body>
 
 </html>

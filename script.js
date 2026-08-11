@@ -461,7 +461,6 @@ function initPortfolio() {
     // ===== ROLE TYPEWRITER SWITCHER LOOP =====
     const roleText = document.getElementById('role-text');
     const roles = [
-        "Data Science Solutions",
         "ML-Powered Systems",
         "Data-Driven Applications",
         "Full-Stack Software"
@@ -472,6 +471,7 @@ function initPortfolio() {
     let typeSpeed = 80;
 
     function typeRole() {
+        if (!roleText) return;
         const currentRole = roles[roleIdx];
         if (isDeleting) {
             roleText.textContent = currentRole.substring(0, charIdx - 1);
@@ -494,7 +494,9 @@ function initPortfolio() {
 
         setTimeout(typeRole, typeSpeed);
     }
-    setTimeout(typeRole, 500);
+    if (roleText) {
+        setTimeout(typeRole, 500);
+    }
 
     // ===== STATS COUNTER AND OBSERVER =====
     function animateStatCounter(target) {
@@ -513,15 +515,10 @@ function initPortfolio() {
             step++;
             startVal += increment;
             if (step >= steps) {
-                target.textContent = isFloat ? endVal.toFixed(1) + plusSuffix : endVal + plusSuffix;
+                target.textContent = isFloat ? endVal.toFixed(2) + plusSuffix : endVal + plusSuffix;
                 clearInterval(counter);
-                
-                // Wait 3 seconds, then restart the counter animation
-                setTimeout(() => {
-                    animateStatCounter(target);
-                }, 3000);
             } else {
-                target.textContent = isFloat ? startVal.toFixed(1) + plusSuffix : Math.round(startVal) + plusSuffix;
+                target.textContent = isFloat ? startVal.toFixed(2) + plusSuffix : Math.round(startVal) + plusSuffix;
             }
         }, stepTime);
     }
@@ -1259,7 +1256,7 @@ function initPortfolio() {
                 if (url.startsWith('#')) {
                     return `<a href="${url}" class="chat-link scroll-link">${linkText}</a>`;
                 }
-                return `<a href="${url}" target="_blank" class="chat-link">${linkText}</a>`;
+                return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-link">${linkText}</a>`;
             })
             .replace(/\n/g, '<br>');
         
@@ -1270,14 +1267,15 @@ function initPortfolio() {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
-                const targetSec = document.querySelector(targetId);
-                
+
                 if (chatbotWindow) {
                     chatbotWindow.classList.remove('active');
                 }
-                
-                if (targetSec) {
-                    targetSec.scrollIntoView({ behavior: 'smooth' });
+
+                if (targetId && targetId.startsWith('#') && document.querySelector(targetId)) {
+                    setActiveLink(targetId);
+                    switchSection(targetId);
+                    history.pushState(null, null, targetId);
                 }
             });
         });
@@ -1304,7 +1302,7 @@ function initPortfolio() {
         } else if (text.includes('study') || text.includes('edu') || text.includes('uni') || text.includes('degree') || text.includes('college') || text.includes('cert')) {
             return botResponses.education;
         } else if (text.includes('hello') || text.includes('hi') || text.includes('hey') || text.includes('greet')) {
-            return "Hello! I am Myat's virtual assistant. Try asking me about his **skills**, **experience**, **education**, **availability**, or **contact info**!";
+            return "Hello! I'm Myat's portfolio assistant. Ask about his **skills**, **experience**, **education**, **availability**, or **contact info**!";
         } else {
             return "I can answer questions regarding Myat's **skills**, **experience**, **education**, **availability**, or **contact info**. Feel free to try any of these keywords!";
         }
@@ -1605,6 +1603,7 @@ function initPortfolio() {
                 
                 if (response.ok && data.success) {
                     await printFormTerminalLine(`[SUCCESS] Message successfully delivered to Myat's inbox! Thank you, ${visitorName}!`, 'success');
+                    showToast("Message Transmitted", `Thank you, ${visitorName}! Your message reached Myat's inbox.`);
                     formTimeouts.push(setTimeout(() => {
                         contactForm.reset();
                     }, 1000));
@@ -1665,7 +1664,246 @@ function initPortfolio() {
         updateThemeIcons(true);
     }
 
-    console.log('Premium Futuristic Portfolio Loaded successfully! 🛸');
+    // ===== PROJECT CATEGORY FILTERING =====
+    const filterButtons = document.querySelectorAll('.project-filter-btn');
+
+    if (filterButtons.length > 0 && projectCards && projectCards.length > 0) {
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-categories') || '';
+                    const categoryList = categories.split(' ');
+
+                    if (filterValue === 'all' || categoryList.includes(filterValue)) {
+                        card.classList.remove('is-hidden');
+                    } else {
+                        card.classList.add('is-hidden');
+                    }
+                });
+            });
+        });
+    }
+
+    // ===== TOAST NOTIFICATION HELPER =====
+    function showToast(title, message) {
+        const toast = document.getElementById('toastNotification');
+        const tTitle = document.getElementById('toastTitle');
+        const tMsg = document.getElementById('toastMessage');
+        if (toast && tTitle && tMsg) {
+            tTitle.textContent = title;
+            tMsg.textContent = message;
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 4500);
+        }
+    }
+
+    // ===== ACCENT THEME PICKER =====
+    const accentDots = document.querySelectorAll('.accent-dot');
+    function setAccent(accentName) {
+        accentDots.forEach(dot => {
+            dot.classList.toggle('active', dot.getAttribute('data-accent') === accentName);
+        });
+        if (accentName === 'cyan') {
+            document.documentElement.removeAttribute('data-accent');
+            document.body.removeAttribute('data-accent');
+        } else {
+            document.documentElement.setAttribute('data-accent', accentName);
+            document.body.setAttribute('data-accent', accentName);
+        }
+        localStorage.setItem('accentColor', accentName);
+    }
+    accentDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const acc = dot.getAttribute('data-accent');
+            setAccent(acc);
+        });
+    });
+    const savedAccent = localStorage.getItem('accentColor');
+    if (savedAccent) setAccent(savedAccent);
+
+    // ===== INTERACTIVE TERMINAL CLI =====
+    const terminalCliInput = document.getElementById('terminal-cli-input');
+    if (terminalCliInput && terminalBody) {
+        terminalCliInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = terminalCliInput.value.trim().toLowerCase();
+                terminalCliInput.value = '';
+                if (!cmd) return;
+
+                const cmdLine = document.createElement('div');
+                cmdLine.className = 'terminal-line terminal-cmd';
+                cmdLine.textContent = `$ ${cmd}`;
+                terminalBody.appendChild(cmdLine);
+
+                const resLine = document.createElement('div');
+                resLine.className = 'terminal-line terminal-info';
+
+                switch (cmd) {
+                    case 'help':
+                        resLine.textContent = '[HELP] Available commands: help, skills, projects, whoami, clear, contact';
+                        break;
+                    case 'skills':
+                        resLine.textContent = '[SKILLS] Python, JavaScript/React, SQL, Machine Learning, Cloud Operations, Docker';
+                        break;
+                    case 'projects':
+                        resLine.textContent = '[PROJECTS] Song Popularity Predictor, Postgrad System, ChatGPT Sentiment, Credit Card Fraud';
+                        break;
+                    case 'whoami':
+                        resLine.textContent = '[WHOAMI] Myat Min Khant — Adaptive Tech & Data Enthusiast | CS Honors @ AIU';
+                        break;
+                    case 'contact':
+                        resLine.textContent = '[CONTACT] Email: mmk111203@gmail.com | LinkedIn: /in/myat-min-khant-810bb3275/';
+                        break;
+                    case 'clear':
+                        terminalBody.innerHTML = '';
+                        return;
+                    default:
+                        resLine.className = 'terminal-line terminal-error';
+                        resLine.textContent = `[ERROR] Command not recognized: '${cmd}'. Type 'help' for available commands.`;
+                }
+                terminalBody.appendChild(resLine);
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+    }
+
+    // ===== QUICK PREVIEW MODAL =====
+    const previewModal = document.getElementById('projectPreviewModal');
+    const closePreviewBtn = document.getElementById('closePreviewModalBtn');
+    const previewModalTitle = document.getElementById('previewModalTitle');
+    const previewModalImg = document.getElementById('previewModalImg');
+    const previewModalDesc = document.getElementById('previewModalDesc');
+    const previewModalTech = document.getElementById('previewModalTech');
+    const previewModalCodeBtn = document.getElementById('previewModalCodeBtn');
+    const previewModalDemoBtn = document.getElementById('previewModalDemoBtn');
+
+    document.querySelectorAll('.preview-modal-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (!previewModal) return;
+            previewModalTitle.textContent = btn.getAttribute('data-title') || 'Project Preview';
+            previewModalDesc.textContent = btn.getAttribute('data-desc') || '';
+            previewModalImg.src = btn.getAttribute('data-img') || '';
+            
+            const techString = btn.getAttribute('data-tech') || '';
+            previewModalTech.innerHTML = techString.split(',').map(t => `<span class="tech-tag">${t.trim()}</span>`).join(' ');
+            
+            const codeUrl = btn.getAttribute('data-code');
+            const demoUrl = btn.getAttribute('data-demo');
+            
+            if (codeUrl) {
+                previewModalCodeBtn.style.display = 'inline-flex';
+                previewModalCodeBtn.href = codeUrl;
+            } else {
+                previewModalCodeBtn.style.display = 'none';
+            }
+            
+            if (demoUrl) {
+                previewModalDemoBtn.style.display = 'inline-flex';
+                previewModalDemoBtn.href = demoUrl;
+            } else {
+                previewModalDemoBtn.style.display = 'none';
+            }
+            
+            previewModal.classList.add('active');
+        });
+    });
+
+    if (closePreviewBtn && previewModal) {
+        closePreviewBtn.addEventListener('click', () => previewModal.classList.remove('active'));
+        previewModal.addEventListener('click', (e) => {
+            if (e.target === previewModal) previewModal.classList.remove('active');
+        });
+    }
+
+    // ===== LIVE GITHUB DATA FETCH =====
+    const GH_LANG_COLORS = {
+        Python: '#3776AB',
+        JavaScript: '#F7DF1E',
+        TypeScript: '#3178C6',
+        HTML: '#E34F26',
+        CSS: '#1572B6',
+        Java: '#E76F51',
+        'Jupyter Notebook': '#DA5B0B',
+        SQL: '#CC292B',
+        Shell: '#89E051',
+    };
+
+    function renderGitHubLanguages(langCounts) {
+        const bar = document.getElementById('gh-lang-bar');
+        const legend = document.getElementById('gh-lang-legend');
+        if (!bar || !legend) return;
+
+        const total = Object.values(langCounts).reduce((sum, n) => sum + n, 0);
+        if (total <= 0) return;
+
+        const sorted = Object.entries(langCounts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 4);
+
+        bar.innerHTML = sorted.map(([lang, count]) => {
+            const pct = Math.round((count / total) * 100);
+            const color = GH_LANG_COLORS[lang] || '#9ca3af';
+            return `<div class="gh-bar-segment" style="width: ${pct}%; background: ${color};" title="${lang} ${pct}%"></div>`;
+        }).join('');
+
+        legend.innerHTML = sorted.map(([lang, count]) => {
+            const pct = Math.round((count / total) * 100);
+            const color = GH_LANG_COLORS[lang] || '#9ca3af';
+            return `<span><span class="dot" style="background: ${color};"></span> ${lang} (${pct}%)</span>`;
+        }).join('');
+    }
+
+    async function fetchGitHubStats() {
+        try {
+            const res = await fetch('https://api.github.com/users/myatminkhant123');
+            if (res.ok) {
+                const data = await res.json();
+                const reposEl = document.getElementById('gh-metric-repos');
+                const followersEl = document.getElementById('gh-metric-followers');
+                const sinceEl = document.getElementById('gh-metric-since');
+                if (reposEl) reposEl.textContent = `${data.public_repos}+`;
+                if (followersEl) followersEl.textContent = `${data.followers}+`;
+                if (sinceEl && data.created_at) {
+                    sinceEl.textContent = new Date(data.created_at).getFullYear();
+                }
+            }
+
+            const reposRes = await fetch('https://api.github.com/users/myatminkhant123/repos?per_page=100&sort=updated');
+            if (reposRes.ok) {
+                const repos = await reposRes.json();
+                const langCounts = {};
+                repos.forEach((repo) => {
+                    if (repo.fork || !repo.language) return;
+                    langCounts[repo.language] = (langCounts[repo.language] || 0) + 1;
+                });
+                renderGitHubLanguages(langCounts);
+            }
+        } catch (e) {
+            // Silently retain fallback values
+        }
+    }
+    fetchGitHubStats();
+
+    // ===== COURSE ACCORDION A11Y KEYBOARD ACCESSIBILITY =====
+    document.querySelectorAll('.course-item-header').forEach(header => {
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+                const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                header.setAttribute('aria-expanded', (!isExpanded).toString());
+            }
+        });
+    });
+
+    document.querySelectorAll('a[target="_blank"]:not([rel])').forEach((anchor) => {
+        anchor.rel = 'noopener noreferrer';
+    });
 }
 
 if (document.readyState === 'loading') {
