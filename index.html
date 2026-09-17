@@ -106,6 +106,7 @@
             <a href="CV_MMK.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="viewResumeBtn" style="padding: 0.8rem 1.5rem; font-size: 0.95rem; width: 100%;"><i class="fa-solid fa-file-pdf"></i> Resume</a>
         </div>
     </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
     <header id="mobile-header">
         <div class="mobile-logo">MMK</div>
@@ -1023,11 +1024,11 @@
         <div class="container" style="margin-top: 5rem;">
             <h2 class="section-title reveal" style="margin-bottom: 3rem;"><span class="gradient-title">Skill Ecosystem Radar</span></h2>
             <div class="skills-container">
-                <!-- Left Column: Databases (long), Programming (short) -->
+                <!-- Left Column: 3 Cards (Databases, Programming, Data Science) -->
                 <div class="skills-side-col reveal">
                     <div class="skill-category glass-card databases">
                         <h3 class="skill-category-title">Databases</h3>
-                        <p class="skill-category-subtitle">Cloud-hosted relational database design & administration.</p>
+                        <p class="skill-category-subtitle">Cloud-hosted relational database design, query optimization, and schema management.</p>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>MSSQL Server</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>MySQL</span>
@@ -1039,23 +1040,19 @@
 
                     <div class="skill-category glass-card programming">
                         <h3 class="skill-category-title">Programming</h3>
-                        <p class="skill-category-subtitle">Full-stack software engineering foundations.</p>
+                        <p class="skill-category-subtitle">Full-stack software engineering, object-oriented programming, and clean code.</p>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Python</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Java</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>JavaScript</span>
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>TypeScript</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>C++</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Center Column: Radar Chart + Data Science (medium) -->
-                <div class="skills-radar-wrapper reveal">
-                    <canvas id="skills-radar" class="skills-radar-canvas"></canvas>
-                    
                     <div class="skill-category glass-card data-science">
                         <h3 class="skill-category-title">Data Science</h3>
-                        <p class="skill-category-subtitle">Data analysis & machine learning modeling.</p>
+                        <p class="skill-category-subtitle">Data preprocessing, feature engineering, and predictive machine learning models.</p>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Pandas</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>NumPy</span>
@@ -1065,12 +1062,17 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Center Column: Radar Chart (Centered Vertically) -->
+                <div class="skills-radar-wrapper reveal">
+                    <canvas id="skills-radar" class="skills-radar-canvas"></canvas>
+                </div>
                 
-                <!-- Right Column: Cloud & Infrastructure (long), Web Development (medium) -->
+                <!-- Right Column: 3 Cards (Cloud & Infrastructure, Web Development, Tools & Systems) -->
                 <div class="skills-side-col reveal" style="transition-delay: 0.2s;">
                     <div class="skill-category glass-card cloud-infra">
                         <h3 class="skill-category-title">Cloud & Infrastructure</h3>
-                        <p class="skill-category-subtitle">Cloud database operations across Azure PaaS, IaaS, and Kubernetes.</p>
+                        <p class="skill-category-subtitle">Cloud database operations, CI/CD workflows, and Azure cloud infrastructure.</p>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Microsoft Azure</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Linux Systems</span>
@@ -1082,13 +1084,25 @@
 
                     <div class="skill-category glass-card web-dev">
                         <h3 class="skill-category-title">Web Development</h3>
-                        <p class="skill-category-subtitle">Building and shipping production-ready web applications.</p>
+                        <p class="skill-category-subtitle">Building, testing, and shipping production-ready web applications and APIs.</p>
                         <div class="skill-tags">
                             <span class="skill-tag"><span class="skill-tag-dot"></span>React</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Node.js</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>HTML & CSS</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Tailwind CSS</span>
                             <span class="skill-tag"><span class="skill-tag-dot"></span>Express.js</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category glass-card tools-systems">
+                        <h3 class="skill-category-title">Tools & Systems</h3>
+                        <p class="skill-category-subtitle">Enterprise analytics, DevOps tooling, containerization, and ITSM platforms.</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>Docker</span>
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>Power BI</span>
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>Excel</span>
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>ServiceNow</span>
+                            <span class="skill-tag"><span class="skill-tag-dot"></span>CI/CD Pipelines</span>
                         </div>
                     </div>
                 </div>

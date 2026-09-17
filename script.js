@@ -4,26 +4,36 @@ function initPortfolio() {
     // ===== DASHBOARD SIDEBAR & ROUTING =====
     const sidebar = document.getElementById('sidebar');
     const navToggle = document.getElementById('navToggle');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
     const navProgressFill = document.getElementById('nav-progress-fill');
+
+    function closeSidebar() {
+        if (sidebar) sidebar.classList.remove('active');
+        if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+    }
 
     // Toggle sidebar on mobile
     if (navToggle && sidebar) {
-        // Initial state
         navToggle.setAttribute('aria-expanded', 'false');
         navToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = sidebar.classList.toggle('active');
+            if (sidebarOverlay) sidebarOverlay.classList.toggle('active', isOpen);
             navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', () => {
+            closeSidebar();
         });
     }
 
     // Close sidebar on click outside
     document.addEventListener('click', (e) => {
         if (sidebar && sidebar.classList.contains('active') && !sidebar.contains(e.target) && (navToggle && !navToggle.contains(e.target))) {
-            sidebar.classList.remove('active');
-            if (navToggle) {
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
+            closeSidebar();
         }
     });
 
@@ -72,12 +82,7 @@ function initPortfolio() {
         setActiveLink(targetId);
 
         // Close sidebar on mobile after clicking
-        if (sidebar) {
-            sidebar.classList.remove('active');
-            if (navToggle) {
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
-        }
+        closeSidebar();
 
         // Reset scroll position to top of section
         window.scrollTo({ top: 0, behavior: 'instant' });
