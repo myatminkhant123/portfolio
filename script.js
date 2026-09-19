@@ -466,8 +466,9 @@ function initPortfolio() {
     // ===== ROLE TYPEWRITER SWITCHER LOOP =====
     const roleText = document.getElementById('role-text');
     const roles = [
-        "ML-Powered Systems",
-        "Data-Driven Applications",
+        "AI-Powered Pipelines",
+        "Data Science Workflows",
+        "Cloud-Native Applications",
         "Full-Stack Software"
     ];
     let roleIdx = 0;
@@ -541,227 +542,53 @@ function initPortfolio() {
 
     statNums.forEach(num => statsObserver.observe(num));
 
-    // ===== CUSTOM INTERACTIVE SKILLS RADAR =====
-    const skillsRadar = document.getElementById('skills-radar');
-    if (skillsRadar) {
-        const rCtx = skillsRadar.getContext('2d');
-        const labels = ['Databases', 'Cloud & Ops', 'Programming', 'Web Dev', 'Tools & Systems'];
-        const values = [0.95, 0.92, 0.85, 0.80, 0.78]; // Skills percentages
-        const pointsCount = labels.length;
-        const radius = 120;
-        let animatedRadiusScale = 0;
+    // ===== 4-QUADRANT BENTO SKILL MATRIX INTERACTION =====
+    const bentoQuadrants = document.querySelectorAll('.bento-quadrant');
+    const skillCategories = document.querySelectorAll('.skill-category');
 
-        let hoveredPointIdx = -1;
-
-        function resizeSkillsRadar() {
-            const dpr = window.devicePixelRatio || 1;
-            skillsRadar.width = 380 * dpr;
-            skillsRadar.height = 380 * dpr;
-            rCtx.scale(dpr, dpr);
-        }
-        resizeSkillsRadar();
-
-        const centerX = 190;
-        const centerY = 190;
-
-        function getPoints(scale) {
-            const points = [];
-            for (let i = 0; i < pointsCount; i++) {
-                const angle = (Math.PI * 2 / pointsCount) * i - Math.PI / 2;
-                const val = values[i] * radius * scale;
-                points.push({
-                    x: centerX + Math.cos(angle) * val,
-                    y: centerY + Math.sin(angle) * val
-                });
-            }
-            return points;
-        }
-
-        function drawGrid() {
-            // Concentric hexagons
-            rCtx.strokeStyle = document.body.classList.contains('light-theme') ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.05)';
-            rCtx.lineWidth = 1;
-            for (let j = 1; j <= 4; j++) {
-                const r = radius * (j / 4);
-                rCtx.beginPath();
-                for (let i = 0; i < pointsCount; i++) {
-                    const angle = (Math.PI * 2 / pointsCount) * i - Math.PI / 2;
-                    const x = centerX + Math.cos(angle) * r;
-                    const y = centerY + Math.sin(angle) * r;
-                    if (i === 0) rCtx.moveTo(x, y);
-                    else rCtx.lineTo(x, y);
-                }
-                rCtx.closePath();
-                rCtx.stroke();
-            }
-
-            // Axis lines
-            rCtx.beginPath();
-            for (let i = 0; i < pointsCount; i++) {
-                const angle = (Math.PI * 2 / pointsCount) * i - Math.PI / 2;
-                rCtx.moveTo(centerX, centerY);
-                rCtx.lineTo(centerX + Math.cos(angle) * radius, centerY + Math.sin(angle) * radius);
-            }
-            rCtx.stroke();
-        }
-
-        function drawLabels() {
-            rCtx.font = '500 11px Inter, sans-serif';
-            rCtx.fillStyle = document.body.classList.contains('light-theme') ? '#4b5563' : '#9ca3af';
-            rCtx.textAlign = 'center';
-            rCtx.textBaseline = 'middle';
-
-            for (let i = 0; i < pointsCount; i++) {
-                const angle = (Math.PI * 2 / pointsCount) * i - Math.PI / 2;
-                const labelX = centerX + Math.cos(angle) * (radius + 24);
-                const labelY = centerY + Math.sin(angle) * (radius + 14);
-                rCtx.fillText(labels[i], labelX, labelY);
-            }
-        }
-
-        function drawRoundedRect(ctx, x, y, width, height, radius) {
-            ctx.beginPath();
-            if (ctx.roundRect) {
-                ctx.roundRect(x, y, width, height, radius);
-            } else {
-                ctx.moveTo(x + radius, y);
-                ctx.lineTo(x + width - radius, y);
-                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-                ctx.lineTo(x + width, y + height - radius);
-                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-                ctx.lineTo(x + radius, y + height);
-                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-                ctx.lineTo(x, y + radius);
-                ctx.quadraticCurveTo(x, y, x + radius, y);
-            }
-            ctx.closePath();
-        }
-
-        function drawTooltip(pt, label, value) {
-            const text = `${label}: ${Math.round(value * 100)}%`;
-            rCtx.font = 'bold 11px Inter, sans-serif';
-            const textWidth = rCtx.measureText(text).width;
-            const paddingX = 8;
-            const tooltipW = textWidth + paddingX * 2;
-            const tooltipH = 22;
-            const tooltipX = pt.x - tooltipW / 2;
-            const tooltipY = pt.y - 32;
-
-            // Draw tooltip background box
-            rCtx.fillStyle = document.body.classList.contains('light-theme') ? '#ffffff' : '#0b1120';
-            rCtx.strokeStyle = '#06b6d4';
-            rCtx.lineWidth = 1;
-            drawRoundedRect(rCtx, tooltipX, tooltipY, tooltipW, tooltipH, 4);
-            rCtx.fill();
-            rCtx.stroke();
-
-            // Draw tooltip text
-            rCtx.fillStyle = document.body.classList.contains('light-theme') ? '#1f2937' : '#ffffff';
-            rCtx.textAlign = 'center';
-            rCtx.textBaseline = 'middle';
-            rCtx.fillText(text, pt.x, tooltipY + tooltipH / 2);
-        }
-
-        function drawRadar() {
-            rCtx.clearRect(0, 0, 380, 380);
-            drawGrid();
-            drawLabels();
-
-            const pts = getPoints(animatedRadiusScale);
-
-            // Shape Area Fill
-            rCtx.beginPath();
-            rCtx.moveTo(pts[0].x, pts[0].y);
-            for (let i = 1; i < pointsCount; i++) {
-                rCtx.lineTo(pts[i].x, pts[i].y);
-            }
-            rCtx.closePath();
-            
-            const gradient = rCtx.createRadialGradient(centerX, centerY, 5, centerX, centerY, radius);
-            gradient.addColorStop(0, 'rgba(6, 182, 212, 0.05)');
-            gradient.addColorStop(1, 'rgba(139, 92, 246, 0.38)');
-            rCtx.fillStyle = gradient;
-            rCtx.fill();
-
-            // Outline
-            rCtx.strokeStyle = '#06b6d4';
-            rCtx.lineWidth = 2.5;
-            rCtx.stroke();
-
-            // Points indicator dots
-            pts.forEach(pt => {
-                rCtx.beginPath();
-                rCtx.arc(pt.x, pt.y, 4.5, 0, Math.PI * 2);
-                rCtx.fillStyle = '#fff';
-                rCtx.strokeStyle = '#8b5cf6';
-                rCtx.lineWidth = 1.5;
-                rCtx.fill();
-                rCtx.stroke();
-            });
-
-            // If hover is active, draw tooltip over hovered point
-            if (hoveredPointIdx !== -1 && hoveredPointIdx < pts.length) {
-                const pt = pts[hoveredPointIdx];
-                rCtx.beginPath();
-                rCtx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
-                rCtx.strokeStyle = 'rgba(6, 182, 212, 0.5)';
-                rCtx.lineWidth = 1.5;
-                rCtx.stroke();
-
-                drawTooltip(pt, labels[hoveredPointIdx], values[hoveredPointIdx]);
-            }
-        }
-
-        redrawRadarFn = drawRadar;
-
-        skillsRadar.addEventListener('mousemove', (e) => {
-            const rect = skillsRadar.getBoundingClientRect();
-            const cssX = (e.clientX - rect.left) * (380 / rect.width);
-            const cssY = (e.clientY - rect.top) * (380 / rect.height);
-
-            const pts = getPoints(animatedRadiusScale);
-            let foundIdx = -1;
-            for (let i = 0; i < pointsCount; i++) {
-                const dist = Math.hypot(cssX - pts[i].x, cssY - pts[i].y);
-                if (dist < 12) {
-                    foundIdx = i;
-                    break;
-                }
-            }
-
-            if (foundIdx !== hoveredPointIdx) {
-                hoveredPointIdx = foundIdx;
-                drawRadar();
-            }
-        });
-
-        skillsRadar.addEventListener('mouseleave', () => {
-            if (hoveredPointIdx !== -1) {
-                hoveredPointIdx = -1;
-                drawRadar();
-            }
-        });
-
-        // Trigger radar animation on enter viewport
-        const radarObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    let start = null;
-                    function anim(timestamp) {
-                        if (!start) start = timestamp;
-                        const progress = timestamp - start;
-                        animatedRadiusScale = Math.min(progress / 1000, 1);
-                        drawRadar();
-                        if (progress < 1000) {
-                            requestAnimationFrame(anim);
-                        }
+    if (bentoQuadrants.length) {
+        // Bento quadrant hover triggers corresponding skill card highlight
+        bentoQuadrants.forEach(quad => {
+            quad.addEventListener('mouseenter', () => {
+                const categoryClass = quad.getAttribute('data-category');
+                skillCategories.forEach(card => {
+                    if (card.classList.contains(categoryClass)) {
+                        card.style.transform = 'translateY(-6px) scale(1.02)';
+                        card.style.borderColor = 'var(--cyan)';
+                        card.style.boxShadow = '0 12px 30px rgba(6, 182, 212, 0.3)';
                     }
-                    requestAnimationFrame(anim);
-                    radarObserver.unobserve(skillsRadar);
-                }
+                });
             });
-        }, { threshold: 0.5 });
-        radarObserver.observe(skillsRadar);
+
+            quad.addEventListener('mouseleave', () => {
+                const categoryClass = quad.getAttribute('data-category');
+                skillCategories.forEach(card => {
+                    if (card.classList.contains(categoryClass)) {
+                        card.style.transform = '';
+                        card.style.borderColor = '';
+                        card.style.boxShadow = '';
+                    }
+                });
+            });
+        });
+
+        // Skill category card hover triggers corresponding bento quadrant highlight
+        skillCategories.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                bentoQuadrants.forEach(quad => {
+                    const quadCat = quad.getAttribute('data-category');
+                    if (card.classList.contains(quadCat)) {
+                        quad.classList.add('active');
+                    }
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                bentoQuadrants.forEach(quad => {
+                    quad.classList.remove('active');
+                });
+            });
+        });
     }
 
     // ===== PROJECTS DISPLAY =====
@@ -810,14 +637,12 @@ function initPortfolio() {
             javascript: "JavaScript & MERN Stack: Developing interactive web front-ends with React.js and engineering scalable backend services/APIs with Node.js & Express.",
             html5: "HTML5: Structuring clean semantic layouts with a focus on SEO best practices and page speed optimization.",
             css3: "CSS3: Formulating premium styling patterns, fluid animation keyframes, HSL color tokens, and robust layouts.",
-            mssql: "MSSQL Server: Advanced schema engineering, query optimizations, indexing, and enterprise relational database administration.",
-            mysql: "MySQL: Managing relational databases, writing queries, and designing scalable schemas for transactional web apps.",
+            sql: "MySQL & MS SQL Server: Database operations, SQL scripting, schema engineering, backup reporting, and query optimization.",
             git: "Git & GitHub: Professional version control, branching strategies, repository management, collaborative PR code reviews, and workflow automation.",
             azure: "Microsoft Azure: Virtual network routing, resource group structures, role-based access lists, and cloud VM provisioning.",
             aks: "AKS (Azure Kubernetes Service): Orchestrating containerized deployments, Kubernetes cluster scaling, network routing, and config management.",
             docker: "Docker: Containerizing environments to guarantee 100% execution consistency from development to cloud hosting.",
             linux: "Linux Systems: System administration, bash shell scripting, job automation, and server patching management.",
-            powershell: "PowerShell: Scripting automations, command-line operations, tasks execution, and cloud/Windows infrastructure deployment.",
             powerbi: "Power BI: Creating interactive executive business dashboards, advanced DAX queries, data transformations, and scheduled gateway refreshes.",
             excel: "Microsoft Excel: Advanced spreadsheets, pivot tables, VLOOKUP/INDEX-MATCH, VBA macros, and financial data modeling.",
             servicenow: "ServiceNow: Managing IT Service Management (ITSM) workflows, system incidents tracking, asset management, and ticketing pipelines."
@@ -832,14 +657,12 @@ function initPortfolio() {
             javascript: "#F7DF1E",
             html5: "#E34F26",
             css3: "#1572B6",
-            mssql: "#CC292B",
-            mysql: "#00758F",
+            sql: "#00758F",
             git: "#f3f4f6",
             azure: "#0078D4",
             aks: "#326CE5",
             docker: "#2496ED",
             linux: "#FCC624",
-            powershell: "#0078D4",
             powerbi: "#F2C811",
             excel: "#107C41",
             servicenow: "#81B924"
@@ -1209,35 +1032,33 @@ function initPortfolio() {
     const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
     const botResponses = {
-        skills: "Myat specializes in **Software Engineering**, **Data Science & Analytics**, and **Cloud Infrastructure** workflows.\n\n" +
+        skills: "Myat specializes in **Data Science**, **Agentic AI & ML**, **Full-Stack Web**, and **Cloud Infrastructure** operations.\n\n" +
                 "🛠️ **Technical Stack:**\n" +
-                "• **Languages:** Python, Java, JavaScript, C++, SQL\n" +
-                "• **Web Frameworks:** React, Node.js, Express.js\n" +
-                "• **Cloud & Systems:** Microsoft Azure, Linux Systems, Docker, Git/GitHub, VS Code\n" +
-                "• **Data Tools:** Pandas, NumPy, Scikit-Learn, Power BI, Excel\n\n" +
-                "🔗 View his work in the [Featured Projects](#projects) section or hover over the [Skills Radar](#skills) to learn more.",
-        experience: "Myat has solid hands-on experience in enterprise IT operations and systems:\n\n" +
-                    "💼 **AIA Digital +** — *Cloud Operations Intern* (Apr 2026 - Present)\n" +
-                    "Assisting in Incident Management, Change Management (drafting monthly Linux patching changes), and performance monitoring using Dynatrace and ServiceNow.\n\n" +
-                    "💼 **Print With Sahel** — *Founder & Owner* (Apr 2024 - Feb 2026)\n" +
-                    "Managed operations systems, client support, and data analytics to optimize operations.\n\n" +
-                    "🔗 View his work timeline in the [Experience Section](#experience) or click to [Download CV PDF](CV_MMK.pdf).",
+                "• **Languages & Web:** Python, JavaScript, PHP, React.js, Node.js, HTML/CSS\n" +
+                "• **Databases & Cloud:** MS SQL, MySQL, Microsoft Azure, Linux fundamentals, Git/GitHub\n" +
+                "• **Data & Analytics:** Data analysis, report generation, supervised machine learning, SQL, spreadsheet modelling\n" +
+                "• **Operations & Admin:** Business operations, inventory tracking, event coordination, Microsoft Excel/Office\n\n" +
+                "🔗 View his work in the [Featured Projects](#projects) section or explore the [Skills Ecosystem](#skills) to learn more.",
+        experience: "Myat has hands-on experience across enterprise cloud operations and business execution:\n\n" +
+                    "💼 **AIA Digital +** — *Cloud Operations intern* (Apr 2026 – Oct 2026)\n" +
+                    "Supported MySQL & MS SQL Server database operations, Windows/Linux infrastructure patching, ITSM ServiceNow ticket lifecycles, and enterprise tools including Azure, Dynatrace, PagerDuty, and CyberArk.\n\n" +
+                    "💼 **Print With Sahel** — *Founder and Owner* (Apr 2024 – Feb 2026)\n" +
+                    "Managed daily printing operations, student/staff delivery timelines, and Excel sales tracking for inventory planning.\n\n" +
+                    "🔗 View his work timeline in the [Experience Section](#experience) or click to [View CV PDF](CV_MMK.pdf).",
         status: "📍 **Availability Status:**\n" +
-                "• **Target Role:** Software Engineering, Data Analytics, or Cloud Operations (Junior / Entry-level / Industrial Training)\n" +
-                "• **Location:** Kuala Lumpur, Malaysia\n" +
-                "• **Relocation:** Fully open & flexible to regional/international relocation\n" +
-                "• **Availability Timeline:** Starting from **November 2026**\n\n" +
+                "• **Target Roles:** Data Analysis, Agentic AI, or Software Development (Full-time, Part-time, Contract, Freelance, Graduate Trainee)\n" +
+                "• **Location:** Kuala Lumpur, Malaysia (Open to On-site work, Relocation, and Remote work)\n" +
+                "• **Availability Window:** Starting **December 2026** and **January 2027**\n\n" +
                 "🔗 If you would like to hire Myat, send a message in the [Contact Form](#contact).",
-        contact: "You can reach Myat directly via these secure channels:\n\n" +
+        contact: "You can reach Myat directly via these channels:\n\n" +
                  "📧 **Email:** mmk111203@gmail.com\n" +
+                 "📞 **Phone:** 01164597291\n" +
                  "💼 **LinkedIn:** linkedin.com/in/myat-min-khant-810bb3275\n" +
                  "📂 **GitHub:** github.com/myatminkhant123\n\n" +
-                 "🔗 Or message him directly via [WhatsApp Direct](https://wa.me/601164597291) or fill in the [Secure SMTP Contact Form](#contact)!",
-        education: "Myat is a final-year **Bachelor of Computer Science (Honours)** student at **Albukhary International University** (Oct 2023 - Nov 2026).\n\n" +
-                   "• **CGPA Honor:** 3.53\n" +
-                   "• **Scholarship:** Albukhary Foundation Full Scholar\n" +
-                   "• **Certifications:** IBM Data Analyst, DeepLearning.AI Generative AI for Software Development, and TechNexus Full MERN Stack Bootcamp Certificates\n\n" +
-                   "🔗 Credentials verification: [IBM Professional Certificate](https://coursera.org/verify/professional-cert/CLPHAOPC673C), [DeepLearning.AI Professional Certificate](https://coursera.org/verify/professional-cert/TRP5PIXN0JQS), and [TechNexus MERN Stack Bootcamp](technexus_cert.png)."
+                 "🔗 Or message him directly via [WhatsApp Direct](https://wa.me/601164597291) or fill in the [Contact Form](#contact)!",
+        education: "Myat holds a **Bachelor of Computer Science (Honours)** (CGPA 3.53) and **Foundation in Computing** (CGPA 3.27) from **Albukhary International University (AIU)** as an **Albukhary Foundation Fully Funded Scholarship Recipient**.\n\n" +
+                   "• **Certifications:** IBM Certified Data Analyst Professional, Generative AI for Software Development (DeepLearning.AI), and TechNexus Full MERN Stack Bootcamp.\n\n" +
+                   "🔗 Credentials verification: [IBM Professional Certificate](https://coursera.org/verify/professional-cert/CLPHAOPC673C), [DeepLearning.AI Certificate](https://coursera.org/verify/professional-cert/TRP5PIXN0JQS), and [TechNexus MERN Stack Bootcamp](technexus_cert.png)."
     };
 
     function toggleChatbot() {
@@ -1753,16 +1574,16 @@ function initPortfolio() {
                         resLine.textContent = '[HELP] Available commands: help, skills, projects, whoami, clear, contact';
                         break;
                     case 'skills':
-                        resLine.textContent = '[SKILLS] Python, JavaScript/React, SQL, Machine Learning, Cloud Operations, Docker';
+                        resLine.textContent = '[SKILLS] Python, JavaScript, PHP, React.js, Node.js, SQL (MS SQL & MySQL), Microsoft Azure, Linux, Supervised ML';
                         break;
                     case 'projects':
-                        resLine.textContent = '[PROJECTS] Song Popularity Predictor, Postgrad System, ChatGPT Sentiment, Credit Card Fraud';
+                        resLine.textContent = '[PROJECTS] AIU Postgrad System, Smart Greenhouse (IoT), Handwriting Writer Classifier (CNN), ChatGPT Review Analyzer (NLP)';
                         break;
                     case 'whoami':
-                        resLine.textContent = '[WHOAMI] Myat Min Khant — Adaptive Tech & Data Enthusiast | CS Honors @ AIU';
+                        resLine.textContent = '[WHOAMI] Myat Min Khant — Computer Science Graduate | Data Science & Agentic AI | Albukhary Foundation Scholar @ AIU';
                         break;
                     case 'contact':
-                        resLine.textContent = '[CONTACT] Email: mmk111203@gmail.com | LinkedIn: /in/myat-min-khant-810bb3275/';
+                        resLine.textContent = '[CONTACT] Email: mmk111203@gmail.com | Phone: 01164597291 | LinkedIn: /in/myat-min-khant-810bb3275/';
                         break;
                     case 'clear':
                         terminalBody.innerHTML = '';

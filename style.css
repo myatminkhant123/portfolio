@@ -1765,27 +1765,136 @@ body.light-theme .form-terminal-overlay {
     width: 100%;
 }
 
-.skills-radar-wrapper {
+/* ===== 4-QUADRANT BENTO SKILL MATRIX ===== */
+.skills-bento-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
     width: 100%;
     height: 100%;
 }
 
 @media (max-width: 992px) {
-    .skills-radar-wrapper {
+    .skills-bento-wrapper {
         order: -1;
+        margin-bottom: 1.5rem;
     }
 }
 
-.skills-radar-canvas {
-    max-width: 100%;
-    width: 380px;
-    height: 380px;
-    z-index: 2;
+.skills-bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.bento-quadrant {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.85rem;
+    border-radius: 16px;
+    background: rgba(11, 17, 32, 0.75);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-quadrant::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.bento-quadrant:hover, .bento-quadrant.active {
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25);
+}
+
+.bento-quadrant:hover::after, .bento-quadrant.active::after {
+    opacity: 1;
+}
+
+.bento-quad-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.bento-quad-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(6, 182, 212, 0.12);
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.bento-quad-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.bento-quad-title {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.bento-quad-sub {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--cyan);
+}
+
+.bento-progress-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.bento-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    box-shadow: 0 0 10px var(--cyan-glow);
+    transition: width 1s ease-in-out;
+}
+
+.bento-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.bento-mini-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .skill-category {
@@ -2077,6 +2186,21 @@ body.light-theme .form-terminal-overlay {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+}
+
+.project-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--cyan);
+    background: rgba(6, 182, 212, 0.08);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    padding: 0.25rem 0.65rem;
+    border-radius: 1rem;
+    margin-bottom: 0.6rem;
+    width: fit-content;
 }
 
 .project-title {
