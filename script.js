@@ -466,10 +466,10 @@ function initPortfolio() {
     // ===== ROLE TYPEWRITER SWITCHER LOOP =====
     const roleText = document.getElementById('role-text');
     const roles = [
-        "AI-Powered Pipelines",
-        "Data Science Workflows",
+        "Full-Stack Software",
         "Cloud-Native Applications",
-        "Full-Stack Software"
+        "Scalable Web Systems",
+        "Enterprise Software Solutions"
     ];
     let roleIdx = 0;
     let charIdx = 0;
@@ -645,7 +645,7 @@ function initPortfolio() {
             linux: "Linux Systems: System administration, bash shell scripting, job automation, and server patching management.",
             powerbi: "Power BI: Creating interactive executive business dashboards, advanced DAX queries, data transformations, and scheduled gateway refreshes.",
             excel: "Microsoft Excel: Advanced spreadsheets, pivot tables, VLOOKUP/INDEX-MATCH, VBA macros, and financial data modeling.",
-            servicenow: "ServiceNow: Managing IT Service Management (ITSM) workflows, system incidents tracking, asset management, and ticketing pipelines."
+            servicenow: "ServiceNow: Managing IT Service Management (ITSM) workflows, system incidents tracking, asset management, and ticketing workflows."
         };
 
         // Brand colors mapping for dynamic hover styles
@@ -1046,7 +1046,7 @@ function initPortfolio() {
                     "Managed daily printing operations, student/staff delivery timelines, and Excel sales tracking for inventory planning.\n\n" +
                     "🔗 View his work timeline in the [Experience Section](#experience) or click to [View CV PDF](CV_MMK.pdf).",
         status: "📍 **Availability Status:**\n" +
-                "• **Target Roles:** Data Analysis, Agentic AI, or Software Development (Full-time, Part-time, Contract, Freelance, Graduate Trainee)\n" +
+                "• **Target Roles:** Software Development, Data Analytics & AI, or Graduate Trainee (Full-time, Contract, Graduate Trainee)\n" +
                 "• **Location:** Kuala Lumpur, Malaysia (Open to On-site work, Relocation, and Remote work)\n" +
                 "• **Availability Window:** Starting **December 2026** and **January 2027**\n\n" +
                 "🔗 If you would like to hire Myat, send a message in the [Contact Form](#contact).",
@@ -1252,10 +1252,10 @@ function initPortfolio() {
                 const spec3 = document.getElementById('edit-ts-spec3')?.textContent.trim() || 'Cloud Operations';
                 
                 sequences.ts = [
-                    { text: "$ npx ts-node pipeline.ts", type: "cmd" },
+                    { text: "$ npx ts-node workflow.ts", type: "cmd" },
                     { text: "[INFO] Initializing compilation context for developer 'Myat Min Khant'...", type: "info" },
                     { text: `[INFO] Specialties verified: ["${spec1}", "${spec2}", "${spec3}"]`, type: "info" },
-                    { text: "[INFO] Running async DataPipeline operations on raw input...", type: "info" },
+                    { text: "[INFO] Running async DataProcessor operations on raw input...", type: "info" },
                     { text: "[SUCCESS] Scalable FullStackApplication successfully deployed to production (scaling: auto, reliability: 99.9%).", type: "success" }
                 ];
             } else if (fileType === 'py') {
@@ -1264,10 +1264,10 @@ function initPortfolio() {
                 
                 sequences.py = [
                     { text: "$ python analytics.py", type: "cmd" },
-                    { text: "[INFO] Loading Pandas DataFrame pipeline...", type: "info" },
+                    { text: "[INFO] Loading Pandas DataFrame workflow...", type: "info" },
                     { text: `[INFO] Analyzing data patterns: focus set to ["${focus1}", "${focus2}"]`, type: "info" },
                     { text: "[INFO] Running transform_and_analyze() operations...", type: "info" },
-                    { text: "[SUCCESS] PortfolioPipeline execution output: FullStackApp deployed. scale_out=True.", type: "success" }
+                    { text: "[SUCCESS] PortfolioWorkflow execution output: FullStackApp deployed. scale_out=True.", type: "success" }
                 ];
             } else if (fileType === 'sql') {
                 const skill1 = document.getElementById('edit-sql-skill1')?.textContent.trim() || 'Software Engineering';
