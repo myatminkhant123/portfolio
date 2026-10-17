@@ -635,6 +635,7 @@ function initPortfolio() {
             python: "Python: Data analysis, scripting and automation, database integration, web scraping, and data manipulation using Pandas.",
             java: "Java: Solid object-oriented software engineering principles, system design patterns, and enterprise backend architectures.",
             javascript: "JavaScript & MERN Stack: Developing interactive web front-ends with React.js and engineering scalable backend services/APIs with Node.js & Express.",
+            php: "PHP: Server-side scripting, dynamic web development, database-driven workflows, and REST API creation.",
             html5: "HTML5: Structuring clean semantic layouts with a focus on SEO best practices and page speed optimization.",
             css3: "CSS3: Formulating premium styling patterns, fluid animation keyframes, HSL color tokens, and robust layouts.",
             sql: "MySQL & MS SQL Server: Database operations, SQL scripting, schema engineering, backup reporting, and query optimization.",
@@ -655,6 +656,7 @@ function initPortfolio() {
             python: "#3776AB",
             java: "#5382A1",
             javascript: "#F7DF1E",
+            php: "#777BB4",
             html5: "#E34F26",
             css3: "#1572B6",
             sql: "#00758F",
@@ -1032,30 +1034,51 @@ function initPortfolio() {
     const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
     const botResponses = {
-        skills: "Myat specializes in **Data Science**, **Agentic AI & ML**, **Full-Stack Web**, and **Cloud Infrastructure** operations.\n\n" +
-                "🛠️ **Technical Stack:**\n" +
-                "• **Languages & Web:** Python, JavaScript, PHP, React.js, Node.js, HTML/CSS\n" +
-                "• **Databases & Cloud:** MS SQL, MySQL, Microsoft Azure, Linux fundamentals, Git/GitHub\n" +
-                "• **Data & Analytics:** Data analysis, report generation, supervised machine learning, SQL, spreadsheet modelling\n" +
-                "• **Operations & Admin:** Business operations, inventory tracking, event coordination, Microsoft Excel/Office\n\n" +
+        skills: "Myat combines technical engineering with real-world business execution across data science, AI-powered systems, and cloud operations:\n\n" +
+                "🛠️ **Technical & Web Development:**\n" +
+                "• Python, JavaScript, PHP, React.js, Node.js, HTML/CSS, Git/GitHub, MS SQL, Microsoft Azure, Linux fundamentals\n\n" +
+                "📊 **Data & Analytics:**\n" +
+                "• Data analysis, report generation, supervised machine learning, SQL, spreadsheet modelling\n\n" +
+                "💼 **Operations & Administration:**\n" +
+                "• Business operations, inventory tracking, event coordination, logistics, Microsoft Excel/Office, data entry\n\n" +
+                "🤝 **Soft Skills & Leadership:**\n" +
+                "• Mentoring/teaching, customer service, fluent English, team leadership, cross-functional collaboration\n\n" +
                 "🔗 View his work in the [Featured Projects](#projects) section or explore the [Skills Ecosystem](#skills) to learn more.",
-        experience: "Myat has hands-on experience across enterprise cloud operations and business execution:\n\n" +
-                    "💼 **AIA Digital +** — *Cloud Operations intern* (Apr 2026 – Oct 2026)\n" +
-                    "Supported MySQL & MS SQL Server database operations, Windows/Linux infrastructure patching, ITSM ServiceNow ticket lifecycles, and enterprise tools including Azure, Dynatrace, PagerDuty, and CyberArk.\n\n" +
+        experience: "Myat has hands-on experience across enterprise cloud operations, entrepreneurship, and tech events:\n\n" +
+                    "💼 **AIA Digital +** — *Cloud Operations intern* (Apr 2026 – Present)\n" +
+                    "Supported MySQL & Microsoft SQL Server database operations, Windows/Linux infrastructure patching, ITSM ServiceNow workflows, and enterprise tools including Microsoft Azure, Dynatrace, PagerDuty, and CyberArk.\n\n" +
                     "💼 **Print With Sahel** — *Founder and Owner* (Apr 2024 – Feb 2026)\n" +
-                    "Managed daily printing operations, student/staff delivery timelines, and Excel sales tracking for inventory planning.\n\n" +
-                    "🔗 View his work timeline in the [Experience Section](#experience) or click to [View CV PDF](CV_MMK.pdf).",
-        status: "📍 **Availability Status:**\n" +
-                "• **Target Roles:** Software Development, Data Analytics & AI, or Graduate Trainee (Full-time, Contract, Graduate Trainee)\n" +
-                "• **Location:** Kuala Lumpur, Malaysia (Open to On-site work, Relocation, and Remote work)\n" +
-                "• **Availability Window:** Starting **December 2026** and **January 2027**\n\n" +
-                "🔗 If you would like to hire Myat, send a message in the [Contact Form](#contact).",
+                    "Founded and ran an on-campus print service, managing daily order fulfillment, urgent deadline scheduling, cash flow, paper/ink supplies, and machine maintenance.\n\n" +
+                    "🤝 **Extracurricular & Volunteering:**\n" +
+                    "• **Kedah Maker Fair 2025:** Committee Member & Event Organizer (66 school teams)\n" +
+                    "• **Young Innovators Challenge 2025 (Chumbaka):** Mentor & Trainer (Arduino IoT & AI)\n\n" +
+                    "🔗 View his full timeline in the [Experience Section](#experience) or click to [View CV PDF](CV_MMK.pdf).",
+        references: "Myat provides three verified academic and industry references:\n\n" +
+                    "1. **Mark Virta** — Director of Technology Operations, AIA Digital+ Malaysia\n" +
+                    "   📧 [Mark.Virta@aia.com](mailto:Mark.Virta@aia.com)\n\n" +
+                    "2. **Professor Dr. Basheer Riskhan** — Dean and Lecturer, Albukhary International University\n" +
+                    "   📧 [b.riskhan@aiu.edu.my](mailto:b.riskhan@aiu.edu.my)\n\n" +
+                    "3. **Associate Prof Ts. Dr. Leelavathi Rajamanickam** — Lecturer, Albukhary International University\n" +
+                    "   📧 [leelavathi.rajamanickam@aiu.edu.my](mailto:leelavathi.rajamanickam@aiu.edu.my)\n\n" +
+                    "🔗 View verified references in the [Experience & References](#experience) section.",
+        projects: "Here are Myat's featured projects:\n\n" +
+                  "1. **AIU Postgraduate Monitoring System** (Final Year Project) — Multi-user platform supporting 500+ users with RBAC user journey validation.\n" +
+                  "2. **Smart Greenhouse Monitoring System (IoT)** — ESP32 sensor integration, edge threshold logic, and MQTT ThingsBoard telemetry.\n" +
+                  "3. **Handwriting Recognition Project** — CNN writer classifier (70 classes) for offline CPU-only execution with prediction CSV & confusion matrix.\n" +
+                  "4. **ChatGPT App Review Analyzer (NLP)** — Scikit-Learn NLP pipeline benchmarking Linear SVM, Naive Bayes, and Logistic Regression on 2,290+ reviews (80.22% peak accuracy).\n\n" +
+                  "🔗 Explore the full interactive gallery in the [Featured Projects](#projects) section!",
+        status: "📍 **Career Availability Status:**\n" +
+                "• **Target Roles:** Data Analysis, Agentic AI, Software Development, Graduate Trainee\n" +
+                "• **Work Types:** Full-Time, Part-Time, Contract, Freelance, or Graduate Trainee\n" +
+                "• **Timeline:** Preferably starting **December 2026** and **January 2027**\n" +
+                "• **Location:** Kuala Lumpur, Malaysia (Open to On-site work, Relocation, and Remote work)\n\n" +
+                "🔗 Reach out directly via the [Contact Form](#contact) or message via [WhatsApp Direct](https://wa.me/601164597291)!",
         contact: "You can reach Myat directly via these channels:\n\n" +
                  "📧 **Email:** mmk111203@gmail.com\n" +
-                 "📞 **Phone:** 01164597291\n" +
+                 "📞 **Phone:** +601164597291\n" +
                  "💼 **LinkedIn:** linkedin.com/in/myat-min-khant-810bb3275\n" +
                  "📂 **GitHub:** github.com/myatminkhant123\n\n" +
-                 "🔗 Or message him directly via [WhatsApp Direct](https://wa.me/601164597291) or fill in the [Contact Form](#contact)!",
+                 "🔗 Or message him directly via [WhatsApp Direct](https://wa.me/601164597291) or submit the [Contact Form](#contact)!",
         education: "Myat holds a **Bachelor of Computer Science (Honours)** (CGPA 3.53) and **Foundation in Computing** (CGPA 3.27) from **Albukhary International University (AIU)** as an **Albukhary Foundation Fully Funded Scholarship Recipient**.\n\n" +
                    "• **Certifications:** IBM Certified Data Analyst Professional, Generative AI for Software Development (DeepLearning.AI), and TechNexus Full MERN Stack Bootcamp.\n\n" +
                    "🔗 Credentials verification: [IBM Professional Certificate](https://coursera.org/verify/professional-cert/CLPHAOPC673C), [DeepLearning.AI Certificate](https://coursera.org/verify/professional-cert/TRP5PIXN0JQS), and [TechNexus MERN Stack Bootcamp](technexus_cert.png)."
@@ -1117,8 +1140,12 @@ function initPortfolio() {
     function getBotResponse(userMsg) {
         const text = userMsg.toLowerCase().trim();
         
-        if (text.includes('skill') || text.includes('tech') || text.includes('stack') || text.includes('python') || text.includes('code') || text.includes('program')) {
+        if (text.includes('skill') || text.includes('tech') || text.includes('stack') || text.includes('python') || text.includes('code') || text.includes('program') || text.includes('php')) {
             return botResponses.skills;
+        } else if (text.includes('ref') || text.includes('virta') || text.includes('riskhan') || text.includes('leelavathi') || text.includes('recommend') || text.includes('supervisor')) {
+            return botResponses.references;
+        } else if (text.includes('project') || text.includes('greenhouse') || text.includes('chatgpt') || text.includes('handwriting') || text.includes('aiu')) {
+            return botResponses.projects;
         } else if (text.includes('exp') || text.includes('work') || text.includes('job') || text.includes('intern') || text.includes('aia') || text.includes('sahel')) {
             return botResponses.experience;
         } else if (text.includes('status') || text.includes('avail') || text.includes('relocat') || text.includes('timelin') || text.includes('where') || text.includes('locat')) {
@@ -1128,9 +1155,9 @@ function initPortfolio() {
         } else if (text.includes('study') || text.includes('edu') || text.includes('uni') || text.includes('degree') || text.includes('college') || text.includes('cert')) {
             return botResponses.education;
         } else if (text.includes('hello') || text.includes('hi') || text.includes('hey') || text.includes('greet')) {
-            return "Hello! I'm Myat's portfolio assistant. Ask about his **skills**, **experience**, **education**, **availability**, or **contact info**!";
+            return "Hello! I'm Myat's portfolio assistant. Ask about his **skills**, **projects**, **experience**, **references**, **education**, **availability**, or **contact info**!";
         } else {
-            return "I can answer questions regarding Myat's **skills**, **experience**, **education**, **availability**, or **contact info**. Feel free to try any of these keywords!";
+            return "I can answer questions regarding Myat's **skills**, **projects**, **experience**, **references**, **education**, **availability**, or **contact info**. Feel free to try any of these keywords!";
         }
     }
 
@@ -1571,19 +1598,25 @@ function initPortfolio() {
 
                 switch (cmd) {
                     case 'help':
-                        resLine.textContent = '[HELP] Available commands: help, skills, projects, whoami, clear, contact';
+                        resLine.textContent = '[HELP] Available commands: help, skills, projects, experience, references, whoami, clear, contact';
                         break;
                     case 'skills':
-                        resLine.textContent = '[SKILLS] Python, JavaScript, PHP, React.js, Node.js, SQL (MS SQL & MySQL), Microsoft Azure, Linux, Supervised ML';
+                        resLine.textContent = '[SKILLS] Tech: Python, JavaScript, PHP, React.js, Node.js, HTML/CSS | Data: Supervised ML, MS SQL, MySQL, Analytics | Cloud: Microsoft Azure, Linux';
                         break;
                     case 'projects':
-                        resLine.textContent = '[PROJECTS] AIU Postgrad System, Smart Greenhouse (IoT), Handwriting Writer Classifier (CNN), ChatGPT Review Analyzer (NLP)';
+                        resLine.textContent = '[PROJECTS] 1) AIU Postgraduate System (500+ users) 2) Smart Greenhouse (IoT/ThingsBoard) 3) Handwriting Classifier (CNN, 70 classes) 4) ChatGPT Review Analyzer (NLP, 80.22% acc)';
+                        break;
+                    case 'experience':
+                        resLine.textContent = '[EXPERIENCE] AIA Digital+ (Cloud Operations Intern, Apr 2026–Present) | Print With Sahel (Founder & Owner, Apr 2024–Feb 2026)';
+                        break;
+                    case 'references':
+                        resLine.textContent = '[REFERENCES] 1) Mark Virta (Director Tech Ops, AIA Digital+) 2) Prof. Dr. Basheer Riskhan (Dean, AIU) 3) Assoc. Prof. Ts. Dr. Leelavathi Rajamanickam (AIU)';
                         break;
                     case 'whoami':
-                        resLine.textContent = '[WHOAMI] Myat Min Khant — Computer Science Graduate | Data Science & Agentic AI | Albukhary Foundation Scholar @ AIU';
+                        resLine.textContent = '[WHOAMI] Myat Min Khant — Computer Science Graduate (Data Science & AI) | Albukhary Foundation Scholar (CGPA 3.53) | AIA Digital+ Cloud Ops';
                         break;
                     case 'contact':
-                        resLine.textContent = '[CONTACT] Email: mmk111203@gmail.com | Phone: 01164597291 | LinkedIn: /in/myat-min-khant-810bb3275/';
+                        resLine.textContent = '[CONTACT] Email: mmk111203@gmail.com | Phone: +601164597291 | Location: Kuala Lumpur, Malaysia | LinkedIn: /in/myat-min-khant-810bb3275/';
                         break;
                     case 'clear':
                         terminalBody.innerHTML = '';
