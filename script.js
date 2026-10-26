@@ -466,10 +466,11 @@ function initPortfolio() {
     // ===== ROLE TYPEWRITER SWITCHER LOOP =====
     const roleText = document.getElementById('role-text');
     const roles = [
+        "AI-Powered Pipelines",
         "Full-Stack Software",
-        "Cloud-Native Applications",
-        "Scalable Web Systems",
-        "Enterprise Software Solutions"
+        "Cloud-Native Systems",
+        "Agentic AI Workflows",
+        "Solutions to Survive & Scale"
     ];
     let roleIdx = 0;
     let charIdx = 0;
@@ -505,6 +506,39 @@ function initPortfolio() {
     }
 
     // ===== STATS COUNTER AND OBSERVER =====
+    // Automatically synchronize completed projects count from the #projects section
+    function syncCompletedProjectsCount() {
+        const totalProjects = document.querySelectorAll('#projects .project-card, .projects-grid .project-card');
+        const projectStatNum = document.getElementById('stat-project-count') || document.querySelector('.achieve-card[href="#projects"] .achieve-num');
+        const projectStatDesc = document.getElementById('stat-project-desc') || document.querySelector('.achieve-card[href="#projects"] .achieve-desc');
+        
+        if (totalProjects.length > 0) {
+            const count = totalProjects.length;
+            if (projectStatNum) {
+                projectStatNum.setAttribute('data-target', count);
+            }
+            if (projectStatDesc) {
+                projectStatDesc.textContent = `Built ${count} featured projects encompassing data analytics, data engineering, IoT, and web platforms.`;
+            }
+        }
+    }
+
+    syncCompletedProjectsCount();
+
+    // Observe changes in project grid to keep the count reactive if projects change dynamically
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (projectsGrid) {
+        const projObserver = new MutationObserver(() => {
+            syncCompletedProjectsCount();
+            const projectStatNum = document.getElementById('stat-project-count') || document.querySelector('.achieve-card[href="#projects"] .achieve-num');
+            if (projectStatNum && projectStatNum.textContent !== '0') {
+                const count = document.querySelectorAll('#projects .project-card, .projects-grid .project-card').length;
+                projectStatNum.textContent = count + '+';
+            }
+        });
+        projObserver.observe(projectsGrid, { childList: true });
+    }
+
     function animateStatCounter(target) {
         const endVal = parseFloat(target.getAttribute('data-target'));
         const isFloat = endVal % 1 !== 0;

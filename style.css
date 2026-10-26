@@ -24,8 +24,9 @@
     --glass-bg: rgba(11, 17, 32, 0.7);
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-border-hover: rgba(6, 182, 212, 0.35);
-    --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace;
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -40,8 +41,10 @@ body {
     background-color: var(--bg-space);
     color: var(--text-main);
     line-height: 1.6;
+    letter-spacing: -0.01em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Skip link for keyboard users */
@@ -986,7 +989,7 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: 0.75rem;
     overflow: hidden;
-    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(12px);
@@ -2512,6 +2515,19 @@ body.light-theme .form-terminal-overlay {
     padding: 2.5rem 1.5rem;
 }
 
+a.achieve-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+a.achieve-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyan);
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.18);
+}
+
 .achieve-icon {
     font-size: 2.2rem;
     margin-bottom: 1rem;
@@ -2928,7 +2944,7 @@ textarea.form-input {
 .resume-paper {
     max-width: 800px;
     margin: 0 auto;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     color: #1f2937;
     background: #fff;
     line-height: 1.5;
@@ -2942,7 +2958,7 @@ textarea.form-input {
 }
 
 .resume-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: 2.2rem;
     font-weight: 700;
     color: #111827;
@@ -2971,7 +2987,7 @@ textarea.form-input {
 }
 
 .resume-section-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: 1.15rem;
     font-weight: 700;
     text-transform: uppercase;
