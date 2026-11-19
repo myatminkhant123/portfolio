@@ -29,7 +29,7 @@ export const projectsData: Project[] = [
       "Edge Architecture: Modular monolith on Cloudflare Workers, Hono, D1 relational SQL (10 tables), and private R2 storage."
     ],
     techStack: ["React 18", "TypeScript", "Hono", "Cloudflare Workers", "Cloudflare D1 & R2", "Tailwind CSS"],
-    image: "/kcc_preview.svg",
+    image: "./kcc_preview.svg",
     demoUrl: "https://kedah-community-connect-kcc.vercel.app/",
     statusBadge: "Live Platform"
   },
@@ -47,7 +47,7 @@ export const projectsData: Project[] = [
       "Platform Reliability: Validated key submission milestones, automated reminders, and defect logging."
     ],
     techStack: ["React.js", "Web Platform", "RBAC Auth", "Database Design", "500+ Users"],
-    image: "/thumb3.webp",
+    image: "./thumb3.webp",
     statusBadge: "Final Year Project"
   },
   {
@@ -64,7 +64,7 @@ export const projectsData: Project[] = [
       "Live Cloud Telemetry: Streamed structured JSON payloads via MQTT to ThingsBoard for real-time dashboard analytics."
     ],
     techStack: ["ESP32", "C++ / MicroPython", "IoT Sensors", "MQTT", "ThingsBoard"],
-    image: "/greenhouse_schematic.png",
+    image: "./greenhouse_schematic.png",
     githubUrl: "https://github.com/rominswe/smart_agriculture-greenhouse_monitoring",
     statusBadge: "Hardware & Cloud"
   },
@@ -82,7 +82,7 @@ export const projectsData: Project[] = [
       "Interactive Deployment: Packaged trained estimators into a real-time inference web application with confusion matrix diagnostics."
     ],
     techStack: ["Python", "Scikit-Learn", "TF-IDF", "Linear SVM", "Streamlit"],
-    image: "/thumb_chatgpt.webp",
+    image: "./thumb_chatgpt.webp",
     demoUrl: "https://chatgptsentimentanalysis.streamlit.app/",
     githubUrl: "https://github.com/myatminkhant123/sentiment_analysis-.git",
     statusBadge: "NLP Pipeline"
@@ -101,7 +101,7 @@ export const projectsData: Project[] = [
       "Error Diagnosis: Generated multi-class confusion matrices to systematically identify high-similarity penmanship overlaps."
     ],
     techStack: ["Python", "PyTorch / Keras", "CNN", "OpenCV", "NumPy"],
-    image: "/thumb3.webp",
+    image: "./thumb3.webp",
     statusBadge: "Computer Vision"
   },
   {
@@ -118,7 +118,7 @@ export const projectsData: Project[] = [
       "SHAP Interpretability: Isolated individual feature attribution to explain driving factors behind song virality."
     ],
     techStack: ["Python", "XGBoost", "KMeans", "SHAP", "Scikit-Learn"],
-    image: "/earphone.webp",
+    image: "./earphone.webp",
     demoUrl: "https://songpopularitypredictionmlproject.streamlit.app/",
     githubUrl: "https://github.com/myatminkhant123/Song_Popularity_Prediction_ML_Project",
     statusBadge: "XGBoost & SHAP"
@@ -137,7 +137,7 @@ export const projectsData: Project[] = [
       "Retail Analytics: Incorporated Apriori association rule mining for personalized financial product recommendations."
     ],
     techStack: ["Python", "Random Forest", "SMOTE", "Pandas", "Scikit-Learn"],
-    image: "/thumb2.webp",
+    image: "./thumb2.webp",
     githubUrl: "https://github.com/myatminkhant123/Credit_Card_Fraud_Detection_and_Customer_Personalization",
     statusBadge: "Anomaly Detection"
   },
@@ -155,7 +155,7 @@ export const projectsData: Project[] = [
       "Interactive GUI: Delivered a real-time matchup simulator web app predicting tournament knockout brackets."
     ],
     techStack: ["Python", "Random Forest", "Pandas", "Streamlit"],
-    image: "/thumb1.webp",
+    image: "./thumb1.webp",
     demoUrl: "https://fifawcmatchprediction.streamlit.app/",
     githubUrl: "https://github.com/myatminkhant123/FIFA_WorldCup2022_Match_Prediction",
     statusBadge: "Predictive Analytics"

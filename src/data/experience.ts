@@ -39,7 +39,7 @@ export const experiencesData: ExperienceItem[] = [
     location: "Kuala Lumpur, Malaysia",
     period: "Apr 2026 – Present",
     type: "Enterprise Cloud Internship",
-    logo: "/aia_logo.png",
+    logo: "./aia_logo.png",
     description: "Support enterprise database and cloud infrastructure operations across mission-critical insurance systems with 99.9% uptime compliance.",
     achievements: [
       "Supported MySQL and Microsoft SQL Server enterprise database operations, backup verification, and DR readiness.",
@@ -73,7 +73,7 @@ export const referencesData: ReferenceItem[] = [
     email: "mark.virta@aia.com",
     relationship: "Internship Director & Executive Mentor",
     verified: true,
-    logo: "/aia_logo.png"
+    logo: "./aia_logo.png"
   },
   {
     name: "Prof. Dr. Basheer Riskhan",
@@ -82,7 +82,7 @@ export const referencesData: ReferenceItem[] = [
     email: "basheer.riskhan@aiu.edu.my",
     relationship: "Academic Dean & Department Head",
     verified: true,
-    logo: "/aiu_logo.png"
+    logo: "./aiu_logo.png"
   },
   {
     name: "Assoc. Prof. Ts. Dr. Leelavathi Rajamanickam",
@@ -91,7 +91,7 @@ export const referencesData: ReferenceItem[] = [
     email: "leelavathi.rajamanickam@aiu.edu.my",
     relationship: "Academic Advisor & Supervisor",
     verified: true,
-    logo: "/aiu_logo.png"
+    logo: "./aiu_logo.png"
   }
 ];
 
@@ -102,7 +102,7 @@ export const volunteerData: VolunteerItem[] = [
     organization: "Kedah Maker Fair 2025 (SCI Committee)",
     period: "2025",
     description: "Coordinated logistics and technical arrangements for a state-level STEM maker event involving 66 school teams across Kedah.",
-    logo: "/sci_committee_logo.png",
+    logo: "./sci_committee_logo.png",
     category: "STEM & Robotics Event"
   },
   {
@@ -111,7 +111,7 @@ export const volunteerData: VolunteerItem[] = [
     organization: "Young Innovators Challenge 2025 (Chumbaka)",
     period: "2025",
     description: "Guided school teachers and students through problem-solving methodologies and hands-on hardware/AI prototyping using Arduino IoT arrays and Artificial Intelligence.",
-    logo: "/chumbaka_logo.png",
+    logo: "./chumbaka_logo.png",
     category: "IoT & AI Mentorship"
   },
   {
@@ -120,7 +120,7 @@ export const volunteerData: VolunteerItem[] = [
     organization: "Thunderbirds Frisbee Club",
     period: "Nov 2023 – Apr 2025",
     description: "Coordinated club events, scheduled matches, and organized friendly inter-university ultimate frisbee tournaments and athletic engagements.",
-    logo: "/thunderbirds_logo.png",
+    logo: "./thunderbirds_logo.png",
     category: "Sports & Club Leadership"
   },
   {
@@ -129,7 +129,7 @@ export const volunteerData: VolunteerItem[] = [
     organization: "AIU Myanmar Student Association (AMSA)",
     period: "Nov 2023 – Jul 2024",
     description: "Promoted traditional arts, arranged cross-cultural showcases, and directed performance units for university international functions.",
-    logo: "/amsa_logo.png",
+    logo: "./amsa_logo.png",
     category: "Cultural Leadership"
   },
   {
@@ -138,7 +138,7 @@ export const volunteerData: VolunteerItem[] = [
     organization: "AIU Myanmar Student Association (AMSA)",
     period: "Nov 2022 – Oct 2023",
     description: "Managed external communications, cultural representation, and public relations coordination for traditional celebrations and community events at AIU.",
-    logo: "/amsa_logo.png",
+    logo: "./amsa_logo.png",
     category: "Public Relations & Media"
   },
   {

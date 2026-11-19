@@ -262,7 +262,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
               {/* Developer Desk Illustration Frame */}
               <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
                 <img
-                  src="/tech_guy_desk.jpg"
+                  src="./tech_guy_desk.jpg"
                   alt="Software & Full-Stack Development, AI & Data Science Developer Desk"
                   className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 />

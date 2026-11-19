@@ -40,9 +40,9 @@ export const profileData: ProfileData = {
   whatsappUrl: "https://wa.me/601164597291",
   linkedinUrl: "https://www.linkedin.com/in/myat-min-khant-810bb3275",
   githubUrl: "https://github.com/myatminkhant123",
-  resumeUrl: "/CV_MMK.pdf",
-  avatarUrl: "/CVphoto.webp",
-  sidebarAvatarUrl: "/tech_guy_mmk.jpg",
+  resumeUrl: "./CV_MMK.pdf",
+  avatarUrl: "./CVphoto.webp",
+  sidebarAvatarUrl: "./tech_guy_mmk.jpg",
   stats: [
     { label: "CGPA Academic Honor", value: "3.53", subtext: "Albukhary Full Scholarship" },
     { label: "Full-Stack & AI Projects", value: "8+", subtext: "Web, LLMs, ML & IoT" },

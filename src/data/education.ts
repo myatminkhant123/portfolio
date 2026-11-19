@@ -38,7 +38,7 @@ export const educationData: EducationDegree[] = [
     period: "Oct 2023 – Nov 2026",
     grade: "CGPA 3.53 / 4.00",
     honors: "Albukhary Foundation Fully Funded Scholarship Recipient",
-    logo: "/aiu_logo.png",
+    logo: "./aiu_logo.png",
     description: "Specialized in Data Science & Artificial Intelligence with strong software development foundations. Focused on machine learning pipelines, full-stack application development, and database architectures."
   },
   {
@@ -47,7 +47,7 @@ export const educationData: EducationDegree[] = [
     period: "Oct 2022 – Sep 2023",
     grade: "CGPA 3.27 / 4.00",
     honors: "Albukhary Foundation Full Pre-U Scholarship",
-    logo: "/aiu_logo.png",
+    logo: "./aiu_logo.png",
     description: "Comprehensive foundation across programming principles, discrete mathematics, relational databases, data structures, and web technologies."
   }
 ];
@@ -57,7 +57,7 @@ export const certificationsData: Certification[] = [
     id: "deeplearning-genai",
     title: "Generative AI for Software Development",
     issuer: "DeepLearning.AI",
-    issuerLogo: "/deeplearning_logo.svg",
+    issuerLogo: "./deeplearning_logo.svg",
     platformText: "3-Course Professional Certificate via Coursera",
     date: "Jun 2026",
     verifyUrl: "https://coursera.org/verify/professional-cert/TRP5PIXN0JQS",
@@ -91,7 +91,7 @@ export const certificationsData: Certification[] = [
     id: "ibm-data-analyst",
     title: "IBM Data Analyst Professional Certificate",
     issuer: "IBM Skills Network",
-    issuerLogo: "/ibm_logo.svg",
+    issuerLogo: "./ibm_logo.svg",
     platformText: "11-Course Professional Certificate via Coursera",
     date: "May 2026",
     verifyUrl: "https://coursera.org/verify/professional-cert/CLPHAOPC673C",
@@ -143,10 +143,10 @@ export const certificationsData: Certification[] = [
     id: "technexus-mern",
     title: "Full MERN Stack Bootcamp",
     issuer: "TechNexus — School of Computing & Informatics (AIU)",
-    issuerLogo: "/technexus_logo.png",
+    issuerLogo: "./technexus_logo.png",
     platformText: "Intensive Full-Stack Web Development Bootcamp",
     date: "Issued 10/11/2025",
-    verifyUrl: "/technexus_cert.png",
+    verifyUrl: "./technexus_cert.png",
     badgeText: "Bootcamp Honors & Verified Certificate",
     description: "An intensive training program focused on full-stack web application engineering, covering front-end and back-end development with HTML, CSS, JavaScript, React.js, Node.js, Express, and MongoDB. Includes hands-on project design, REST API creation, database integration, and working on real-world projects.",
     tools: ["React.js", "Node.js", "Express.js", "MongoDB", "JavaScript ES6+", "RESTful APIs"],
