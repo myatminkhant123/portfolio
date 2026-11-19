@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent-white: #ffffff;
+    --accent-silver: #e4e4e7;
+    --accent-charcoal: #27272a;
+    --glow-white: rgba(255, 255, 255, 0.35);
+    --glow-subtle: rgba(255, 255, 255, 0.12);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Full Transparency for Monochrome Canvas Background */
+.bg-theme-main {
+  background: transparent !important;
+}
+
+/* Glassmorphism Panel (Monochrome Titanium Frost) */
+.glass-panel {
+  background: rgba(14, 14, 18, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 32px -8px rgba(255, 255, 255, 0.10);
+  transform: translateY(-2px);
+}
+
+/* Advanced Smoothness & Tactile Button Micro-Interactions */
+button, a {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  user-select: none;
+}
+
+button:active, a:active {
+  transform: scale(0.96);
+}
+
+/* Shimmer Light-Sweep Effect for Primary Buttons */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent,
+    rgba(255, 255, 255, 0.30),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+  left: 140%;
+}
+
+/* Tactile Click Pulse */
+.btn-tactile:active {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 24px rgba(255, 255, 255, 0.25) !important;
+}
+
+/* 3D Perspective Utility */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Custom Minimalist Monochrome Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* Keyframe Animations for Cute Avatar & Monochrome Effects */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+
+@keyframes eye-blink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes cute-typing {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes glow-pulse-white {
+  0%, 100% {
+    box-shadow: 0 0 15px 1px rgba(255, 255, 255, 0.35), 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px 4px rgba(255, 255, 255, 0.60), 0 0 45px rgba(255, 255, 255, 0.30);
+  }
+}
+
+@keyframes sparkle-spin {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(180deg);
+    opacity: 0.4;
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4.5s ease-in-out infinite;
+}
+
+.animate-eye-blink {
+  animation: eye-blink 4s infinite;
+  transform-origin: center;
+}
+
+.animate-cute-typing {
+  animation: cute-typing 0.6s ease-in-out infinite alternate;
+}
+
+.animate-glow-white {
+  animation: glow-pulse-white 3s ease-in-out infinite;
+}
+
+.animate-sparkle-spin {
+  animation: sparkle-spin 3s ease-in-out infinite;
+}
