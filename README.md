@@ -66,5 +66,5 @@ The production output will be generated in `dist/`.
 
 - **LinkedIn**: [linkedin.com/in/myatminkhant](https://www.linkedin.com/in/myat-min-khant-532675239/)
 - **Email**: [mmk111203@gmail.com](mailto:mmk111203@gmail.com)
-- **WhatsApp**: [+60 17-640 4390](https://wa.me/601164597291)
+- **WhatsApp**: [+60 11-6459 7291](https://wa.me/601164597291)
 - **Portfolio**: [myatminkhant123.github.io/portfolio](https://myatminkhant123.github.io/portfolio/)
