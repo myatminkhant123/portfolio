@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
-  <rect width="36" height="36" rx="8" fill="#FF6F00"/>
-  <path fill="#ffffff" d="M10 8h8a10 10 0 0 1 10 10v0a10 10 0 0 1-10 10h-8V8zm6 5v10h2a5 5 0 0 0 5-5v0a5 5 0 0 0-5-5h-2z"/>
-  <text x="44" y="24" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-weight="bold" font-size="16">DeepLearning.AI</text>
-</svg>
