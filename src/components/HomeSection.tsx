@@ -23,11 +23,9 @@ interface HomeSectionProps {
 
 export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResume }) => {
   const roles = [
-    'Full-Stack Web Architectures',
-    'Agentic AI & LLM Systems',
-    'Data Science & Predictive ML',
-    'Modern React & TypeScript Apps',
-    'End-to-End Machine Learning Pipelines',
+    'Reliable web products',
+    'Practical AI systems',
+    'Predictive data tools',
   ];
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
 
@@ -82,10 +80,10 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
               </span>
             </h1>
 
-            {/* Sub-headline prioritizing Full-Stack, AI & Data Science */}
+            {/* Clear role statement for recruiters and collaborators */}
             <p className="text-base sm:text-lg text-zinc-300 font-medium mb-4">
-              <span className="text-white font-bold">Full-Stack Software Engineer</span> &amp;{' '}
-              <span className="text-zinc-200 font-bold">AI &amp; Data Science Specialist</span>
+              <span className="text-white font-bold">Full-stack software engineer</span>{' '}
+              building useful products with <span className="text-zinc-200 font-bold">AI and data</span>.
             </p>
 
             {/* Attractive "I craft..." Syntax Block (Monochrome) */}
@@ -96,7 +94,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
                 <span className="text-xs sm:text-sm font-mono text-zinc-400 font-bold uppercase tracking-wider">
-                  I craft
+                  I build
                 </span>
               </div>
               <span className="text-zinc-600 font-mono text-sm">/</span>
@@ -108,10 +106,9 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
               </div>
             </div>
 
-            {/* Scholar Bio */}
+            {/* Short value proposition */}
             <p className="text-sm sm:text-base text-zinc-300 leading-relaxed mb-6 max-w-xl">
-              <strong className="text-white font-semibold">Albukhary Foundation Scholar</strong> (CGPA 3.53) at Albukhary International University. 
-              Passionate about architecting responsive full-stack web applications, training predictive machine learning models, and building agentic AI pipelines. Actively scouting software engineering, AI, and data science roles. Let's build something exceptional. 🚀
+              I turn ideas into responsive web applications, machine-learning tools, and dependable cloud workflows. I am an <strong className="text-white font-semibold">Albukhary Foundation Scholar</strong> (CGPA 3.53) open to software engineering, AI, and data roles.
             </p>
 
             {/* Action Buttons with Advanced Smoothness & Particular Click Animations */}
@@ -192,20 +189,20 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
         </div>
       </div>
 
-      {/* 2. CUTE TECH COMPANION & DEV VIBES SECTION */}
+      {/* 2. PERSONALITY & WORKSPACE SECTION */}
       <div className="pt-8 border-t border-white/10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
           <div>
             <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-400 tracking-wider uppercase mb-1.5 font-mono">
               <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>Tech Persona &amp; Daily Dev Vibes</span>
+              <span>Beyond the code</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-              Code, Coffee &amp; Agentic AI
+              How I work
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-zinc-400 font-mono max-w-md">
-            A playful, youthful look into my daily development rhythm, machine learning experiments, and tech guy setup.
+            A quick look at the tools, habits, and ideas behind my projects.
           </p>
         </div>
 
@@ -216,7 +213,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10 mb-4">
               <span className="text-xs font-mono font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                Cute Tech Mascot
+                Interactive companion
               </span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/15 font-semibold">
                 Click me! ✨
@@ -480,7 +477,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
           {/* Right Column: Academic & Tech Journey (Timeline in Monochrome) */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
-              Academic &amp; Tech Journey
+              Experience that translates to impact
             </h3>
 
             {/* Vertical Connected Timeline in Pure Monochrome */}
@@ -561,15 +558,15 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
         </div>
       </div>
 
-      {/* 4. MILESTONES & ACHIEVEMENTS in Monochrome */}
+      {/* 4. RECRUITER-RELEVANT EVIDENCE in Monochrome */}
       <div className="pt-8 border-t border-white/10">
         <div className="mb-6">
           <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-400 tracking-wider uppercase mb-1.5 font-mono">
             <Sparkles className="w-3.5 h-3.5 text-white" />
-            <span>Verified Track Record</span>
+            <span>Evidence of execution</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-            Milestones &amp; Achievements
+            What I bring
           </h2>
         </div>
 
@@ -578,10 +575,10 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
             <div>
               <div className="text-3xl mb-2">🎯</div>
               <div className="text-3xl font-extrabold font-mono text-white mb-1">3.53</div>
-              <h3 className="text-sm sm:text-base font-bold text-white">CGPA Academic Honor</h3>
+                <h3 className="text-sm sm:text-base font-bold text-white">Strong academic foundation</h3>
             </div>
             <p className="text-xs sm:text-sm text-zinc-400 mt-2 leading-relaxed">
-              Consistently ranked in the top percentile of the CS cohort at AIU.
+              Computer Science graduate with a 3.53 CGPA and a Data Science focus.
             </p>
           </div>
 
@@ -613,7 +610,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
               <div className="text-3xl font-extrabold font-mono text-white mb-1">8</div>
               <div className="flex items-center justify-between">
                 <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-zinc-200 transition-colors">
-                  Completed Projects
+                  Projects shipped
                 </h3>
                 <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition-transform group-hover:translate-x-1" />
               </div>
@@ -632,7 +629,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate, onOpenResu
               <div className="text-3xl font-extrabold font-mono text-white mb-1">1</div>
               <div className="flex items-center justify-between">
                 <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-zinc-200 transition-colors">
-                  Enterprise Experience
+                  Enterprise operations
                 </h3>
                 <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition-transform group-hover:translate-x-1" />
               </div>

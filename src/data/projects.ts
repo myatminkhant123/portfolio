@@ -22,7 +22,7 @@ export const projectsData: Project[] = [
     category: "web",
     featured: true,
     date: "2026 – Present",
-    description: "Cloud-first, serverless civic issue reporting and service tracking web platform bridging citizens across Kedah's 12 districts with Local Authorities (PBT) and state agencies (JKR, Health, Landscape).",
+    description: "Built a cloud-first civic reporting platform connecting residents across Kedah's 12 districts with local authorities and state agencies.",
     highlights: [
       "Civic Traceability: Centralized digital channel for neighborhood issue reporting with formal triage and resolution handoffs.",
       "Server-Side RBAC: Strict 3-tier permissions for Residents, Admins, and Department Officers with immutable audit trails.",
@@ -40,7 +40,7 @@ export const projectsData: Project[] = [
     category: "web",
     featured: true,
     date: "Aug 2025 – Mar 2026",
-    description: "Role-based multi-user academic workflow and thesis monitoring platform designed for university faculty and supporting 500+ postgraduate students.",
+    description: "Built a role-based thesis monitoring platform for university faculty and 500+ postgraduate students.",
     highlights: [
       "Workflows & Journeys: Formulated role-based user journeys and approval state transitions for faculty and students.",
       "RBAC & Security: Implemented strict permission checkpoints for supervisors, examiners, and graduate coordinators.",
@@ -57,7 +57,7 @@ export const projectsData: Project[] = [
     category: "iot",
     featured: true,
     date: "Jan 2026 – Feb 2026",
-    description: "End-to-end IoT monitoring system tracking ambient temperature, humidity, soil moisture, and gas levels using ESP32 microcontrollers and industrial sensor arrays.",
+    description: "Built an ESP32 monitoring system for greenhouse temperature, humidity, soil moisture, and gas levels.",
     highlights: [
       "Sensor Integration: Interfaced DHT22, soil capacitive, and gas sensors with low-latency analog sampling.",
       "Edge Decision Logic: Programmed local microsecond response logic for irrigation relays and hazardous alert buzzers.",
@@ -75,7 +75,7 @@ export const projectsData: Project[] = [
     category: "data",
     featured: false,
     date: "Nov 2025 – Jan 2026",
-    description: "End-to-end NLP sentiment classification pipeline categorizing 2,290+ real-world user reviews via multi-model machine learning benchmarking.",
+    description: "Built an NLP pipeline that classified 2,290+ real-world app reviews and compared multiple machine-learning models.",
     highlights: [
       "Text Processing: Engineered regex tokenization, stopword cleaning, and TF-IDF n-gram vector representations.",
       "Model Benchmarking: Evaluated Linear SVM, Naive Bayes, and Logistic Regression, achieving 80.22% peak test accuracy.",
@@ -94,7 +94,7 @@ export const projectsData: Project[] = [
     category: "data",
     featured: false,
     date: "Dec 2025 – Jan 2026",
-    description: "Convolutional Neural Network writer classifier spanning 70 distinct classes, specifically optimized for lightweight offline CPU execution.",
+    description: "Built a lightweight CNN writer classifier covering 70 classes for offline CPU inference.",
     highlights: [
       "CNN Architecture: Designed multi-stage convolutional and pooling blocks optimized for grayscale character contours.",
       "Reproducible Tooling: Authored end-to-end CLI scripts (train.py, run.py, analyze.py) for reproducible test evaluation.",
@@ -111,7 +111,7 @@ export const projectsData: Project[] = [
     category: "data",
     featured: false,
     date: "Oct 2025 – Dec 2025",
-    description: "Integrated Spotify API audio features with historical Billboard Hot 100 metrics to classify track hit probabilities with SHAP model explainability.",
+    description: "Built an explainable model that predicts song-hit probability from Spotify audio features and Billboard history.",
     highlights: [
       "Feature Engineering: Merged acousticness, danceability, tempo, and chart position into normalized training matrices.",
       "Predictive Accuracy: Achieved 91% F1-score with fine-tuned XGBoost alongside KMeans track clustering.",
@@ -130,7 +130,7 @@ export const projectsData: Project[] = [
     category: "data",
     featured: false,
     date: "Sep 2025 – Nov 2025",
-    description: "Dual-purpose financial security system mitigating extreme class imbalance (99.8% non-fraud vs 0.2% fraud) paired with Market Basket Recommendation.",
+    description: "Built a fraud-detection and product-recommendation system for highly imbalanced transaction data.",
     highlights: [
       "Imbalance Handling: Applied SMOTE and stratified resampling to prevent majority-class bias in anomaly identification.",
       "High Precision: Deployed Random Forest classification reaching 95.8% precision on simulated financial transaction streams.",
@@ -148,7 +148,7 @@ export const projectsData: Project[] = [
     category: "data",
     featured: false,
     date: "Jul 2025 – Sep 2025",
-    description: "End-to-end match outcome prediction application trained on decades of international FIFA tournament metrics with stratified cross-validation.",
+    description: "Built a match-outcome prediction app using historical FIFA tournament data and stratified cross-validation.",
     highlights: [
       "Contextual Metrics: Synthesized squad global rankings, goal differential averages, and tournament pressure factors.",
       "Cross-Validation: Achieved 98.6% cross-validated accuracy across balanced multi-class outcome splits (Win/Loss/Draw).",

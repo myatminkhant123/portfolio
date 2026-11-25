@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { id: 'education', label: 'Education & Certs', icon: GraduationCap },
   { id: 'experience', label: 'Experience', icon: Briefcase },
   { id: 'skills', label: 'Skills & Stack', icon: Layers },
-  { id: 'projects', label: 'Featured Projects', icon: Code },
+  { id: 'projects', label: 'Selected Work', icon: Code },
   { id: 'contact', label: 'Contact', icon: Mail },
 ];
 
@@ -136,6 +136,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           className="p-2 rounded-xl text-zinc-300 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 active:scale-90 transition-all btn-tactile"
           aria-label="Toggle navigation drawer"
+          aria-expanded={isMobileOpen}
+          aria-controls="sidebar"
         >
           {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>

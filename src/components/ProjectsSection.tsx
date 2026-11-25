@@ -17,13 +17,13 @@ export const ProjectsSection: React.FC = () => {
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-400 tracking-wider uppercase mb-2 font-mono">
             <Layers className="w-4 h-4 text-white" />
-            <span>Featured Engineering Portfolio</span>
+            <span>Selected work</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2">
-            Projects &amp; Production Systems
+            Projects that solve real problems
           </h2>
           <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-            Full-stack web applications, supervised machine learning pipelines, and agentic AI models built for real-world impact.
+            A focused selection of web applications, machine-learning tools, and connected systems. Each project shows how I approach a problem, build a solution, and measure the result.
           </p>
         </div>
 
@@ -31,6 +31,7 @@ export const ProjectsSection: React.FC = () => {
         <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-zinc-950/80 border border-white/10 rounded-2xl self-start md:self-auto shadow-sm">
           <button
             onClick={() => setFilter('all')}
+            aria-pressed={filter === 'all'}
             className={`btn-tactile px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all active:scale-95 ${
               filter === 'all'
                 ? 'bg-white text-black font-bold shadow-sm'
@@ -41,33 +42,36 @@ export const ProjectsSection: React.FC = () => {
           </button>
           <button
             onClick={() => setFilter('web')}
+            aria-pressed={filter === 'web'}
             className={`btn-tactile px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all active:scale-95 ${
               filter === 'web'
                 ? 'bg-white text-black font-bold shadow-sm'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Full-Stack Web (2)
+            Full-Stack Web ({projectsData.filter((project) => project.category === 'web').length})
           </button>
           <button
             onClick={() => setFilter('data')}
+            aria-pressed={filter === 'data'}
             className={`btn-tactile px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all active:scale-95 ${
               filter === 'data'
                 ? 'bg-white text-black font-bold shadow-sm'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Data Science &amp; AI (5)
+            Data Science &amp; AI ({projectsData.filter((project) => project.category === 'data').length})
           </button>
           <button
             onClick={() => setFilter('iot')}
+            aria-pressed={filter === 'iot'}
             className={`btn-tactile px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all active:scale-95 ${
               filter === 'iot'
                 ? 'bg-white text-black font-bold shadow-sm'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            IoT Hardware (1)
+            IoT Hardware ({projectsData.filter((project) => project.category === 'iot').length})
           </button>
         </div>
       </div>
@@ -118,10 +122,10 @@ export const ProjectsSection: React.FC = () => {
                   {project.description}
                 </p>
 
-                {/* Highlights Bullet List */}
+                {/* Key contributions */}
                 {project.highlights && project.highlights.length > 0 && (
                   <ul className="space-y-2 mb-4">
-                    {project.highlights.map((h, i) => (
+                    {project.highlights.slice(0, 2).map((h, i) => (
                       <li key={i} className="text-xs sm:text-sm text-zinc-300 flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
                         <span className="leading-snug">{h}</span>

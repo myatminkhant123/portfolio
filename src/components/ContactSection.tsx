@@ -432,6 +432,10 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                 <input
                   id="form-name"
                   type="text"
+                  autoComplete="name"
+                  required
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'form-name-error' : undefined}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Sarah Jenkins"
@@ -442,7 +446,7 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                 <User className="absolute right-3.5 top-3 w-4 h-4 text-zinc-500 pointer-events-none" />
               </div>
               {errors.name && (
-                <p className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
+                <p id="form-name-error" role="alert" className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
                   <AlertCircle className="w-3 h-3 flex-shrink-0" />
                   {errors.name}
                 </p>
@@ -458,6 +462,10 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                 <input
                   id="form-email"
                   type="email"
+                  autoComplete="email"
+                  required
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'form-email-error' : undefined}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="e.g. sarah.j@company.com"
@@ -468,7 +476,7 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                 <Mail className="absolute right-3.5 top-3 w-4 h-4 text-zinc-500 pointer-events-none" />
               </div>
               {errors.email && (
-                <p className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
+                <p id="form-email-error" role="alert" className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
                   <AlertCircle className="w-3 h-3 flex-shrink-0" />
                   {errors.email}
                 </p>
@@ -484,6 +492,9 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
             <input
               id="form-subject"
               type="text"
+              required
+              aria-invalid={Boolean(errors.subject)}
+              aria-describedby={errors.subject ? 'form-subject-error' : undefined}
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
               placeholder="e.g. Software Engineering Opportunity / AI Project Consultation"
@@ -492,7 +503,7 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
               }`}
             />
             {errors.subject && (
-              <p className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
+              <p id="form-subject-error" role="alert" className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
                 <AlertCircle className="w-3 h-3 flex-shrink-0" />
                 {errors.subject}
               </p>
@@ -507,6 +518,9 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
             <textarea
               id="form-message"
               rows={4}
+              required
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? 'form-message-error' : undefined}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Describe the opportunity, project requirements, or questions..."
@@ -515,7 +529,7 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
               }`}
             />
             {errors.message && (
-              <p className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
+              <p id="form-message-error" role="alert" className="text-[11px] text-zinc-300 mt-1 flex items-center gap-1 font-mono">
                 <AlertCircle className="w-3 h-3 flex-shrink-0" />
                 {errors.message}
               </p>

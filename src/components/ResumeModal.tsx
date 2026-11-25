@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, Download, FileText, ExternalLink } from 'lucide-react';
 import { profileData } from '../data/profile';
 
@@ -8,19 +8,43 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
   // Close on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
+        return;
+      }
+
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
 
     if (isOpen) {
+      previouslyFocusedRef.current = document.activeElement as HTMLElement;
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+      requestAnimationFrame(() => dialogRef.current?.querySelector<HTMLElement>('button')?.focus());
     } else {
       document.body.style.overflow = '';
+      previouslyFocusedRef.current?.focus();
     }
 
     return () => {
@@ -40,6 +64,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       aria-labelledby="resume-modal-title"
     >
       <div
+        ref={dialogRef}
         className="glass-panel w-full max-w-5xl h-[92vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden border border-white/[0.12] bg-zinc-950/95"
         onClick={(e) => e.stopPropagation()}
       >

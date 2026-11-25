@@ -18,6 +18,8 @@ export const ThreeDBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     let animId: number;
     let W = (canvas.width = window.innerWidth);
     let H = (canvas.height = window.innerHeight);
@@ -39,7 +41,9 @@ export const ThreeDBackground: React.FC = () => {
       H = canvas.height = window.innerHeight;
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    if (!prefersReducedMotion) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
     window.addEventListener('resize', handleResize);
 
     // ── Monochrome Stars ──────────────────────────────────────────
@@ -226,7 +230,9 @@ export const ThreeDBackground: React.FC = () => {
       ctx.fillStyle = fogGrad;
       ctx.fillRect(0, horizonY - 45, W, 90);
 
-      animId = requestAnimationFrame(render);
+      if (!prefersReducedMotion) {
+        animId = requestAnimationFrame(render);
+      }
     };
 
     render();
@@ -240,7 +246,7 @@ export const ThreeDBackground: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      <canvas ref={canvasRef} className="w-full h-full block" />
+      <canvas ref={canvasRef} className="w-full h-full block" aria-hidden="true" />
     </div>
   );
 };
